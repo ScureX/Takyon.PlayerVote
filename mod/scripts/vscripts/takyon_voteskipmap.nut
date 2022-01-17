@@ -46,7 +46,7 @@ bool function CommandSkip(entity player, array<string> args){
     int half = ceil(1.0 * GetPlayerArray().len()/2).tointeger()
     int quater = ceil(1.0 * GetPlayerArray().len()/4).tointeger()
 
-    if(playerVotedNames.len() >= 2){ //CHANGE
+    if(playerVotedNames.len() >= half){
         SetServerVar("gameEndTime", 1.0) // end this game 
         playerVotedNames.clear()
     }
