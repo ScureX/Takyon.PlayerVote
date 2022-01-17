@@ -1,0 +1,20 @@
+{
+	"Name": "Takyon.VoteSkipMap",
+	"Description": "Write !skip in the console to skip the current map.",
+	"LoadPriority": 0,
+	"RequiredOnClient": false,
+	"Version": "1.0.0",
+
+	"Scripts": [
+		{
+			"Path": "takyon_voteskipmap.nut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "VoteSkipMapInit"
+			},
+			"ServerCallback": {
+				"After": "VoteSkipMapInit"
+			}
+		}
+	]
+}
