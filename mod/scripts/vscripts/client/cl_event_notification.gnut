@@ -17,6 +17,8 @@ global function SetEventNotificationEndingOnSignals //Should go away once we mak
 
 const EN_SHOW_OVER_SCREENFADE = 0x00000001
 
+global int playersVoted
+
 void function CLEventNotification_Init()
 {
 	RegisterSignal( "SetEventNotification" )
@@ -43,16 +45,34 @@ void function EventNotification( int eventID, entity ent, var eventVal )
 		//TODO: One day, go back and move all these into specific scripts, e.g. MFD EventNotifications should go into cl_gamemode_mfd
 		case eEventNotifications.PlayerWantsToSkip:
 			//SetTimedEventNotification( 6.0, "Skip this map by typing !skip in the console" ) //  enable this if  you want a smaller less distracting message
-			AnnouncementMessageSweep( GetLocalClientPlayer(), "A Player Wants To Skip This Map", "Skip this map by typing !skip in the console!", <1,0,0>)
+			playersVoted = playersVoted + 1
+			if(playersVoted > 1){
+				AnnouncementMessageSweep( GetLocalClientPlayer(), playersVoted + " Players Want To Skip This Map", "Skip this map by typing !skip in the console!", <1,0,0>)
+			}
+			else{
+				AnnouncementMessageSweep( GetLocalClientPlayer(), playersVoted + " Player Wants To Skip This Map", "Skip this map by typing !skip in the console!", <1,0,0>)
+			}
 			break
-			
+		
+		case eEventNotifications.SkipMap:
+			playersVoted = 0
+			break
+
+		case eEventNotifications.PlayerAlreadyVoted:
+			AnnouncementMessageSweep( GetLocalClientPlayer(), "You have already voted", " ", <1,0,0>)
+			break
+
+		case eEventNotifications.PlayerHelp:
+			AnnouncementMessageSweep( GetLocalClientPlayer(), "Use !skip to skip this map", "Open your console and type !skip", <0,0,1>)
+			break
+
 		case eEventNotifications.BurnCardRematch:
 			if ( ent )
 				SetTimedEventNotification( 3.0, "#BURNCARD_REMATCH_WARNING", ent.GetPlayerName() )
 			break
 
 		case eEventNotifications.YouveBeenSpotted:
-			SetTimedEventNotification( 3.0, "TEST" )
+			SetTimedEventNotification( 3.0, "Test" )
 			break
 
 		case eEventNotifications.MarkedForDeathWaitingForMarkedToSpawn:

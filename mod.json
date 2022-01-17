@@ -2,7 +2,7 @@
 	"Name": "Takyon.VoteSkipMap",
 	"Description": "Write !skip in the console to skip the current map.",
 	"LoadPriority": 0,
-	"RequiredOnClient": false,
+	"RequiredOnClient": true,
 	"Version": "1.0.0",
 
 	"Scripts": [

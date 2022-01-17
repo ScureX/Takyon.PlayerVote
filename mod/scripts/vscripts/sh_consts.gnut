@@ -1526,6 +1526,9 @@ global enum eEventNotifications
 {
 	Clear,
 	PlayerWantsToSkip,
+	SkipMap,
+	PlayerHelp,
+	PlayerAlreadyVoted,
 	PlayerHasEnemyFlag,
 	PlayerCapturedEnemyFlag,
 	PlayerReturnedEnemyFlag,
