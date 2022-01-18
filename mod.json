@@ -1,9 +1,9 @@
 {
 	"Name": "Takyon.VoteSkipMap",
-	"Description": "Write !skip in the console to skip the current map.",
+	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no]",
 	"LoadPriority": 0,
 	"RequiredOnClient": false,
-	"Version": "2.0.0",
+	"Version": "2.1.0",
 
 	"Scripts": [
 		{
