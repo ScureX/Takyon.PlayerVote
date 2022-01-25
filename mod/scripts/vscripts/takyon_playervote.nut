@@ -30,8 +30,6 @@ bool function CanFindPlayerFromSubstring(string substring){
             found++
     }
 
-    printl("found this many: " + found)
-
     if(found == 1){ 
         return true
     }

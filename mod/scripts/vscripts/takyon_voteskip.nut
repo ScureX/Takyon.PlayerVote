@@ -1,6 +1,7 @@
 global function VoteSkipInit
 
 array<string> playerSkipVoteNames = [] // list of players who have voted, is used to see how many have voted 
+bool skipEnabled = true
 
 void function VoteSkipInit(){
     #if SERVER
@@ -33,7 +34,13 @@ bool function CommandSkip(entity player, array<string> args){
                 return true
             }
             SendHudMessageBuilder(player, "Missing Privileges!", 255, 200, 200)
-            return true
+            return false
+        }
+
+        // check if skipping is enabled
+        if(!skipEnabled){
+            SendHudMessageBuilder(player, "Skipping is disabled", 255, 200, 200)
+            return false
         }
 
         // check if player has already voted //TODO fix this up

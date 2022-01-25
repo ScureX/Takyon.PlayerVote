@@ -1,6 +1,6 @@
 {
 	"Name": "Takyon.PlayerVote",
-	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no] [!extend, !extend froce]",
+	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no] [!extend, !extend force]",
 	"LoadPriority": 0,
 	"RequiredOnClient": false,
 	"Version": "2.1.0",
