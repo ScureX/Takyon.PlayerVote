@@ -28,3 +28,12 @@ Lets people vote on kicking a player by typing !yes or !no. By default at least 
 This feature can be disabled, even disallowing admins to kick.
 
 There cannot be two votes at the same time. Mabye adding a time limit in the future?
+
+## !extend
+### Usage: [!extend]  [!extend force]
+
+Lets people vote on extending the map to play longer. (The time added can be changed)
+
+By default the map can only be extended once. (This can be changed)
+
+Force can only be used by admins, and will always extend the map.
