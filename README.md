@@ -23,6 +23,8 @@ Votes are reset on map change.
 
 Lets people vote on kicking a player by typing !yes or !no. By default at least 90% of people need to have voted and more than half of those have to vote for kicking. (This can be changed)
 
+Not the full name has to be given, just enough to identify a player.
+
 !kick name force only works for people declared as admins in the andminNames array. This lets them kick without voting.
 
 This feature can be disabled, even disallowing admins to kick.
