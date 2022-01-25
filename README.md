@@ -39,3 +39,44 @@ Lets people vote on extending the map to play longer. (The time added can be cha
 By default the map can only be extended once. (This can be changed)
 
 Force can only be used by admins, and will always extend the map.
+
+# Settings
+Settings are distributed in files in ```Titanfall2\R2Northstar\mods\Takyon.VoteSkipMap-2.1.0\mod\scripts\vscripts```
+
+## takyon_playervote.nut
+### adminNames
+Specify player names who should be able to force votes like kick, skip and extend
+```adminNames = ["name1", "name2", "name3"]```
+
+## takyon_help.nut
+### displayHintOnSpawnAmount
+Amount of times (after dropship) a hint to type !help should be displayed on respawn
+0: Only in dropship/initial spawn 
+1: in dropship and on first respawn
+etc.
+
+## takyon_voteskip.nut
+### skipEnabled
+true: players can vote to skip the map
+false: players **cant** vote to skip the map
+
+## takyon_votekick.nut
+### playerVoteKickEnabled
+true: players can vote to kick a player
+false: players **cant** vote to kick a player
+
+### playerVotePercentage
+How many people have to vote for the vote to be decided in percent
+0.5: 50% of all players have to vote
+0.9: 90% of all players have to vote
+
+### minimumOnlinePlayers
+How many people have to be online for a votekick to be initiated so that when 3 people are online 2 cant kick 1. Avoids trolling.
+
+## takyon_voteextend.nut
+### extendMapMultipleTimes
+true: players can vote to extend the map multiple times
+false: players **cant** vote to extend the map multiple times
+
+### extendMatchTime
+By how many minutes the map gets extended on vote passed
