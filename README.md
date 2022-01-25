@@ -1,5 +1,8 @@
 # PlayerVote
-Enables players to skip maps they don't like by typing !skip in the console. The map will be skipped if enough players have voted.
+
+Enables players to vote on different things like skipping a map or kicking a player, to add a true community feeling to your server!
+
+BIG THANKS to: Coopyy, Spoon, Dullahan, Tsk22, wolf109909, Pandora and all the other people that helped me through this nightmare of a project! <3
 
 # Commands
 ## !help
@@ -17,6 +20,7 @@ Votes are reset on map change.
 
 ## !kick
 ### Usage: [!kick name]  [!kick name force] | [!yes]  [!no]
+
 Lets people vote on kicking a player by typing !yes or !no. By default at least 90% of people need to have voted and more than half of those have to vote for kicking. (This can be changed)
 
 !kick name force only works for people declared as admins in the andminNames array. This lets them kick without voting.
