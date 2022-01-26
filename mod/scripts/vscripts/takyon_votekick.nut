@@ -5,6 +5,7 @@ float playerVotePercentage = 0.9 // CHANGE 0.9
 array<string> playerKickVoteYesNames = []
 array<string> playerKickVoteNoNames = []
 string playerVotedForKick = ""
+int minimumOnlinePlayers = 5 // minimum required players online to kick a person. this should be kept high cause if there are only 3, 2 people are enough to kick
 
 bool saveKickedPlayers = true // true: kicked players cant rejoin the same match | false: kicked players can just rejoin
 array<string> kickedPlayers = [] // kicked players are saved here. this will prevent them from rejoining the same match. kicked players are reset on mapchange!!!
@@ -131,7 +132,9 @@ bool function CommandNo(entity player, array<string> args){
 
 void function CheckIfEnoughKickVotes(){
     // 90% need to have voted and there need to be more yes than no votes
-    if(playerKickVoteYesNames.len() > playerKickVoteNoNames.len() && (1.0 * playerKickVoteYesNames.len() + playerKickVoteNoNames.len()) > (GetPlayerArray().len() * playerVotePercentage)){ 
+    bool moreYesThanNo = playerKickVoteYesNames.len() > playerKickVoteNoNames.len()
+    bool enoughPeopleVoted = (1.0 * playerKickVoteYesNames.len() + playerKickVoteNoNames.len()) > (GetPlayerArray().len() * playerVotePercentage)
+    if(moreYesThanNo && enoughPeopleVoted){ 
         // check if player is still in server
 
         ServerCommand("kick " + playerVotedForKick)
