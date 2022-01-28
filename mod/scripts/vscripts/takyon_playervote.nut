@@ -58,7 +58,7 @@ void function SendHudMessageBuilder(entity player, string message, int r, int g,
     #if SERVER
     // SendHudMessage(player, message, x_pos, y_pos, R, G, B, A, fade_in_time, hold_time, fade_out_time)
     // Alpha doesnt work properly and is dependant on the RGB values for whatever fucking reason
-    SendHudMessage( player, message, -1, 0.2, r, g, b, 255, 0.15, 6, 1 )
+    SendHudMessage( player, message, -1, 0.2, r, g, b, 255, 0.15, holdTime, 1 )
     #endif
 }
 
