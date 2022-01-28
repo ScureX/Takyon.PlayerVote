@@ -25,9 +25,9 @@ bool function CommandHelp(entity player, array<string> args){
     if(!IsLobby()){
         printl("USER USED HELP")
         string commands =   "[ !skip, !extend, !kick ]\n"
-        string skip =       "[ !skip   -> to skip the map\n"
-        string extend =     "[ !extend -> to play this map longer\n"
-        string kick =       "[ !kick   -> to kick a player"
+        string skip =       "[ !skip   -> to skip the map]\n"
+        string extend =     "[ !extend -> to play this map longer]\n"
+        string kick =       "[ !kick   -> to kick a player]"
         SendHudMessageBuilder(player, commands + skip + extend + kick, 200, 200, 255)
     }
     return true
@@ -47,7 +47,7 @@ void function OnPlayerSpawned(entity player){
     }   
 
     if(spawnedPlayers.find(player.GetPlayerName()) == -1 || spawnAmount <= displayHintOnSpawnAmount){
-        SendHudMessageBuilder(player, "Open your console and type !help", 200, 200, 255)
+        SendHudMessageBuilder(player, "Open your console and type !help", 200, 200, 255) // Message that gets displayed on respawn
         spawnedPlayers.append(player.GetPlayerName())
     }
 }
@@ -57,6 +57,6 @@ void function OnPlayerDisconnected(entity player){
     while(spawnedPlayers.find(player.GetPlayerName()) != -1){
         try{
             spawnedPlayers.remove(spawnedPlayers.find(player.GetPlayerName()))
-        } catch(exception){} // idc abtt error handling
+        } catch(exception){} // idc abt error handling
     }
 }

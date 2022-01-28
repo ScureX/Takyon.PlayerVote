@@ -1,9 +1,9 @@
 {
 	"Name": "Takyon.PlayerVote",
-	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no] [!extend, !extend force]",
+	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no] [!extend, !extend force] [!rules, !sendrules], [!announce], [!msg name message]",
 	"LoadPriority": 0,
 	"RequiredOnClient": false,
-	"Version": "2.1.0",
+	"Version": "2.2.0",
 
 	"Scripts": [
 		{
@@ -54,6 +54,36 @@
 			},
 			"ServerCallback": {
 				"After": "VoteSkipInit"
+			}
+		},
+		{
+			"Path": "takyon_rules.nut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "RulesInit"
+			},
+			"ServerCallback": {
+				"After": "RulesInit"
+			}
+		},
+		{
+			"Path": "takyon_message.nut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "MessageInit"
+			},
+			"ServerCallback": {
+				"After": "MessageInit"
+			}
+		},
+		{
+			"Path": "takyon_announce.nut",
+			"RunOn": "MP",
+			"ClientCallback": {
+				"After": "AnnounceInit"
+			},
+			"ServerCallback": {
+				"After": "AnnounceInit"
 			}
 		}
 	]

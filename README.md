@@ -1,8 +1,10 @@
 # PlayerVote
 
-Enables players to vote on different things like skipping a map or kicking a player, to add a true community feeling to your server!
+Enables players to vote on different things like skipping a map or kicking a player, to add a true community feeling to your server! Also includes admin functionalities to enforce some rules.
 
 BIG THANKS to: Coopyy, Spoon, Dullahan, Tsk22, wolf109909, Pandora and all the other people that helped me through this nightmare of a project! <3
+
+---
 
 # Commands
 ## !help
@@ -39,6 +41,26 @@ Lets people vote on extending the map to play longer. (The time added can be cha
 By default the map can only be extended once. (This can be changed)
 
 Force can only be used by admins, and will always extend the map.
+
+## !rules
+### Usage: [!rules]
+Shows the user the servers rules, specified in ```takyon_rules.nut```. Change or disable these!
+
+## !sendrules |!sr
+### Usage: [!sendrules]  [!sr]
+Lets an admin send the rules to a specific user. Rules are shown for longer and have a notice that an admin sent these. This can be used on users who misbehave.
+
+## !msg
+### Usage: [!msg playerName message]
+Lets an admin send an anonymous direct message to the player. This might help with toxic users or if you do not want to embarrass them publicly, which may lead to more problems.
+
+Not the full name has to be given, just enough to identify a player.
+
+## !announce
+### Usage: [!announce message]
+Lets an admin announce something. The message is displayed for everyone. 
+
+---
 
 # Settings
 Settings are distributed in files in ```Titanfall2\R2Northstar\mods\Takyon.VoteSkipMap-2.1.0\mod\scripts\vscripts```
@@ -80,3 +102,36 @@ false: players **cant** vote to extend the map multiple times
 
 ### extendMatchTime
 By how many minutes the map gets extended on vote passed
+
+## takyon_rules.nut
+### rulesEnabled
+true: players can use !rules
+false: players **cant** use !rules
+
+### adminSendRulesEnabled
+true: admins can send users the rules
+false: players **cant** send users the rules
+
+### showRulesTime
+For how many seconds the rules should be displayed when an admin sends them
+
+### Adding rules
+Rules can be added below the "add rules here" section.
+
+To make a new Rule add this below the other rules:
+
+```string rule99 = "[99] this is a rule"```
+
+Make sure it's getting diplayed by adding it to "rules". Add a ```+``` behind the last ```\n``` then add your rule with:
+
+```rule99 + "\n"```
+
+## takyon_message.nut
+### messageEnabled
+true: admins can send players messages
+false: players **cant** send players messages
+
+## takyon_announcement.nut
+### announceEnabled
+true: admins can make announcements
+false: players **cant** make announcements
