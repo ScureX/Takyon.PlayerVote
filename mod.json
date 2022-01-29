@@ -4,7 +4,12 @@
 	"LoadPriority": 0,
 	"RequiredOnClient": false,
 	"Version": "2.2.0",
-
+	"ConVars": [
+		{
+			"Name": "pv_admin_names",
+			"DefaultValue": "Takyon_Scure"
+		}
+	],
 	"Scripts": [
 		{
 			"Path": "takyon_playervote.nut",

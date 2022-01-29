@@ -7,17 +7,27 @@ global function IsPlayerAdmin
 global function GetPlayerFromName
 
 // array<string> adminNames = ["Takyon_Scure"] // example
-global array<string> adminNames = ["Takyon_Scure"] // list of usernames who should have admin privileges to execute commands like !rtv force // CHANGE
+// global array<string> adminNames = ["Takyon_Scure"] // list of usernames who should have admin privileges to execute commands like !rtv force // CHANGE
+global array<string> adminNames = []
 
 void function PlayerVoteInit(){
     #if SERVER
-    // placeholder
+    UpdateAdminList()
     #endif
 }
 
 /*
  *  HELPER FUNCTIONS
  */
+
+void function UpdateAdminList()
+{
+    string cvar = GetConVarString( "pv_admin_names" )
+
+    adminNames = split( cvar, "," )
+    foreach ( string adminName in adminNames )
+        StringReplace( adminName, " ", "" )
+}
 
 bool function CanFindPlayerFromSubstring(string substring){
     #if SERVER
