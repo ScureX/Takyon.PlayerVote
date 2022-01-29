@@ -63,60 +63,26 @@ Lets an admin announce something. The message is displayed for everyone.
 ---
 
 # Settings
-Settings are distributed in files in ```Titanfall2\R2Northstar\mods\Takyon.VoteSkipMap-2.1.0\mod\scripts\vscripts```
+This mod can be configured using the following ConVars:
 
-## takyon_playervote.nut
-### adminNames
-Specify player names who should be able to force votes like kick, skip and extend
-```adminNames = ["name1", "name2", "name3"]```
+| Name                              | Description                                                                                                                       | Default value    | Accepted Value |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ---------------- | -------------- |
+| `pv_admin_names`                  | Comma-separated of players who should be able to force votes like kick, skip and extend                                           | `"TakyonSecure"` | `string`       |
+| `pv_display_hint_on_spawn_amount` | Amount of times (after dropship) a hint to type !help should be displayed on respawn                                              | `2`              | `int`          |
+| `pv_skip_enabled`                 | Allow players to start a voteskip                                                                                                 | `1`              | `0-1`          |
+| `pv_kick_enabled`                 | Allow players to start a votekick                                                                                                 | `1`              | `0-1`          |
+| `pv_kick_percentage`              | Percentage of "yes" required for a vote to pass                                                                                   | `0.9`            | `float`        |
+| `pv_kick_min_players`             | How many people have to be online for a votekick to be initiated so that when 3 people are online 2 cant kick 1. Avoids trolling. | `5`              | `int`          |
+| `pv_extend_map_multiple_times`    | Allow multiple extensions of the same map                                                                                         | `0`              | `0-1`          |
+| `pv_extend_amount`                | By how many minutes the map gets extended on vote passed                                                                          | `3.5`            | `float`        |
+| `pv_rules_enabled`                | Allow !rule usage                                                                                                                 | `1`              | `0-1`          |
+| `pv_rules_admin_send_enabled`     | Allow admins to send users the rules                                                                                              | `1`              | `0-1`          |
+| `pv_rules_show_time`              | For how many seconds the rules should be displayed when an admin sends them                                                       | `15`             | `int`          |
+| `pv_message`                      | Admins can send players messages                                                                                                  | `1`              | `0-1`          |
+| `pv_announce`                     | Admins can make announcements                                                                                                     | `1`              | `0-1`          |
 
-## takyon_help.nut
-### displayHintOnSpawnAmount
-Amount of times (after dropship) a hint to type !help should be displayed on respawn
-0: Only in dropship/initial spawn 
-1: in dropship and on first respawn
-etc.
-
-## takyon_voteskip.nut
-### skipEnabled
-true: players can vote to skip the map
-false: players **cant** vote to skip the map
-
-## takyon_votekick.nut
-### playerVoteKickEnabled
-true: players can vote to kick a player
-false: players **cant** vote to kick a player
-
-### playerVotePercentage
-How many people have to vote for the vote to be decided in percent
-0.5: 50% of all players have to vote
-0.9: 90% of all players have to vote
-
-### minimumOnlinePlayers
-How many people have to be online for a votekick to be initiated so that when 3 people are online 2 cant kick 1. Avoids trolling.
-
-## takyon_voteextend.nut
-### extendMapMultipleTimes
-true: players can vote to extend the map multiple times
-false: players **cant** vote to extend the map multiple times
-
-### extendMatchTime
-By how many minutes the map gets extended on vote passed
-
-## takyon_rules.nut
-### rulesEnabled
-true: players can use !rules
-false: players **cant** use !rules
-
-### adminSendRulesEnabled
-true: admins can send users the rules
-false: players **cant** send users the rules
-
-### showRulesTime
-For how many seconds the rules should be displayed when an admin sends them
-
-### Adding rules
-Rules can be added below the "add rules here" section.
+# Adding rules
+Rules can be added in `mod\scripts\vscripts\takyon_rules.nut` below the "add rules here" section.
 
 To make a new Rule add this below the other rules:
 
@@ -125,13 +91,3 @@ To make a new Rule add this below the other rules:
 Make sure it's getting diplayed by adding it to "rules". Add a ```+``` behind the last ```\n``` then add your rule with:
 
 ```rule99 + "\n"```
-
-## takyon_message.nut
-### messageEnabled
-true: admins can send players messages
-false: players **cant** send players messages
-
-## takyon_announcement.nut
-### announceEnabled
-true: admins can make announcements
-false: players **cant** make announcements
