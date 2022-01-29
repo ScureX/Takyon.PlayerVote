@@ -16,6 +16,18 @@
 		{
 			"Name": "pv_skip_enabled",
 			"DefaultValue": "true"
+		},
+		{
+			"Name": "pv_kick_enabled",
+			"DefaultValue": "true"
+		},
+		{
+			"Name": "pv_kick_percentage",
+			"DefaultValue": "0.9"
+		},
+		{
+			"Name": "pv_kick_min_players",
+			"DefaultValue": "5"
 		}
 	],
 	"Scripts": [
