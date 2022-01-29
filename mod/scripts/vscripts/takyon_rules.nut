@@ -35,6 +35,11 @@ void function RulesInit(){
     /*
      *  end of rules
      */
+
+    // ConVars
+    rulesEnabled = GetConVarBool( "pv_rules_enabled" )
+    adminSendRulesEnabled = GetConVarBool( "pv_rules_admin_send_enabled" )
+    showRulesTime = GetConVarInt( "pv_rules_show_time" )
     #endif
 }
 

@@ -36,6 +36,18 @@
 		{
 			"Name": "pv_extend_amount",
 			"DefaultValue": "3.5"
+		},
+		{
+			"Name": "pv_rules_enabled",
+			"DefaultValue": "1"
+		},
+		{
+			"Name": "pv_rules_admin_send_enabled",
+			"DefaultValue": "1"
+		},
+		{
+			"Name": "pv_rules_show_time",
+			"DefaultValue": "15"
 		}
 	],
 	"Scripts": [
