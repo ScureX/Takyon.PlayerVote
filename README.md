@@ -63,7 +63,7 @@ Lets an admin announce something. The message is displayed for everyone.
 ---
 
 # Settings
-This mod can be configured using the following ConVars:
+This mod can be configured using the following [ConVars](https://r2northstar.gitbook.io/r2northstar-wiki/hosting-a-server-with-northstar/dedicated-server#convars):
 
 | Name                              | Description                                                                                                                       | Default value    | Accepted Value |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ---------------- | -------------- |
