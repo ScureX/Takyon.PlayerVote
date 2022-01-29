@@ -48,6 +48,14 @@
 		{
 			"Name": "pv_rules_show_time",
 			"DefaultValue": "15"
+		},
+		{
+			"Name": "pv_message",
+			"DefaultValue": "1"
+		},
+		{
+			"Name": "pv_announce",
+			"DefaultValue": "1"
 		}
 	],
 	"Scripts": [

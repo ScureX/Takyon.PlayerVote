@@ -8,6 +8,9 @@ void function AnnounceInit(){
     AddClientCommandCallback("!announce", CommandAnnounce)
     AddClientCommandCallback("!ANNOUNCE", CommandAnnounce)
     AddClientCommandCallback("!Announce", CommandAnnounce)
+
+    // ConVar
+    announceEnabled = GetConVarBool( "pv_announce" )
     #endif
 }
 
