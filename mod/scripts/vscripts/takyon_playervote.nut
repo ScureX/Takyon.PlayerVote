@@ -6,8 +6,6 @@ global function PlayerHasVoted
 global function IsPlayerAdmin
 global function GetPlayerFromName
 
-// array<string> adminNames = ["Takyon_Scure"] // example
-// global array<string> adminNames = ["Takyon_Scure"] // list of usernames who should have admin privileges to execute commands like !rtv force // CHANGE
 global array<string> adminNames = []
 
 void function PlayerVoteInit(){
