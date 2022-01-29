@@ -12,6 +12,9 @@ void function VoteSkipInit(){
 
     AddClientCommandCallback("!rtv", CommandSkip) // rock the vote. requested by @Hedelma
     AddClientCommandCallback("!RTV", CommandSkip)
+
+    // ConVar
+    skipEnabled = GetConVarBool( "pv_skip_enabled" )
     #endif
 }
 

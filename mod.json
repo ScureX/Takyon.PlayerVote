@@ -12,6 +12,10 @@
 		{
 			"Name": "pv_display_hint_on_spawn_amount",
 			"DefaultValue": "2" // set this to the amount of spawns the hint to use !help should be displayed. 1 = only on dropship and first spawn, 2 on dropship, first and second spawn
+		},
+		{
+			"Name": "pv_skip_enabled",
+			"DefaultValue": "true"
 		}
 	],
 	"Scripts": [
