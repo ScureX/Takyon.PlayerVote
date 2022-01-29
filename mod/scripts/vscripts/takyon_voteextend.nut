@@ -11,6 +11,10 @@ void function VoteExtendInit(){
     AddClientCommandCallback("!extend", CommandExtend)
     AddClientCommandCallback("!EXTEND", CommandExtend)
     AddClientCommandCallback("!Extend", CommandExtend)
+
+    // ConVars
+    extendMapMultipleTimes = GetConVarBool( "pv_extend_map_multiple_times" )
+    extendMatchTime = GetConVarFloat( "pv_extend_amount" )
     #endif
 }
 

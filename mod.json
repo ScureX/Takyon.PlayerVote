@@ -15,11 +15,11 @@
 		},
 		{
 			"Name": "pv_skip_enabled",
-			"DefaultValue": "true"
+			"DefaultValue": "1"
 		},
 		{
 			"Name": "pv_kick_enabled",
-			"DefaultValue": "true"
+			"DefaultValue": "1"
 		},
 		{
 			"Name": "pv_kick_percentage",
@@ -28,6 +28,14 @@
 		{
 			"Name": "pv_kick_min_players",
 			"DefaultValue": "5"
+		},
+		{
+			"Name": "pv_extend_map_multiple_times",
+			"DefaultValue": "0"
+		},
+		{
+			"Name": "pv_extend_amount",
+			"DefaultValue": "3.5"
 		}
 	],
 	"Scripts": [
