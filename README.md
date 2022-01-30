@@ -67,8 +67,8 @@ This mod can be configured using the following [ConVars](https://r2northstar.git
 
 | Name                              | Description                                                                                                                       | Default value    | Accepted Value |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ---------------- | -------------- |
-| `pv_admin_names`                  | Comma-separated list of players who should be able to force votes like kick, skip and extend                                      | `"Takyon_Scure"` | `string`       |
-| `pv_display_hint_on_spawn_amount` | Amount of times (after dropship) a hint to type !help should be displayed on respawn                                              | `2`              | `int`          |
+| `pv_admin_uids`                  | Comma-separated list of player's UIDs who should be able to force votes like kick, skip and extend                                      | `"1006880507304"` | `string`       |
+| `pv_display_hint_on_spawn_amount` | Amount of times (after dropship) a hint to type !help should be displayed on respawn. Always displayed in dropship unless set to -1                                              | `2`              | `int`          |
 | `pv_skip_enabled`                 | Allow players to start a voteskip                                                                                                 | `1`              | `0-1`          |
 | `pv_skip_percentage`              | Percentage of "skip" votes required for a vote to pass                                                                            | `0.8`            | `float`        |
 | `pv_kick_enabled`                 | Allow players to start a votekick                                                                                                 | `1`              | `0-1`          |
