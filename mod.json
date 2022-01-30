@@ -3,15 +3,16 @@
 	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no] [!extend, !extend force] [!rules, !sendrules], [!announce], [!msg name message]",
 	"LoadPriority": 0,
 	"RequiredOnClient": false,
-	"Version": "2.2.0",
+	"Version": "3.0.0",
 
 	"Scripts": [
 		{
+			"Path": "takyon_localization.nut",
+			"RunOn": "SERVER && MP"
+		},
+		{
 			"Path": "takyon_playervote.nut",
 			"RunOn": "SERVER && MP",
-			"ClientCallback": {
-				"After": "PlayerVoteInit"
-			},
 			"ServerCallback": {
 				"After": "PlayerVoteInit"
 			}
@@ -19,9 +20,6 @@
 		{
 			"Path": "takyon_help.nut",
 			"RunOn": "SERVER && MP",
-			"ClientCallback": {
-				"After": "HelpInit"
-			},
 			"ServerCallback": {
 				"After": "HelpInit"
 			}
@@ -29,9 +27,6 @@
 		{
 			"Path": "takyon_votekick.nut",
 			"RunOn": "SERVER && MP",
-			"ClientCallback": {
-				"After": "VoteKickInit"
-			},
 			"ServerCallback": {
 				"After": "VoteKickInit"
 			}
@@ -39,49 +34,34 @@
 		{
 			"Path": "takyon_voteextend.nut",
 			"RunOn": "SERVER && MP",
-			"ClientCallback": {
-				"After": "VoteExtendInit"
-			},
 			"ServerCallback": {
 				"After": "VoteExtendInit"
 			}
 		},
 		{
 			"Path": "takyon_voteskip.nut",
-			"RunOn": "MP",
-			"ClientCallback": {
-				"After": "VoteSkipInit"
-			},
+			"RunOn": "SERVER && MP",
 			"ServerCallback": {
 				"After": "VoteSkipInit"
 			}
 		},
 		{
 			"Path": "takyon_rules.nut",
-			"RunOn": "MP",
-			"ClientCallback": {
-				"After": "RulesInit"
-			},
+			"RunOn": "SERVER && MP",
 			"ServerCallback": {
 				"After": "RulesInit"
 			}
 		},
 		{
 			"Path": "takyon_message.nut",
-			"RunOn": "MP",
-			"ClientCallback": {
-				"After": "MessageInit"
-			},
+			"RunOn": "SERVER && MP",
 			"ServerCallback": {
 				"After": "MessageInit"
 			}
 		},
 		{
 			"Path": "takyon_announce.nut",
-			"RunOn": "MP",
-			"ClientCallback": {
-				"After": "AnnounceInit"
-			},
+			"RunOn": "SERVER && MP",
 			"ServerCallback": {
 				"After": "AnnounceInit"
 			}
