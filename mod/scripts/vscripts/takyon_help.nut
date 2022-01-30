@@ -5,7 +5,6 @@ int displayHintOnSpawnAmount = 0
 
 
 void function HelpInit(){
-    #if SERVER
     // add commands here. i added some varieants for accidents, however not for brain damage. do whatever :P
     AddClientCommandCallback("!help", CommandHelp)
     AddClientCommandCallback("!HELP", CommandHelp)
@@ -17,7 +16,6 @@ void function HelpInit(){
 
     // ConVar
     displayHintOnSpawnAmount = GetConVarInt( "pv_display_hint_on_spawn_amount" )
-    #endif
 }
 
 /*
@@ -50,7 +48,7 @@ void function OnPlayerSpawned(entity player){
     }   
 
     if(spawnedPlayers.find(player.GetPlayerName()) == -1 || spawnAmount <= displayHintOnSpawnAmount){
-        SendHudMessageBuilder(player, "Open your console and type !help", 200, 200, 255) // Message that gets displayed on respawn
+        SendHudMessageBuilder(player, SPAWN_MESSAGE, 200, 200, 255) // Message that gets displayed on respawn
         spawnedPlayers.append(player.GetPlayerName())
     }
 }

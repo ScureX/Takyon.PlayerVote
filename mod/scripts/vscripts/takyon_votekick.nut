@@ -1,7 +1,7 @@
 global function VoteKickInit
 
 bool playerVoteKickEnabled = true // change this to false if you dont want users/admins to be able to vote kick
-float playerVotePercentage = 0.9 // CHANGE 0.9
+float playerVotePercentage = 0.9 // percentage of how many people on the server need to have voted
 array<string> playerKickVoteYesNames = []
 array<string> playerKickVoteNoNames = []
 string playerVotedForKick = ""
@@ -11,7 +11,6 @@ bool saveKickedPlayers = true // true: kicked players cant rejoin the same match
 array<string> kickedPlayers = [] // kicked players are saved here. this will prevent them from rejoining the same match. kicked players are reset on mapchange!!!
 
 void function VoteKickInit(){
-    #if SERVER
     // add commands here. i added some varieants for accidents, however not for brain damage. do whatever :P
     AddClientCommandCallback("!kick", CommandKick) // !kick playername force will kick a player if youre admin | normal kick: !kick playername
     AddClientCommandCallback("!yes", CommandYes)
@@ -26,7 +25,6 @@ void function VoteKickInit(){
     #endif
 }
 
-#if SERVER
 /*
  *  COMMAND LOGIC
  */
@@ -37,19 +35,19 @@ bool function CommandKick(entity player, array<string> args){
         
         // no player name given
         if(args.len() == 0){
-            SendHudMessageBuilder(player, "No name given", 255, 200, 200)
+            SendHudMessageBuilder(player, NO_PLAYERNAME_FOUND, 255, 200, 200)
             return false
         }
 
         // vote kick disabled
         if(!playerVoteKickEnabled){
-            SendHudMessageBuilder(player, "Votekick is disabled", 255, 200, 200)
+            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
             return false
         }
 
         // player not on server or substring unspecific
         if(!CanFindPlayerFromSubstring(args[0])){
-            SendHudMessageBuilder(player, "Couldn't match one player for " + args[0], 255, 200, 200)
+            SendHudMessageBuilder(player, CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], 255, 200, 200)
             return false
         }
 
@@ -58,7 +56,7 @@ bool function CommandKick(entity player, array<string> args){
 
         // players cannot kick themselves 
         if(fullPlayerName == player.GetPlayerName()){
-            SendHudMessageBuilder(player, "You cannot kick yourself", 255, 200, 200)
+            SendHudMessageBuilder(player, CANT_KICK_YOURSELF, 255, 200, 200)
             return false
         }
 
@@ -68,16 +66,16 @@ bool function CommandKick(entity player, array<string> args){
             if(adminNames.find(player.GetPlayerName()) != -1){
                 ServerCommand("kick " + fullPlayerName) 
                 playerKickVoteYesNames.clear()
-                SendHudMessageBuilder(player, "Kicked " + fullPlayerName, 255, 200, 200)
+                SendHudMessageBuilder(player, KICKED_PLAYER + fullPlayerName, 255, 200, 200)
                 return true
             }
-            SendHudMessageBuilder(player, "Missing Privileges!", 255, 200, 200)
+            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
             return false
         }
 
         // Check if enough people are online to initiate a vote
         if(GetPlayerArray().len() < minimumOnlinePlayers){
-            SendHudMessageBuilder(player, "Not enough players online to votekick", 255, 200, 200)
+            SendHudMessageBuilder(player, NOT_ENOUGH_PLAYERS_ONLINE_FOR_KICK, 255, 200, 200)
             return false
         }
 
@@ -90,12 +88,12 @@ bool function CommandKick(entity player, array<string> args){
 
             // notify
             for(int i = 0; i < GetPlayerArray().len(); i++){
-                SendHudMessageBuilder(GetPlayerArray()[i], player.GetPlayerName() + " wants to kick " + fullPlayerName + "\nTo vote type !yes or !no in your console", 255, 200, 200)
+                SendHudMessageBuilder(GetPlayerArray()[i], player.GetPlayerName() + PLAYER_WANTS_TO_KICK_PLAYER + fullPlayerName + HOW_TO_KICK, 255, 200, 200)
             }
             CheckIfEnoughKickVotes()
         }
         else{
-            SendHudMessageBuilder(player, "There is already an active vote for " + fullPlayerName + ".\nVote with !yes or !no", 255, 200, 200)
+            SendHudMessageBuilder(player, ALREADY_VOTE_GOING + fullPlayerName + HOW_TO_KICK, 255, 200, 200)
         }
     }
     return true
@@ -103,7 +101,7 @@ bool function CommandKick(entity player, array<string> args){
 
 bool function CommandYes(entity player, array<string> args){
     if(playerVotedForKick == ""){
-        SendHudMessageBuilder(player, "There is no vote going on. Use !kick", 255, 200, 200)
+        SendHudMessageBuilder(player, NO_VOTE_GOING, 255, 200, 200)
         return false
     }
 
@@ -114,14 +112,14 @@ bool function CommandYes(entity player, array<string> args){
         CheckIfEnoughKickVotes()    
     }
     else{
-        SendHudMessageBuilder(player, "You have already voted", 255, 200, 200)
+        SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
     }
     return true
 }
 
 bool function CommandNo(entity player, array<string> args){
     if(playerVotedForKick == ""){
-        SendHudMessageBuilder(player, "There is no vote going on. Use !kick", 255, 200, 200)
+        SendHudMessageBuilder(player, NO_VOTE_GOING, 255, 200, 200)
         return false
     }
 
@@ -132,7 +130,7 @@ bool function CommandNo(entity player, array<string> args){
         CheckIfEnoughKickVotes()    
     }
     else{
-        SendHudMessageBuilder(player, "You have already voted", 255, 200, 200)
+        SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
     }
     return true
 }
@@ -151,7 +149,7 @@ void function CheckIfEnoughKickVotes(){
         ServerCommand("kick " + playerVotedForKick)
         // notify
         for(int i = 0; i < GetPlayerArray().len(); i++){
-            SendHudMessageBuilder(GetPlayerArray()[i], "Kicked " + playerVotedForKick, 255, 200, 200)
+            SendHudMessageBuilder(GetPlayerArray()[i], KICKED_PLAYER + playerVotedForKick, 255, 200, 200)
         }
 
         kickedPlayers.append(playerVotedForKick)
@@ -174,4 +172,3 @@ void function OnPlayerConnected(entity player){
         // TODO mabye this for havin multiple votes?
     //}
 }*/
-#endif

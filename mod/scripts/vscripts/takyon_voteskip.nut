@@ -4,7 +4,6 @@ array<string> playerSkipVoteNames = [] // list of players who have voted, is use
 bool skipEnabled = true
 
 void function VoteSkipInit(){
-    #if SERVER
     // add commands here. i added some varieants for accidents, however not for brain damage. do whatever :P
     AddClientCommandCallback("!skip", CommandSkip) //!skip force will change the map if your name is in adminNames
     AddClientCommandCallback("!SKIP", CommandSkip)
@@ -15,10 +14,8 @@ void function VoteSkipInit(){
 
     // ConVar
     skipEnabled = GetConVarBool( "pv_skip_enabled" )
-    #endif
 }
 
-#if SERVER
 /*
  *  COMMAND LOGIC
  */
@@ -31,18 +28,18 @@ bool function CommandSkip(entity player, array<string> args){
             // check for admin names
             if(adminNames.find(player.GetPlayerName()) != -1){
                 for(int i = 0; i < GetPlayerArray().len(); i++){
-                    SendHudMessageBuilder(GetPlayerArray()[i], "Admin skipped", 255, 200, 200)
+                    SendHudMessageBuilder(GetPlayerArray()[i], ADMIN_SKIPPED, 255, 200, 200)
 			    }
                 CheckIfEnoughSkipVotes(true)
                 return true
             }
-            SendHudMessageBuilder(player, "Missing Privileges!", 255, 200, 200)
+            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
             return false
         }
 
         // check if skipping is enabled
         if(!skipEnabled){
-            SendHudMessageBuilder(player, "Skipping is disabled", 255, 200, 200)
+            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
             return false
         }
 
@@ -54,15 +51,15 @@ bool function CommandSkip(entity player, array<string> args){
             // send message to everyone
             for(int i = 0; i < GetPlayerArray().len(); i++){
                 if(playerSkipVoteNames.len() > 1) // semantics
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerSkipVoteNames.len() + " Players Want To Skip This Map\nSkip this map by typing !skip in the console", 255, 200, 200)
+                    SendHudMessageBuilder(GetPlayerArray()[i], playerSkipVoteNames.len() + MULTIPLE_SKIP_VOTES, 255, 200, 200)
                 else
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerSkipVoteNames.len() + " Player Wants To Skip This Map\nSkip this map by typing !skip in the console", 255, 200, 200)
+                    SendHudMessageBuilder(GetPlayerArray()[i], playerSkipVoteNames.len() + ONE_SKIP_VOTE, 255, 200, 200)
 			}
         } 
         else {
             // Doesnt let the player vote twice, name is saved so even on reconnect they cannot vote twice
             // Future update might check if the player is actually online but right now i am too tired
-            SendHudMessageBuilder(player, "You have already voted!", 255, 200, 200)
+            SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
         }
     }
     CheckIfEnoughSkipVotes()
@@ -84,4 +81,3 @@ void function CheckIfEnoughSkipVotes(bool force = false){
         playerSkipVoteNames.clear()
     }
 }
-#endif

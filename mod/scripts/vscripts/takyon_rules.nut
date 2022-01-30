@@ -6,7 +6,6 @@ int showRulesTime = 15 // for how many seconds the rules should be displayed whe
 string rules
 
 void function RulesInit(){
-    #if SERVER
     // add commands here. i added some varieants for accidents, however not for brain damage. do whatever :P
     AddClientCommandCallback("!rules", CommandRules)
     AddClientCommandCallback("!RULES", CommandRules)
@@ -35,12 +34,11 @@ void function RulesInit(){
     /*
      *  end of rules
      */
-
+     
     // ConVars
     rulesEnabled = GetConVarBool( "pv_rules_enabled" )
     adminSendRulesEnabled = GetConVarBool( "pv_rules_admin_send_enabled" )
     showRulesTime = GetConVarInt( "pv_rules_show_time" )
-    #endif
 }
 
 /*
@@ -48,32 +46,31 @@ void function RulesInit(){
  */
 
 bool function CommandSendRules(entity player, array<string> args){
-    #if SERVER
     if(!IsLobby()){
         printl("USER USED SEND RULES")
 
         // send rules disabled
         if(!adminSendRulesEnabled){
-            SendHudMessageBuilder(player, "This command has been disabled", 255, 200, 200)
+            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
             return false
         }
 
         // Check if user is admin
         if(!IsPlayerAdmin(player)){
-            SendHudMessageBuilder(player, "Missing Privileges!", 255, 200, 200)
+            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
             return false
         }
 
         // check if theres something after !announce
         if(args.len() < 1){
-            SendHudMessageBuilder(player, "No player name found\n!sr playerName", 255, 200, 200)
+            SendHudMessageBuilder(player, NO_PLAYERNAME_FOUND + HOW_TO_SENDRULES, 255, 200, 200)
             return false
         }
 
         // check if player substring exists n stuff
         // player not on server or substring unspecific
         if(!CanFindPlayerFromSubstring(args[0])){
-            SendHudMessageBuilder(player, "Couldn't match one player for " + args[0], 255, 200, 200)
+            SendHudMessageBuilder(player, CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], 255, 200, 200)
             return false
         }
 
@@ -81,31 +78,28 @@ bool function CommandSendRules(entity player, array<string> args){
         string fullPlayerName = GetFullPlayerNameFromSubstring(args[0])
 
         // give admin feedback
-        SendHudMessageBuilder(player, "Rules sent to " + fullPlayerName, 255, 200, 200)
+        SendHudMessageBuilder(player, RULES_SENT_TO_PLAYER + fullPlayerName, 255, 200, 200)
 
         entity target = GetPlayerFromName(fullPlayerName)
 
         // last minute error handling if player cant be found
         if(target == null){
-            SendHudMessageBuilder(player, "There was an error. The player might've left", 255, 200, 200)
+            SendHudMessageBuilder(player, PLAYER_IS_NULL, 255, 200, 200)
             return false
         }
 
-        SendHudMessageBuilder(target, "An Admin has decided that you should read the rules!\n\n" + rules, 255, 200, 200)
+        SendHudMessageBuilder(target, ADMIN_SENT_YOU_RULES + rules, 255, 200, 200)
     }
-    #endif
     return true
 }
 
 bool function CommandRules(entity player, array<string> args){
-    #if SERVER
     if(!IsLobby()){
         printl("USER USED RULES")
         if(rulesEnabled)
             SendHudMessageBuilder(player, rules, 200, 200, 255, showRulesTime)
         else
-            SendHudMessageBuilder(player, "This command has been disabled", 200, 200, 255)
+            SendHudMessageBuilder(player, COMMAND_DISABLED, 200, 200, 255)
     }
-    #endif
     return true
 }

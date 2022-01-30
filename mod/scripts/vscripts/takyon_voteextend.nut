@@ -6,7 +6,6 @@ bool hasMapBeenExtended = false // makes sure map can only be extended once
 float extendMatchTime = 3.5 // how much time should be added after successful !extend vote in minutes
 
 void function VoteExtendInit(){
-    #if SERVER
     // add commands here. i added some varieants for accidents, however not for brain damage. do whatever :P
     AddClientCommandCallback("!extend", CommandExtend)
     AddClientCommandCallback("!EXTEND", CommandExtend)
@@ -15,7 +14,6 @@ void function VoteExtendInit(){
     // ConVars
     extendMapMultipleTimes = GetConVarBool( "pv_extend_map_multiple_times" )
     extendMatchTime = GetConVarFloat( "pv_extend_amount" )
-    #endif
 }
 
 /*
@@ -31,18 +29,18 @@ bool function CommandExtend(entity player, array<string> args){
             // check for admin names
             if(adminNames.find(player.GetPlayerName()) != -1){
                 for(int i = 0; i < GetPlayerArray().len(); i++){
-                    SendHudMessageBuilder(GetPlayerArray()[i], "Admin extended map time", 255, 200, 200)
+                    SendHudMessageBuilder(GetPlayerArray()[i], ADMIN_EXTENDED, 255, 200, 200)
                     CheckIfEnoughExtendVotes(true)
 			    }
                 return true
             }
-            SendHudMessageBuilder(player, "Missing Privileges!", 255, 200, 200)
+            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
             return true
         }
 
         // check if already extended and settings
         if(hasMapBeenExtended && !extendMapMultipleTimes ){
-            SendHudMessageBuilder(player, "The map cannot be extended twice", 255, 200, 200)
+            SendHudMessageBuilder(player, MAP_CANT_BE_EXTENDED_TWICE, 255, 200, 200)
             return false
         }
 
@@ -54,15 +52,15 @@ bool function CommandExtend(entity player, array<string> args){
             // send message to everyone
             for(int i = 0; i < GetPlayerArray().len(); i++){
                 if(playerExtendVoteNames.len() > 1) // semantics
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerExtendVoteNames.len() + " Players Want To Play This Map Longer\nExtend this map by typing !extend in the console", 255, 200, 200)
+                    SendHudMessageBuilder(GetPlayerArray()[i], playerExtendVoteNames.len() + MULTIPLE_EXTEND_VOTES, 255, 200, 200)
                 else
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerExtendVoteNames.len() + " Player Wants To Play This Map Longer\nExtend this map by typing !extend in the console", 255, 200, 200)
+                    SendHudMessageBuilder(GetPlayerArray()[i], playerExtendVoteNames.len() + ONE_EXTEND_VOTE, 255, 200, 200)
 			}
         } 
         else {
             // Doesnt let the player vote twice, name is saved so even on reconnect they cannot vote twice
             // Future update might check if the player is actually online but right now i am too tired
-            SendHudMessageBuilder(player, "You have already voted!", 255, 200, 200)
+            SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
         }
     }
     CheckIfEnoughExtendVotes()
@@ -83,7 +81,7 @@ void function CheckIfEnoughExtendVotes(bool force = false){
         SetServerVar( "gameEndTime", expect float(GetServerVar("gameEndTime")) + (60 * extendMatchTime))
         // message everyone
         for(int i = 0; i < GetPlayerArray().len(); i++){
-            SendHudMessageBuilder(GetPlayerArray()[i], "Map has been extended!", 255, 200, 200)
+            SendHudMessageBuilder(GetPlayerArray()[i], MAP_EXTENDED, 255, 200, 200)
         }
         hasMapBeenExtended = true
         playerExtendVoteNames.clear()
