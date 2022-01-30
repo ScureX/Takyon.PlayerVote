@@ -1,6 +1,7 @@
 global function VoteSkipInit
 
 array<string> playerSkipVoteNames = [] // list of players who have voted, is used to see how many have voted 
+float skipVotePercentage = 0.8 // percentage of how many people on the server need to have voted
 bool skipEnabled = true
 
 void function VoteSkipInit(){
