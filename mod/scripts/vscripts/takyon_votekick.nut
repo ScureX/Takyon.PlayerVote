@@ -22,7 +22,6 @@ void function VoteKickInit(){
     playerVoteKickEnabled = GetConVarBool( "pv_kick_enabled" )
     playerVotePercentage = GetConVarFloat( "pv_kick_percentage" )
     minimumOnlinePlayers = GetConVarInt( "pv_kick_min_players" )
-    #endif
 }
 
 /*
