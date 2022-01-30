@@ -14,6 +14,7 @@ void function VoteSkipInit(){
 
     // ConVar
     skipEnabled = GetConVarBool( "pv_skip_enabled" )
+    skipVotePercentage = GetConVarFloat( "pv_skip_percentage" )
 }
 
 /*
@@ -72,11 +73,7 @@ bool function CommandSkip(entity player, array<string> args){
 
 void function CheckIfEnoughSkipVotes(bool force = false){
     // check if enough have voted
-    // change "half" in the if statement to whatever var or amount you want
-    int half = ceil(1.0 * GetPlayerArray().len() / 2).tointeger()
-    int quarter = ceil(1.0 * GetPlayerArray().len() / 4).tointeger() //fixed spelling, fuck you coopyy
-
-    if(playerSkipVoteNames.len() >= half || force){ // CHANGE half
+    if(playerSkipVoteNames.len() >= (1.0 * GetPlayerArray().len() * skipVotePercentage) || force){
         SetServerVar("gameEndTime", 1.0) // end this game 
         playerSkipVoteNames.clear()
     }

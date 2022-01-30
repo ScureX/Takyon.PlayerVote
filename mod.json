@@ -19,6 +19,10 @@
 			"DefaultValue": "1" // enable voteskip (!rtv)
 		},
 		{
+			"Name": "pv_skip_percentage",
+			"DefaultValue": "0.8" // percentage of players required to successfully skip the current map
+		},
+		{
 			"Name": "pv_kick_enabled",
 			"DefaultValue": "1" // change this to 0 if you dont want users/admins to be able to vote kick
 		},
@@ -32,7 +36,7 @@
 		},
 		{
 			"Name": "pv_extend_percentage",
-			"DefaultValue": "0.6" // percentage of players required to successfully extend
+			"DefaultValue": "0.6" // percentage of players required to successfully extend the current map
 		},
 		{
 			"Name": "pv_extend_map_multiple_times",

@@ -75,7 +75,7 @@ bool function CommandExtend(entity player, array<string> args){
 
 void function CheckIfEnoughExtendVotes(bool force = false){
     // check if enough have voted if it wasn't forced to begin with
-    if( force || playerExtendVoteNames.len() >= (GetPlayerArray().len() * extendVotePercentage)) {
+    if(playerExtendVoteNames.len() >= (1.0 * GetPlayerArray().len() * extendVotePercentage) || force) {
         SetServerVar( "gameEndTime", expect float(GetServerVar("gameEndTime")) + (60 * extendMatchTime))
         // message everyone
         for(int i = 0; i < GetPlayerArray().len(); i++){
