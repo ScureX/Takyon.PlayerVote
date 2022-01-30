@@ -7,6 +7,9 @@ void function MessageInit(){
     AddClientCommandCallback("!msg", CommandMsg)
     AddClientCommandCallback("!MSG", CommandMsg)
     AddClientCommandCallback("!Msg", CommandMsg)
+
+    // ConVar
+    messageEnabled = GetConVarBool( "pv_message" )
 }
 
 /*

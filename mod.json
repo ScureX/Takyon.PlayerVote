@@ -3,8 +3,71 @@
 	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no] [!extend, !extend force] [!rules, !sendrules], [!announce], [!msg name message]",
 	"LoadPriority": 0,
 	"RequiredOnClient": false,
-	"Version": "3.0.0",
-
+  "Version": "3.0.0",
+  
+	"ConVars": [
+		{
+			"Name": "pv_admin_names",
+			"DefaultValue": "Takyon_Scure" // list of usernames who should have admin privileges to execute commands like !rtv force, comma separated
+		},
+		{
+			"Name": "pv_display_hint_on_spawn_amount",
+			"DefaultValue": "2" // set this to the amount of spawns the hint to use !help should be displayed. 1 = only on dropship and first spawn, 2 on dropship, first and second spawn
+		},
+		{
+			"Name": "pv_skip_enabled",
+			"DefaultValue": "1" // enable voteskip (!rtv)
+		},
+		{
+			"Name": "pv_skip_percentage",
+			"DefaultValue": "0.8" // percentage of players required to successfully skip the current map
+		},
+		{
+			"Name": "pv_kick_enabled",
+			"DefaultValue": "1" // change this to 0 if you dont want users/admins to be able to vote kick
+		},
+		{
+			"Name": "pv_kick_percentage",
+			"DefaultValue": "0.9" // percentage of players required to successfully kick
+		},
+		{
+			"Name": "pv_kick_min_players",
+			"DefaultValue": "5" // minimum required players online to kick a person. this should be kept high cause if there are only 3, 2 people are enough to kick
+		},
+		{
+			"Name": "pv_extend_percentage",
+			"DefaultValue": "0.6" // percentage of players required to successfully extend the current map
+		},
+		{
+			"Name": "pv_extend_map_multiple_times",
+			"DefaultValue": "0" // 0: map can only be extended once; 1: map can be extended indefinetly
+		},
+		{
+			"Name": "pv_extend_amount",
+			"DefaultValue": "3.5" // how much time should be added after successful !extend vote in minutes
+		},
+		{
+			"Name": "pv_rules_enabled",
+			"DefaultValue": "1"  // 1: users can use !rules | 0: users cant use !rules
+		},
+		{
+			"Name": "pv_rules_admin_send_enabled",
+			"DefaultValue": "1"  // 1: admins can send users the rules | 0: admins cant do that
+		},
+		{
+			"Name": "pv_rules_show_time",
+			"DefaultValue": "15" // for how many seconds the rules should be displayed when an admin sends them
+		},
+		{
+			"Name": "pv_message",
+			"DefaultValue": "1" // 1: admins can send messages | 0: admins cannot send messages
+		},
+		{
+			"Name": "pv_announce",
+			"DefaultValue": "1" // 1: admins can make announcements | 0: admins cannot make announcements
+		}
+	],
+  
 	"Scripts": [
 		{
 			"Path": "takyon_localization.nut",

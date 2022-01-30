@@ -1,7 +1,7 @@
 global function HelpInit
 
 array<string> spawnedPlayers = []
-int displayHintOnSpawnAmount = 2 // set this to the amount of spawns the hint to use !help should be displayed. 1 = only on dropship and first spawn, 2 on dropship, first and second spawn
+int displayHintOnSpawnAmount = 0
 
 
 void function HelpInit(){
@@ -13,6 +13,9 @@ void function HelpInit(){
     // callbacks
     AddCallback_OnPlayerRespawned(OnPlayerSpawned)
     AddCallback_OnClientDisconnected(OnPlayerDisconnected)
+
+    // ConVar
+    displayHintOnSpawnAmount = GetConVarInt( "pv_display_hint_on_spawn_amount" )
 }
 
 /*

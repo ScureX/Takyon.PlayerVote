@@ -1,5 +1,6 @@
 global function VoteExtendInit
 
+float extendVotePercentage = 0.9 // percentage of how many people on the server need to have voted
 array<string> playerExtendVoteNames = [] // list of players who have voted, is used to see how many have voted 
 bool extendMapMultipleTimes = false // false: map can only be extended once; true: map can be extended indefinetly
 bool hasMapBeenExtended = false // makes sure map can only be extended once
@@ -10,6 +11,11 @@ void function VoteExtendInit(){
     AddClientCommandCallback("!extend", CommandExtend)
     AddClientCommandCallback("!EXTEND", CommandExtend)
     AddClientCommandCallback("!Extend", CommandExtend)
+
+    // ConVars
+    extendVotePercentage = GetConVarFloat( "pv_extend_percentage" )
+    extendMapMultipleTimes = GetConVarBool( "pv_extend_map_multiple_times" )
+    extendMatchTime = GetConVarFloat( "pv_extend_amount" )
 }
 
 /*
@@ -68,12 +74,8 @@ bool function CommandExtend(entity player, array<string> args){
  */
 
 void function CheckIfEnoughExtendVotes(bool force = false){
-    // check if enough have voted
-    // change "half" in the if statement to whatever var or amount you want
-    int half = ceil(1.0 * GetPlayerArray().len() / 2).tointeger()
-    int quarter = ceil(1.0 * GetPlayerArray().len() / 4).tointeger() //fixed spelling, fuck you coopyy
-
-    if(playerExtendVoteNames.len() >= half || force){ // CHANGE half
+    // check if enough have voted if it wasn't forced to begin with
+    if(playerExtendVoteNames.len() >= (1.0 * GetPlayerArray().len() * extendVotePercentage) || force) {
         SetServerVar( "gameEndTime", expect float(GetServerVar("gameEndTime")) + (60 * extendMatchTime))
         // message everyone
         for(int i = 0; i < GetPlayerArray().len(); i++){
