@@ -6,7 +6,7 @@ global function PlayerHasVoted
 global function IsPlayerAdmin
 global function GetPlayerFromName
 
-global array<string> adminNames = []
+global array<string> adminUIDs = []
 
 void function PlayerVoteInit(){
     UpdateAdminList()
@@ -18,11 +18,11 @@ void function PlayerVoteInit(){
 
 void function UpdateAdminList()
 {
-    string cvar = GetConVarString( "pv_admin_names" )
+    string cvar = GetConVarString( "pv_admin_uids" )
 
-    adminNames = split( cvar, "," )
-    foreach ( string adminName in adminNames )
-        StringReplace( adminName, " ", "" )
+    adminUIDs = split( cvar, "," )
+    foreach ( string uid in adminUIDs )
+        StringReplace( uid, " ", "" )
 }
 
 bool function CanFindPlayerFromSubstring(string substring){
@@ -60,7 +60,7 @@ void function SendHudMessageBuilder(entity player, string message, int r, int g,
 }
 
 bool function IsPlayerAdmin(entity player){
-    if(adminNames.find(player.GetPlayerName()) == -1)
+    if(adminUIDs.find(player.GetUID()) == -1)
         return false
     return true
 }

@@ -61,15 +61,16 @@ bool function CommandKick(entity player, array<string> args){
 
         // admin kick
         if(args.len() == 2 && args[1] == "force"){
-            // check for admin names
-            if(adminNames.find(player.GetPlayerName()) != -1){
-                ServerCommand("kick " + fullPlayerName) 
-                playerKickVoteYesNames.clear()
-                SendHudMessageBuilder(player, KICKED_PLAYER + fullPlayerName, 255, 200, 200)
-                return true
+            // Check if user is admin
+            if(!IsPlayerAdmin(player)){
+                SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+                return false
             }
-            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
-            return false
+            
+            ServerCommand("kick " + fullPlayerName) 
+            playerKickVoteYesNames.clear()
+            SendHudMessageBuilder(player, KICKED_PLAYER + fullPlayerName, 255, 200, 200)
+            return true
         }
 
         // Check if enough people are online to initiate a vote

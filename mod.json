@@ -7,9 +7,9 @@
   
 	"ConVars": [
 		{
-			"Name": "pv_admin_names",
-			"DefaultValue": "Takyon_Scure" // list of usernames who should have admin privileges to execute commands like !skip force, comma separated
-			//"DefaultValue": "Takyon_Scure, OtherUser, CoolAdmin"
+			"Name": "pv_admin_uids",
+			"DefaultValue": "1006880507304" // list of UIDs who should have admin privileges to execute commands like !skip force, comma separated. To get UID: Let admin join priv match with sv_cheats 1 and execute // script print(GetPlayerArray()[0].GetUID())
+			//"DefaultValue": "1006880507304, 1006880507304, 1006880507304"
 		},
 		{
 			"Name": "pv_display_hint_on_spawn_amount",

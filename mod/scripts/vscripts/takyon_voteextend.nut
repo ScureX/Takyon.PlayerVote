@@ -35,15 +35,16 @@ bool function CommandExtend(entity player, array<string> args){
 
         // admin force vote
         if(args.len() == 1 && args[0] == "force"){
-            // check for admin names
-            if(adminNames.find(player.GetPlayerName()) != -1){
-                for(int i = 0; i < GetPlayerArray().len(); i++){
-                    SendHudMessageBuilder(GetPlayerArray()[i], ADMIN_EXTENDED, 255, 200, 200)
-                    CheckIfEnoughExtendVotes(true)
-			    }
-                return true
+            // Check if user is admin
+            if(!IsPlayerAdmin(player)){
+                SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+                return false
             }
-            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+
+            for(int i = 0; i < GetPlayerArray().len(); i++){
+                SendHudMessageBuilder(GetPlayerArray()[i], ADMIN_EXTENDED, 255, 200, 200)
+                CheckIfEnoughExtendVotes(true)
+            }
             return true
         }
 

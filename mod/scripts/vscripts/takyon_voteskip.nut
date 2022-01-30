@@ -27,16 +27,17 @@ bool function CommandSkip(entity player, array<string> args){
         printl("USER TRIED VOTING")
         
         if(args.len() == 1 && args[0] == "force"){
-            // check for admin names
-            if(adminNames.find(player.GetPlayerName()) != -1){
-                for(int i = 0; i < GetPlayerArray().len(); i++){
-                    SendHudMessageBuilder(GetPlayerArray()[i], ADMIN_SKIPPED, 255, 200, 200)
-			    }
-                CheckIfEnoughSkipVotes(true)
-                return true
+            // Check if user is admin
+            if(!IsPlayerAdmin(player)){
+                SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+                return false
             }
-            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
-            return false
+
+            for(int i = 0; i < GetPlayerArray().len(); i++){
+                SendHudMessageBuilder(GetPlayerArray()[i], ADMIN_SKIPPED, 255, 200, 200)
+            }
+            CheckIfEnoughSkipVotes(true)
+            return true
         }
 
         // check if skipping is enabled
