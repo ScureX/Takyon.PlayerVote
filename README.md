@@ -73,6 +73,7 @@ This mod can be configured using the following [ConVars](https://r2northstar.git
 | `pv_kick_enabled`                 | Allow players to start a votekick                                                                                                 | `1`              | `0-1`          |
 | `pv_kick_percentage`              | Percentage of "yes" required for a vote to pass                                                                                   | `0.9`            | `float`        |
 | `pv_kick_min_players`             | How many people have to be online for a votekick to be initiated so that when 3 people are online 2 cant kick 1. Avoids trolling. | `5`              | `int`          |
+| `pv_extend_percentage`            | Percentage of "extend" votes required for a vote to pass                                                                          | `0.6`            | `float`        |
 | `pv_extend_map_multiple_times`    | Allow multiple extensions of the same map                                                                                         | `0`              | `0-1`          |
 | `pv_extend_amount`                | By how many minutes the map gets extended on vote passed                                                                          | `3.5`            | `float`        |
 | `pv_rules_enabled`                | Allow !rule usage                                                                                                                 | `1`              | `0-1`          |

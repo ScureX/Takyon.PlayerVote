@@ -31,6 +31,10 @@
 			"DefaultValue": "5" // minimum required players online to kick a person. this should be kept high cause if there are only 3, 2 people are enough to kick
 		},
 		{
+			"Name": "pv_extend_percentage",
+			"DefaultValue": "0.6" // percentage of players required to successfully extend
+		},
+		{
 			"Name": "pv_extend_map_multiple_times",
 			"DefaultValue": "0" // 0: map can only be extended once; 1: map can be extended indefinetly
 		},
