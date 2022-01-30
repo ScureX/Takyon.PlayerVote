@@ -1,5 +1,6 @@
 global function HelpInit
 
+bool helpEnabled = true
 array<string> spawnedPlayers = []
 int displayHintOnSpawnAmount = 0
 
@@ -15,6 +16,7 @@ void function HelpInit(){
     AddCallback_OnClientDisconnected(OnPlayerDisconnected)
 
     // ConVar
+    helpEnabled = GetConVarBool( "pv_help_enabled" )
     displayHintOnSpawnAmount = GetConVarInt( "pv_display_hint_on_spawn_amount" )
 }
 
@@ -24,6 +26,11 @@ void function HelpInit(){
 
 bool function CommandHelp(entity player, array<string> args){
     if(!IsLobby()){
+        if(!helpEnabled){
+            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            return false
+        }
+
         printl("USER USED HELP")
         string commands =   "[ !skip, !extend, !kick ]\n"
         string skip =       "[ !skip   -> to skip the map]\n"

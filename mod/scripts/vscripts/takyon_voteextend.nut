@@ -1,5 +1,6 @@
 global function VoteExtendInit
 
+bool extendVoteEnabled = true
 float extendVotePercentage = 0.9 // percentage of how many people on the server need to have voted
 array<string> playerExtendVoteNames = [] // list of players who have voted, is used to see how many have voted 
 bool extendMapMultipleTimes = false // false: map can only be extended once; true: map can be extended indefinetly
@@ -13,6 +14,7 @@ void function VoteExtendInit(){
     AddClientCommandCallback("!Extend", CommandExtend)
 
     // ConVars
+    extendVoteEnabled = GetConVarBool( "pv_extend_vote_enabled" )
     extendVotePercentage = GetConVarFloat( "pv_extend_percentage" )
     extendMapMultipleTimes = GetConVarBool( "pv_extend_map_multiple_times" )
     extendMatchTime = GetConVarFloat( "pv_extend_amount" )
@@ -26,6 +28,11 @@ bool function CommandExtend(entity player, array<string> args){
     if(!IsLobby()){
         printl("USER TRIED EXTENDING")
         
+        if(!extendVoteEnabled){
+            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            return false
+        }
+
         // admin force vote
         if(args.len() == 1 && args[0] == "force"){
             // check for admin names
