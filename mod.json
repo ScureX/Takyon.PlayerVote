@@ -3,12 +3,13 @@
 	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no] [!extend, !extend force] [!rules, !sendrules], [!announce], [!msg name message]",
 	"LoadPriority": 0,
 	"RequiredOnClient": false,
-  "Version": "3.0.0",
+  	"Version": "3.0.0",
   
 	"ConVars": [
 		{
 			"Name": "pv_admin_names",
-			"DefaultValue": "Takyon_Scure" // list of usernames who should have admin privileges to execute commands like !rtv force, comma separated
+			"DefaultValue": "Takyon_Scure" // list of usernames who should have admin privileges to execute commands like !skip force, comma separated
+			//"DefaultValue": "Takyon_Scure, OtherUser, CoolAdmin"
 		},
 		{
 			"Name": "pv_display_hint_on_spawn_amount",
@@ -16,7 +17,7 @@
 		},
 		{
 			"Name": "pv_skip_enabled",
-			"DefaultValue": "1" // enable voteskip (!rtv)
+			"DefaultValue": "1" // enable voteskip (!skip), 0 = disabled, 1 = enabled
 		},
 		{
 			"Name": "pv_skip_percentage",
@@ -24,7 +25,7 @@
 		},
 		{
 			"Name": "pv_kick_enabled",
-			"DefaultValue": "1" // change this to 0 if you dont want users/admins to be able to vote kick
+			"DefaultValue": "1" // are users/admins able to vote kick, 0 = disabled, 1 = enabled
 		},
 		{
 			"Name": "pv_kick_percentage",
