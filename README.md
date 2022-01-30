@@ -70,6 +70,7 @@ This mod can be configured using the following [ConVars](https://r2northstar.git
 | `pv_admin_names`                  | Comma-separated list of players who should be able to force votes like kick, skip and extend                                      | `"Takyon_Scure"` | `string`       |
 | `pv_display_hint_on_spawn_amount` | Amount of times (after dropship) a hint to type !help should be displayed on respawn                                              | `2`              | `int`          |
 | `pv_skip_enabled`                 | Allow players to start a voteskip                                                                                                 | `1`              | `0-1`          |
+| `pv_skip_percentage`              | Percentage of "skip" votes required for a vote to pass                                                                            | `0.8`            | `float`        |
 | `pv_kick_enabled`                 | Allow players to start a votekick                                                                                                 | `1`              | `0-1`          |
 | `pv_kick_percentage`              | Percentage of "yes" required for a vote to pass                                                                                   | `0.9`            | `float`        |
 | `pv_kick_min_players`             | How many people have to be online for a votekick to be initiated so that when 3 people are online 2 cant kick 1. Avoids trolling. | `5`              | `int`          |
