@@ -63,11 +63,11 @@ Lets an admin announce something. The message is displayed for everyone.
 ---
 
 # Settings
-This mod can be configured using the following [ConVars](https://r2northstar.gitbook.io/r2northstar-wiki/hosting-a-server-with-northstar/dedicated-server#convars):
+This mod can be configured using the following [ConVars](https://r2northstar.gitbook.io/r2northstar-wiki/hosting-a-server-with-northstar/dedicated-server#convars), which can be set inside your `R2Northstar\mods\Northstar.CustomServers\mod\cfg\autoexec_ns_server.cfg` file:
 
 | Name                              | Description                                                                                                                       | Default value    | Accepted Value |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ---------------- | -------------- |
-| `pv_admin_names`                  | Comma-separated of players who should be able to force votes like kick, skip and extend                                           | `"TakyonSecure"` | `string`       |
+| `pv_admin_names`                  | Comma-separated list of players who should be able to force votes like kick, skip and extend                                      | `"Takyon_Scure"` | `string`       |
 | `pv_display_hint_on_spawn_amount` | Amount of times (after dropship) a hint to type !help should be displayed on respawn                                              | `2`              | `int`          |
 | `pv_skip_enabled`                 | Allow players to start a voteskip                                                                                                 | `1`              | `0-1`          |
 | `pv_kick_enabled`                 | Allow players to start a votekick                                                                                                 | `1`              | `0-1`          |

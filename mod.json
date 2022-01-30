@@ -8,7 +8,7 @@
 	"ConVars": [
 		{
 			"Name": "pv_admin_names",
-			"DefaultValue": "Takyon_Scure, Anyplayerreally" // list of usernames who should have admin privileges to execute commands like !rtv force, comma separated
+			"DefaultValue": "Takyon_Scure" // list of usernames who should have admin privileges to execute commands like !rtv force, comma separated
 		},
 		{
 			"Name": "pv_display_hint_on_spawn_amount",
@@ -20,7 +20,7 @@
 		},
 		{
 			"Name": "pv_kick_enabled",
-			"DefaultValue": "1" // change this to false if you dont want users/admins to be able to vote kick
+			"DefaultValue": "1" // change this to 0 if you dont want users/admins to be able to vote kick
 		},
 		{
 			"Name": "pv_kick_percentage",
