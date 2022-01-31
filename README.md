@@ -2,7 +2,9 @@
 
 Enables players to vote on different things like skipping a map or kicking a player, to add a true community feeling to your server! Also includes admin functionalities to enforce some rules.
 
-BIG THANKS to: Coopyy, Spoon, Dullahan, Tsk22, wolf109909, Pandora and all the other people that helped me through this nightmare of a project! <3
+BIG THANKS to: Alt4, Coopyy, Spoon, Dullahan, Tsk22, wolf109909, Pandora and all the other people that helped me through this nightmare of a project! <3
+
+**Consider supporting this project on [ko-fi](https://ko-fi.com/takyon_scure)**
 
 ---
 
