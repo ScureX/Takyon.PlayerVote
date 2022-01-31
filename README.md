@@ -60,28 +60,39 @@ Not the full name has to be given, just enough to identify a player.
 ### Usage: [!announce message]
 Lets an admin announce something. The message is displayed for everyone. 
 
+## !switch
+### Usage: [!switch]  [!switch force player]
+Lets a player switch teams based on some rules to keep the match balanced.  
+Lets an admin switch the team of a player.
+
 ---
 
 # Settings
 This mod can be configured using the following [ConVars](https://r2northstar.gitbook.io/r2northstar-wiki/hosting-a-server-with-northstar/dedicated-server#convars), which can be set inside your `R2Northstar\mods\Northstar.CustomServers\mod\cfg\autoexec_ns_server.cfg` file:
 
-| Name                              | Description                                                                                                                       | Default value    | Accepted Value |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ---------------- | -------------- |
-| `pv_admin_uids`                  | Comma-separated list of player's UIDs who should be able to force votes like kick, skip and extend                                      | `"1006880507304"` | `string`       |
-| `pv_display_hint_on_spawn_amount` | Amount of times (after dropship) a hint to type !help should be displayed on respawn. Always displayed in dropship unless set to -1                                              | `2`              | `int`          |
-| `pv_skip_enabled`                 | Allow players to start a voteskip                                                                                                 | `1`              | `0-1`          |
-| `pv_skip_percentage`              | Percentage of "skip" votes required for a vote to pass                                                                            | `0.8`            | `float`        |
-| `pv_kick_enabled`                 | Allow players to start a votekick                                                                                                 | `1`              | `0-1`          |
-| `pv_kick_percentage`              | Percentage of "yes" required for a vote to pass                                                                                   | `0.9`            | `float`        |
-| `pv_kick_min_players`             | How many people have to be online for a votekick to be initiated so that when 3 people are online 2 cant kick 1. Avoids trolling. | `5`              | `int`          |
-| `pv_extend_percentage`            | Percentage of "extend" votes required for a vote to pass                                                                          | `0.6`            | `float`        |
-| `pv_extend_map_multiple_times`    | Allow multiple extensions of the same map                                                                                         | `0`              | `0-1`          |
-| `pv_extend_amount`                | By how many minutes the map gets extended on vote passed                                                                          | `3.5`            | `float`        |
-| `pv_rules_enabled`                | Allow !rule usage                                                                                                                 | `1`              | `0-1`          |
-| `pv_rules_admin_send_enabled`     | Allow admins to send users the rules                                                                                              | `1`              | `0-1`          |
-| `pv_rules_show_time`              | For how many seconds the rules should be displayed when an admin sends them                                                       | `15`             | `int`          |
-| `pv_message`                      | Admins can send players messages                                                                                                  | `1`              | `0-1`          |
-| `pv_announce`                     | Admins can make announcements                                                                                                     | `1`              | `0-1`          |
+| Name                              | Description                                                                                                                         | Default value    | Accepted Value |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------   | ---------------- | -------------- |
+| `pv_admin_uids`                   | Comma-separated list of player's UIDs who should be able to force votes like kick, skip and extend                                  | `"1006880507304"`| `string`       |
+| `pv_display_hint_on_spawn_amount` | Amount of times (after dropship) a hint to type !help should be displayed on respawn. Always displayed in dropship unless set to -1 | `2`              | `int`          |
+| `pv_help_enabled`                 | Allow players to use !help                                                                                                          | `1`              | `0-1`          |
+| `pv_skip_enabled`                 | Allow players to start a voteskip                                                                                                   | `1`              | `0-1`          |
+| `pv_skip_percentage`              | Percentage of "skip" votes required for a vote to pass                                                                              | `0.8`            | `float`        |
+| `pv_kick_enabled`                 | Allow players to start a votekick                                                                                                   | `1`              | `0-1`          |
+| `pv_kick_percentage`              | Percentage of "yes" required for a vote to pass                                                                                     | `0.9`            | `float`        |
+| `pv_kick_min_players`             | How many people have to be online for a votekick to be initiated so that when 3 people are online 2 cant kick 1. Avoids trolling.   | `5`              | `int`          |
+| `pv_extend_vote_enabled`          | Allow players to start a vote extend                                                                                                | `1`              | `0-1`          |
+| `pv_extend_percentage`            | Percentage of "extend" votes required for a vote to pass                                                                            | `0.6`            | `float`        |
+| `pv_extend_map_multiple_times`    | Allow multiple extensions of the same map                                                                                           | `0`              | `0-1`          |
+| `pv_extend_amount`                | By how many minutes the map gets extended on vote passed                                                                            | `3.5`            | `float`        |
+| `pv_rules_enabled`                | Allow !rule usage                                                                                                                   | `1`              | `0-1`          |
+| `pv_rules_admin_send_enabled`     | Allow admins to send users the rules                                                                                                | `1`              | `0-1`          |
+| `pv_rules_show_time`              | For how many seconds the rules should be displayed when an admin sends them                                                         | `15`             | `int`          |
+| `pv_message`                      | Admins can send players messages                                                                                                    | `1`              | `0-1`          |
+| `pv_announce`                     | Admins can make announcements                                                                                                       | `1`              | `0-1`          |
+| `pv_switch_enabled`               | Allows players to use !switch to switch teams                                                                                     | `1`              | `0-1`          |
+| `pv_switch_admin_switch_enabled`  | Allows admins to use !switch force name to switch a player                                                                        | `1`              | `0-1`          |
+| `pv_switch_max_player_diff`       | How many more players the enemy team can have. If they have more than this value, a player cant !switch                           | `1`              | `int`          |
+| `pv_max_switches`                 | How many times a player can !switch per match. Keep this low to prevent abuse as there is no timer                                | `2`              | `int`          |
 
 # Adding rules
 Rules can be added in `mod\scripts\vscripts\takyon_rules.nut` below the "add rules here" section.
