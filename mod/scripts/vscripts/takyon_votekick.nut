@@ -60,7 +60,7 @@ bool function CommandKick(entity player, array<string> args){
         }
 
         // admin kick
-        if(args.len() == 2 && args[1] == "force"){
+        if(args.len() >= 2 && args[1] == "force"){
             // Check if user is admin
             if(!IsPlayerAdmin(player)){
                 SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)

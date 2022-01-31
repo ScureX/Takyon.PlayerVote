@@ -74,6 +74,22 @@
 		{
 			"Name": "pv_announce",
 			"DefaultValue": "1" // 1: admins can make announcements | 0: admins cannot make announcements
+		},
+		{
+			"Name": "pv_switch_enabled",
+			"DefaultValue": "1" // 1: users can use !switch | 0: users cant use !switch
+		},
+		{
+			"Name": "pv_switch_admin_switch_enabled",
+			"DefaultValue": "1"// 1: admins can switch users | 0: admins cant switch users
+		},
+		{
+			"Name": "pv_switch_max_player_diff",
+			"DefaultValue": "0" // how many more players one team can have over the other. 
+		},
+		{
+			"Name": "pv_max_switches",
+			"DefaultValue": "4" // how many times a player can switch teams per match. should be kept low so players cant spam to get an advantage
 		}
 	],
   
@@ -87,6 +103,13 @@
 			"RunOn": "SERVER && MP",
 			"ServerCallback": {
 				"After": "PlayerVoteInit"
+			}
+		},
+		{
+			"Path": "takyon_switch.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "SwitchInit"
 			}
 		},
 		{

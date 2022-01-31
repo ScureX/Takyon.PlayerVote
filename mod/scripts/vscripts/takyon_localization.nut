@@ -45,3 +45,11 @@ global const string MAP_EXTENDED = "Map has been extended!"
 global const string HOW_TO_SENDRULES = "\n!sr playerName"
 global const string RULES_SENT_TO_PLAYER = "Rules sent to " // remember the space at the end
 global const string ADMIN_SENT_YOU_RULES = "An Admin has decided that you should read the rules!\n\n" // two linebreaks to distinguish from rules
+
+// switch
+global const string SWITCH_FROM_UNASSIGNED = "You were unassigned so a random team has been chosen"
+global const string SWITCH_TOO_MANY_PLAYERS = "There are too many players on the enemy team"
+global const string SWITCHED_BY_ADMIN = "Your team has been switched by an admin"
+global const string SWITCHED_TOO_OFTEN = "You have switched too often. You can switch teams again next map"
+global const string SWITCH_ADMIN_SUCCESS = " has been switched" // message for admin that player has been switched. remember to keep the space in the beginning
+global const string SWITCH_SUCCESS = "You have switched teams" // message for player that they have switched
