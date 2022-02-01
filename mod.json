@@ -97,7 +97,7 @@
 		},
 		{
 			"Name": "pv_ping_average_time",
-			"DefaultValue": "5.0" // for how many seconds the ping should be measured to get an average. set 0.0 for current ping
+			"DefaultValue": "2.0" // for how many seconds the ping should be measured to get an average. set 0.0 for current ping
 		}
 	],
   
