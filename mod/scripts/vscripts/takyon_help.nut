@@ -6,12 +6,13 @@ bool useGeneratedHelp = true // will auto-generate text for the help command. se
 
 array<string> spawnedPlayers = []
 
-string commands =   "[ !skip, !extend, !kick, !rules, !switch   ]\n"
-string skip =       "[ !skip   -> to skip the map               ]\n"
-string extend =     "[ !extend -> to play this map longer       ]\n"
-string kick =       "[ !kick   -> to kick a player              ]\n"
+string commands =   "[ !skip, !extend, !kick, !rules, !switch   ]"
+string skip =       "[ !skip   -> to skip the map               ]"
+string extend =     "[ !extend -> to play this map longer       ]"
+string kick =       "[ !kick   -> to kick a player              ]"
 string switchcmd =  "[ !switch -> to switch teams               ]"
-// dont forget to add new strings in CommandHelp()
+// dont forget to add new strings in cmdArr
+array<string> cmdArr = [commands, skip, extend, kick, switchcmd]
 
 
 void function HelpInit(){
@@ -35,13 +36,18 @@ void function HelpInit(){
 
 bool function CommandHelp(entity player, array<string> args){
     if(!IsLobby()){
+        printl("USER USED HELP")
         if(!helpEnabled){
             SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
             return false
         }
 
-        printl("USER USED HELP")
-        SendHudMessageBuilder(player, commands + skip + extend + kick + switchcmd, 200, 200, 255)
+        string fullCmd = ""
+        foreach (string cmd in cmdArr) {
+            fullCmd += cmd + "\n"
+        }
+
+        SendHudMessageBuilder(player, fullCmd, 200, 200, 255)
     }
     return true
 }
@@ -72,4 +78,6 @@ void function OnPlayerDisconnected(entity player){
             spawnedPlayers.remove(spawnedPlayers.find(player.GetPlayerName()))
         } catch(exception){} // idc abt error handling
     }
-}
+}try{
+            spawnedPlayers.remove(spawnedPlayers.find(player.GetPlayerName()))
+        } catch(exception){} // idc abt error handling
