@@ -69,6 +69,7 @@ bool function CommandMsg(entity player, array<string> args){
         }
 
         // send message 
+        SendHudMessageBuilder(player, MESSAGE_SENT_TO_PLAYER + fullPlayerName, 255, 200, 200)
         SendHudMessageBuilder(target, msg, 255, 200, 200)
     }
     return true

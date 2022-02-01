@@ -30,6 +30,7 @@ global const string NO_VOTE_GOING = "There is no vote going on. Use !kick"
 global const string HOW_TO_MESSAGE = "\n!msg playerName message"
 global const string NO_MESSAGE_FOUND = "No message found"
 global const string PLAYER_IS_NULL = "There was an error. The player might've left"
+global const string MESSAGE_SENT_TO_PLAYER = "Message sent"
 
 // help
 global const string SPAWN_MESSAGE = "Open your console and type !help"

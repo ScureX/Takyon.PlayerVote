@@ -65,8 +65,11 @@ void function ShowPing(entity player, entity target, string fullPlayerName) {
         float startTime = Time()
         while(Time() - startTime <= pingAverageTime){
             WaitFrame()
-            pingAvg += GetPing(target)
-            pings++
+            int newPing = GetPing(target)
+            pingAvg += newPing
+            // only increment if it actually pings
+            if(newPing != 0)
+                pings++
         }
         pingAvg = (pingAvg/pings).tointeger()
     }
