@@ -1,8 +1,17 @@
 global function HelpInit
 
 bool helpEnabled = true
-array<string> spawnedPlayers = []
 int displayHintOnSpawnAmount = 0
+bool useGeneratedHelp = true // will auto-generate text for the help command. set false if you want to input your own help text
+
+array<string> spawnedPlayers = []
+
+string commands =   "[ !skip, !extend, !kick, !rules, !switch   ]\n"
+string skip =       "[ !skip   -> to skip the map               ]\n"
+string extend =     "[ !extend -> to play this map longer       ]\n"
+string kick =       "[ !kick   -> to kick a player              ]\n"
+string switchcmd =  "[ !switch -> to switch teams               ]"
+// dont forget to add new strings in CommandHelp()
 
 
 void function HelpInit(){
@@ -32,11 +41,7 @@ bool function CommandHelp(entity player, array<string> args){
         }
 
         printl("USER USED HELP")
-        string commands =   "[ !skip, !extend, !kick ]\n"
-        string skip =       "[ !skip   -> to skip the map]\n"
-        string extend =     "[ !extend -> to play this map longer]\n"
-        string kick =       "[ !kick   -> to kick a player]"
-        SendHudMessageBuilder(player, commands + skip + extend + kick, 200, 200, 255)
+        SendHudMessageBuilder(player, commands + skip + extend + kick + switchcmd, 200, 200, 255)
     }
     return true
 }
@@ -52,7 +57,7 @@ void function OnPlayerSpawned(entity player){
         if (name == player.GetPlayerName())  {
             spawnAmount++
         }
-    }   
+    }
 
     if(spawnedPlayers.find(player.GetPlayerName()) == -1 || spawnAmount <= displayHintOnSpawnAmount){
         SendHudMessageBuilder(player, SPAWN_MESSAGE, 200, 200, 255) // Message that gets displayed on respawn
