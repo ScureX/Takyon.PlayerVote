@@ -85,11 +85,19 @@
 		},
 		{
 			"Name": "pv_switch_max_player_diff",
-			"DefaultValue": "0" // how many more players one team can have over the other. 
+			"DefaultValue": "1" // how many more players one team can have over the other. 
 		},
 		{
 			"Name": "pv_max_switches",
 			"DefaultValue": "4" // how many times a player can switch teams per match. should be kept low so players cant spam to get an advantage
+		},
+		{
+			"Name": "pv_ping_enabled",
+			"DefaultValue": "1" // 1: users can use !ping | 0: users cant use !ping
+		},
+		{
+			"Name": "pv_ping_average_time",
+			"DefaultValue": "5.0" // for how many seconds the ping should be measured to get an average. set 0.0 for current ping
 		}
 	],
   
@@ -110,6 +118,13 @@
 			"RunOn": "SERVER && MP",
 			"ServerCallback": {
 				"After": "SwitchInit"
+			}
+		},
+		{
+			"Path": "takyon_ping.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "PingInit"
 			}
 		},
 		{

@@ -1,7 +1,7 @@
 global function PingInit
 
 bool pingEnabled = true
-float pingAverageTime = 1.0 // for how many seconds the ping should be measured to get an average. set 0.0 for current ping
+float pingAverageTime = 3.0 // for how many seconds the ping should be measured to get an average. set 0.0 for current ping
 
 array<string> spawnedPlayers = []
 
@@ -12,8 +12,8 @@ void function PingInit(){
     AddClientCommandCallback("!Ping", CommandPing)
 
     // ConVar
-    helpEnabled = GetConVarBool( "pv_help_enabled" )
-    displayHintOnSpawnAmount = GetConVarInt( "pv_display_hint_on_spawn_amount" )
+    pingEnabled = GetConVarBool( "pv_ping_enabled" )
+    pingAverageTime = GetConVarFloat( "pv_ping_average_time" )
 }
 
 /*
@@ -41,14 +41,14 @@ bool function CommandPing(entity player, array<string> args){
 
             // get the full player name based on substring. we can be sure this will work because above we check if it can find exactly one matching name... or at least i hope so
             string fullPlayerName = GetFullPlayerNameFromSubstring(args[0])
-            entity target = GetPlayerFromNAme(fullPlayerName)
+            entity target = GetPlayerFromName(fullPlayerName)
 
-            thread ShowPing(player, target)
+            thread ShowPing(player, target, fullPlayerName)
             return true
         }
 
         // get ping from self
-        thread ShowPing(player, player)
+        thread ShowPing(player, player, player.GetPlayerName())
         return true
     }
     return true
@@ -58,19 +58,33 @@ bool function CommandPing(entity player, array<string> args){
  *  HELPER FUNCTIONS
  */
 
-void function ShowPing(entity player, entity target) {
-    int pings = 0
-    int pingAvg = target.GetPlayerGameStat(PGS_PING)
-
+void function ShowPing(entity player, entity target, string fullPlayerName) {
+    int pings = 1
+    int pingAvg = GetPing(target)
     if(pingAverageTime != 0){
         float startTime = Time()
         while(Time() - startTime <= pingAverageTime){
-            pingAvg += target.GetPlayerGameStat(PGS_PING)
+            WaitFrame()
+            pingAvg += GetPing(target)
             pings++
         }
         pingAvg = (pingAvg/pings).tointeger()
     }
 
-    SendHudMessageBuilder(player, fullPlayerName + ": " + str(pingAvg) + "ms", 200, 200, 255)
+    // player who pinged left lol
+    if(GetPlayerArray().find(player) == -1){
+        return
+    }
+
+    SendHudMessageBuilder(player, fullPlayerName + ": " + pingAvg + "ms", 200, 200, 255)
     return
+}
+
+int function GetPing(entity target){
+    // need to error handle cause user can just disconnect
+    try {
+        return target.GetPlayerGameStat(PGS_PING)/100000
+    } catch (exception){
+        return 0
+    }
 }
