@@ -7,13 +7,16 @@ bool useGeneratedHelp = true // will auto-generate text for the help command. se
 array<string> spawnedPlayers = []
 array<string> cmdArr = []
 
-string commands =   "[ !skip, !extend, !kick, !rules, !switch, !balance ]"
-string skip =       "[ !skip        -> to skip the map                  ]"
-string extend =     "[ !extend      -> to play this map longer          ]"
-string kick =       "[ !kick        -> to kick a player                 ]"
-string switchcmd =  "[ !switch      -> to switch teams                  ]"
-string ping =       "[ !ping (name) -> get your or a player's ping      ]"
-string balance =    "[ !balance     -> vote to balance teams by kd      ]"
+string commands =   "[ !skip, !extend, !kick, !rules, !switch, !balance\n]"
+string skip =       "[ !skip        -> to skip the map                   ]"
+string extend =     "[ !extend      -> to play this map longer           ]"
+string kick =       "[ !kick        -> to kick a player                  ]"
+string switchcmd =  "[ !switch      -> to switch teams                   ]"
+string ping =       "[ !ping (name) -> get your or a player's ping       ]"
+string balance =    "[ !balance     -> vote to balance teams by kd       ]"
+string rules =      "[ !rules       -> get the server's rules            ]"
+string message =    "[ !msg         -> !msg player message               ]"
+string announce =   "[ !announce    -> !announce message                 ]"
 
 // dont forget to add new strings in cmdArr in InitCommands()
 void function InitCommands(){
@@ -56,15 +59,52 @@ bool function CommandHelp(entity player, array<string> args){
             return false
         }
 
-        string fullCmd = ""
-        foreach (string cmd in cmdArr) {
-            fullCmd += cmd + "\n"
+        if(args.len() > 0){
+            switch (args[0]) {
+                case "skip":
+                    SendHudMessageBuilder(player, skip, 200, 200, 255)
+                    break;
+                case "extend":
+                    SendHudMessageBuilder(player, extend, 200, 200, 255)
+                    break;
+                case "kick":
+                    SendHudMessageBuilder(player, kick, 200, 200, 255)
+                    break;
+                case "switch":
+                    SendHudMessageBuilder(player, switchcmd, 200, 200, 255)
+                    break;
+                case "ping":
+                    SendHudMessageBuilder(player, ping, 200, 200, 255)
+                    break;
+                case "balance":
+                    SendHudMessageBuilder(player, balance, 200, 200, 255)
+                    break;
+                case "rules":
+                    SendHudMessageBuilder(player, rules, 200, 200, 255)
+                    break;
+                case "msg":
+                    SendHudMessageBuilder(player, message, 200, 200, 255)
+                    break;
+                case "announce":
+                    SendHudMessageBuilder(player, announce, 200, 200, 255)
+                    break;
+                default:
+                    string fullCmd = ""
+                    foreach (string cmd in cmdArr) {
+                        fullCmd += cmd + "\n"
+                    }
+                    SendHudMessageBuilder(player, fullCmd, 200, 200, 255)
+                    break;
+            }
         }
-
-        SendHudMessageBuilder(player, fullCmd, 200, 200, 255)
     }
     return true
 }
+
+/*
+ *  HELP COMMAND DESCRIPTION LOGIC
+ */
+
 
 /*
  *  HELP HINT MESSAGE LOGIC
