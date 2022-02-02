@@ -4,7 +4,7 @@
 	"LoadPriority": 0,
 	"RequiredOnClient": false,
   	"Version": "3.0.0",
-  
+
 	"ConVars": [
 		{
 			"Name": "pv_admin_uids",
@@ -85,7 +85,7 @@
 		},
 		{
 			"Name": "pv_switch_max_player_diff",
-			"DefaultValue": "1" // how many more players one team can have over the other. 
+			"DefaultValue": "1" // how many more players one team can have over the other.
 		},
 		{
 			"Name": "pv_max_switches",
@@ -98,9 +98,17 @@
 		{
 			"Name": "pv_ping_average_time",
 			"DefaultValue": "2.0" // for how many seconds the ping should be measured to get an average. set 0.0 for current ping
+		},
+		{
+			"Name": "pv_balance_enabled",
+			"DefaultValue": "1" // 1: users can use !balance | 0: users cant use !balance
+		},
+		{
+			"Name": "pv_balance_percentage",
+			"DefaultValue": "0.5" // how many people are needed to pass the balance vote in percent
 		}
 	],
-  
+
 	"Scripts": [
 		{
 			"Path": "takyon_localization.nut",

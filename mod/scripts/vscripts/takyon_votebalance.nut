@@ -50,9 +50,9 @@ bool function CommandBalance(entity player, array<string> args){
             // send message to everyone
             for(int i = 0; i < GetPlayerArray().len(); i++){
                 if(playerExtendVoteNames.len() > 1) // semantics
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerExtendVoteNames.len() + MULTIPLE_EXTEND_VOTES, 255, 200, 200)
+                    SendHudMessageBuilder(GetPlayerArray()[i], playerExtendVoteNames.len() + MULTIPLE_BALANCD_VOTES, 255, 200, 200)
                 else
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerExtendVoteNames.len() + ONE_EXTEND_VOTE, 255, 200, 200)
+                    SendHudMessageBuilder(GetPlayerArray()[i], playerExtendVoteNames.len() + ONE_BALANCE_VOTE, 255, 200, 200)
 			}
         }
         else {
@@ -82,12 +82,28 @@ void function CheckIfEnoughBalanceVotes(bool force = false){
 }
 
 void function Balance(){
-    array<entity> imcPlayers = GetPlayerArrayOfTeam(TEAM_IMC)
-    array<entity> militiaPlayers = GetPlayerArrayOfTeam(TEAM_MILITIA)
-    int imcPlayerDiff = militiaPlayers - imcPlayers // how many more players are in imc
-    int militiaPlayerDiff = imcPlayers - militiaPlayers // how many more players are in militia
+    // sort players based on kd
+    array<entity> playerRanks = GetPlayersSortedBySkill(GetPlayerArray())
 
-    foreach (entity player in imcPlayers) {
-        // 50% chance to switch teams if enough diff
+    for(int i = 0; i < GetPlayerArray().len(); i++){
+        if(IsEven(i)){
+            SetTeam(playerRanks[i], TEAM_IMC)
+        }
+        else{
+            SetTeam(playerRanks[i], TEAM_MILITIA)
+        }
     }
+}
+
+array<entity> function GetPlayersSortedBySkill(array<entity> arr){
+    foreach (entity player in arr) {
+        // get kd for player
+        float kd = player.GetPlayerGameStat(PGS_KILLS) / player.GetPlayerGameStat(PGS_DEATHS)
+        var table[kd] <- player
+    }
+    return table.sort()
+}
+
+bool function IsEven(int i){
+    return (i % 2) = 0
 }

@@ -7,12 +7,13 @@ bool useGeneratedHelp = true // will auto-generate text for the help command. se
 array<string> spawnedPlayers = []
 array<string> cmdArr = []
 
-string commands =   "[ !skip, !extend, !kick, !rules, !switch       ]"
-string skip =       "[ !skip        -> to skip the map              ]"
-string extend =     "[ !extend      -> to play this map longer      ]"
-string kick =       "[ !kick        -> to kick a player             ]"
-string switchcmd =  "[ !switch      -> to switch teams              ]"
-string ping =       "[ !ping (name) -> get your or a player's ping  ]"
+string commands =   "[ !skip, !extend, !kick, !rules, !switch, !balance ]"
+string skip =       "[ !skip        -> to skip the map                  ]"
+string extend =     "[ !extend      -> to play this map longer          ]"
+string kick =       "[ !kick        -> to kick a player                 ]"
+string switchcmd =  "[ !switch      -> to switch teams                  ]"
+string ping =       "[ !ping (name) -> get your or a player's ping      ]"
+string balance =    "[ !balance     -> vote to balance teams by kd      ]"
 
 // dont forget to add new strings in cmdArr in InitCommands()
 void function InitCommands(){
@@ -21,6 +22,8 @@ void function InitCommands(){
     cmdArr.append(extend)
     cmdArr.append(kick)
     cmdArr.append(switchcmd)
+    cmdArr.append(ping)
+    cmdArr.append(balance)
 }
 
 void function HelpInit(){
