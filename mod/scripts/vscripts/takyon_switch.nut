@@ -2,7 +2,7 @@ global function SwitchInit
 
 bool switchEnabled = true // true: users can use !switch | false: users cant use !switch
 bool adminSwitchPlayerEnabled = true // true: admins can switch users | false: admins cant switch users
-int maxPlayerDiff = 1 // how many more players one team can have over the other. 
+int maxPlayerDiff = 1 // how many more players one team can have over the other.
 int maxSwitches = 2 // how many times a player can switch teams per match. should be kept low so players cant spam to get an advantage
 
 array<string> switchedPlayers = [] // array of players who have switched their team. does not include players switched by admin
@@ -14,7 +14,7 @@ void function SwitchInit(){
     AddClientCommandCallback("!Switch", CommandSwitch)
     AddClientCommandCallback("!un", Un)
 
-     
+
     // ConVars
     switchEnabled = GetConVarBool( "pv_switch_enabled" )
     adminSwitchPlayerEnabled = GetConVarBool( "pv_switch_admin_switch_enabled" )
@@ -41,7 +41,7 @@ bool function CommandSwitch(entity player, array<string> args){
             return false
         }
 
-        // no name or force given so it cant be an admin switch. -> switch player that requested 
+        // no name or force given so it cant be an admin switch. -> switch player that requested
         if(args.len() < 1){
             // check if player has already switched too often
             if(FindAllSwitches(player) >= maxSwitches){
@@ -91,8 +91,8 @@ bool function CommandSwitch(entity player, array<string> args){
  */
 
 void function SwitchPlayer(entity player, bool force = false){
-    int imcPlayerAmount = GetPlayerArrayOfTeam(TEAM_IMC).len();
-    int militiaPlayerAmount = GetPlayerArrayOfTeam(TEAM_MILITIA).len();
+    int imcPlayerAmount = GetPlayerArrayOfTeam(TEAM_IMC).len()
+    int militiaPlayerAmount = GetPlayerArrayOfTeam(TEAM_MILITIA).len()
 
     // switch from imc to militia
     if(player.GetTeam() == TEAM_IMC){
@@ -126,7 +126,7 @@ void function SwitchPlayer(entity player, bool force = false){
 
         SetTeam(player, teams[rndint(1)])
         SendHudMessageBuilder(player, SWITCH_FROM_UNASSIGNED, 200, 200, 255)
-        return 
+        return
     }
 }
 
@@ -149,12 +149,6 @@ bool function CanPlayerSwitch(entity player, int imcPlayerAmount, int militiaPla
         return true
     }
     return false
-}
-
-int function rndint(int max) {
-    // Generate a pseudo-random integer between 0 and max
-    float roll = 1.0 * max * rand() / RAND_MAX;
-    return roll.tointeger();
 }
 
 int function FindAllSwitches(entity player){

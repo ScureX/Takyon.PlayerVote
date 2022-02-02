@@ -5,6 +5,7 @@ global function GetFullPlayerNameFromSubstring
 global function PlayerHasVoted
 global function IsPlayerAdmin
 global function GetPlayerFromName
+global function rndint
 
 global array<string> adminUIDs = []
 
@@ -32,7 +33,7 @@ bool function CanFindPlayerFromSubstring(string substring){
             found++
     }
 
-    if(found == 1){ 
+    if(found == 1){
         return true
     }
     return false
@@ -47,7 +48,7 @@ string function GetFullPlayerNameFromSubstring(string substring){
 }
 
 bool function PlayerHasVoted(entity player, array<string> arr){
-    if(arr.find(player.GetPlayerName()) == -1){  // not voted yet 
+    if(arr.find(player.GetPlayerName()) == -1){  // not voted yet
         return false
     }
     return true
@@ -73,4 +74,10 @@ entity function GetPlayerFromName(string name){
         }
     }
     return null
+}
+
+int function rndint(int max) {
+    // Generate a pseudo-random integer between 0 and max
+    float roll = 1.0 * max * rand() / RAND_MAX;
+    return roll.tointeger();
 }
