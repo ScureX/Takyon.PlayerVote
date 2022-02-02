@@ -104,8 +104,22 @@
 			"DefaultValue": "1" // 1: users can use !balance | 0: users cant use !balance
 		},
 		{
+			"Name": "pv_vote_map_enabled",
+			"DefaultValue": "1" // 1: users can use !vote | 0: users cant use !vote
+		},
+		{
 			"Name": "pv_balance_percentage",
 			"DefaultValue": "0.5" // how many people are needed to pass the balance vote in percent
+		},
+		{
+			"Name": "pv_map_time_frac",
+			"DefaultValue": "0.5" // when the vote is displayed. 0.5 would be halftime
+		},
+		{
+			"Name": "pv_maps",
+			"DefaultValue": "mp_lf_stacks"
+			// below should be all maps, i wouldnt delete it :)
+			//"DefaultValue": "mp_angel_city, mp_beacon, mp_black_water_canal, mp_box, mp_coliseum, mp_coliseum_column, mp_colony02, mp_complex3, mp_crashsite3, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_grave, mp_homestead, mp_lf_alleys, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_thaw"
 		}
 	],
 
@@ -126,6 +140,13 @@
 			"RunOn": "SERVER && MP",
 			"ServerCallback": {
 				"After": "SwitchInit"
+			}
+		},
+		{
+			"Path": "takyon_votemap.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "VoteMapInit"
 			}
 		},
 		{

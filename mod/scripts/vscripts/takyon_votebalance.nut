@@ -4,6 +4,11 @@ bool balanceEnabled = true
 float balanceVotePercentage = 0.5 // percentage of how many people on the server need to have voted
 array<string> playerBalanceVoteNames = [] // list of players who have voted, is used to see how many have voted
 
+struct PlayerKDData{
+    entity player
+    float kd
+}
+
 void function BalanceInit(){
     // add commands here. i added some varieants for accidents, however not for brain damage. do whatever :P
     AddClientCommandCallback("!balance", CommandBalance)
@@ -45,14 +50,14 @@ bool function CommandBalance(entity player, array<string> args){
         // check if player has already voted
         if(!PlayerHasVoted(player, playerBalanceVoteNames)){
             // add player to list of players who have voted
-            playerExtendVoteNames.append(player.GetPlayerName())
+            playerBalanceVoteNames.append(player.GetPlayerName())
 
             // send message to everyone
             for(int i = 0; i < GetPlayerArray().len(); i++){
-                if(playerExtendVoteNames.len() > 1) // semantics
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerExtendVoteNames.len() + MULTIPLE_BALANCD_VOTES, 255, 200, 200)
+                if(playerBalanceVoteNames.len() > 1) // semantics
+                    SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + MULTIPLE_BALANCD_VOTES, 255, 200, 200)
                 else
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerExtendVoteNames.len() + ONE_BALANCE_VOTE, 255, 200, 200)
+                    SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + ONE_BALANCE_VOTE, 255, 200, 200)
 			}
         }
         else {
@@ -72,7 +77,10 @@ bool function CommandBalance(entity player, array<string> args){
 void function CheckIfEnoughBalanceVotes(bool force = false){
     // check if enough have voted if it wasn't forced to begin with
     if(playerBalanceVoteNames.len() >= (1.0 * GetPlayerArray().len() * balanceVotePercentage) || force) {
-        Balance()
+        array<entity> _players = GetPlayerArray()
+        if(_players.len() < 1)
+            return
+        Balance(_players)
         // message everyone
         for(int i = 0; i < GetPlayerArray().len(); i++){
             SendHudMessageBuilder(GetPlayerArray()[i], BALANCED, 255, 200, 200)
@@ -81,29 +89,34 @@ void function CheckIfEnoughBalanceVotes(bool force = false){
     }
 }
 
-void function Balance(){
+void function Balance(array<entity> _players){
     // sort players based on kd
-    array<entity> playerRanks = GetPlayersSortedBySkill(GetPlayerArray())
+    array<PlayerKDData> playerRanks = GetPlayersSortedBySkill(_players)
 
     for(int i = 0; i < GetPlayerArray().len(); i++){
-        if(IsEven(i)){
-            SetTeam(playerRanks[i], TEAM_IMC)
-        }
-        else{
-            SetTeam(playerRanks[i], TEAM_MILITIA)
-        }
+        if(!IsEven(i))
+            SetTeam(playerRanks[i].player, TEAM_IMC)
+        else
+            SetTeam(playerRanks[i].player, TEAM_MILITIA)
     }
 }
 
-array<entity> function GetPlayersSortedBySkill(array<entity> arr){
+array<PlayerKDData> function GetPlayersSortedBySkill(array<entity> arr){
+    array<PlayerKDData> pkdArr
     foreach (entity player in arr) {
-        // get kd for player
-        float kd = player.GetPlayerGameStat(PGS_KILLS) / player.GetPlayerGameStat(PGS_DEATHS)
-        var table[kd] <- player
+        // get kd for player // TYSM Dinorush
+        PlayerKDData temp
+        temp.player = player
+        temp.kd =  1.0 * player.GetPlayerGameStat(PGS_KILLS) / player.GetPlayerGameStat(PGS_DEATHS)
+        pkdArr.append(temp)
     }
-    return table.sort()
+    pkdArr.sort(PlayerKDDataSort)
+    return pkdArr
 }
 
-bool function IsEven(int i){
-    return (i % 2) == 0
+int function PlayerKDDataSort(PlayerKDData data1, PlayerKDData data2)
+{
+  if ( data1.kd == data2.kd )
+    return 0
+  return data1.kd < data2.kd ? -1 : 1
 }

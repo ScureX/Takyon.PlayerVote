@@ -24,7 +24,7 @@ void function VoteSkipInit(){
 
 bool function CommandSkip(entity player, array<string> args){
     if(!IsLobby()){
-        printl("USER TRIED VOTING")
+        printl("USER TRIED SKIPPING")
         
         if(args.len() == 1 && args[0] == "force"){
             // Check if user is admin
