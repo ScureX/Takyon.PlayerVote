@@ -129,6 +129,13 @@
 			}
 		},
 		{
+			"Path": "takyon_votebalance.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "BalanceInit"
+			}
+		},
+		{
 			"Path": "takyon_ping.nut",
 			"RunOn": "SERVER && MP",
 			"ServerCallback": {

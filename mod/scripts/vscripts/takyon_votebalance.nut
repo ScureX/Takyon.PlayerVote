@@ -105,5 +105,5 @@ array<entity> function GetPlayersSortedBySkill(array<entity> arr){
 }
 
 bool function IsEven(int i){
-    return (i % 2) = 0
+    return (i % 2) == 0
 }

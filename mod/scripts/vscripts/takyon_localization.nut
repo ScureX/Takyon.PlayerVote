@@ -1,5 +1,5 @@
 // Since there cant be localization in a sever sided mod, this will sort of be one
-// Here are all the basic strings 
+// Here are all the basic strings
 // Change these based on your servers language
 
 // general
@@ -54,3 +54,9 @@ global const string SWITCHED_BY_ADMIN = "Your team has been switched by an admin
 global const string SWITCHED_TOO_OFTEN = "You have switched too often. You can switch teams again next map"
 global const string SWITCH_ADMIN_SUCCESS = " has been switched" // message for admin that player has been switched. remember to keep the space in the beginning
 global const string SWITCH_SUCCESS = "You have switched teams" // message for player that they have switched
+
+// balance
+global const string BALANCED = "Teams have been balanced by K/D"
+global const string ONE_BALANCE_VOTE = " Player Wants To Balance The Teams by K/D\nBalance teams by typing !balance in the console" // remember to keep the space in the beginning
+global const string MULTIPLE_BALANCD_VOTES = " Players Want To Balance The Teams by K/D\nBalance teams by typing !balance in the console" // remember to keep the space in the beginning
+global const string ADMIN_BALANCED = "An Admin has balanced the teams by K/D"
