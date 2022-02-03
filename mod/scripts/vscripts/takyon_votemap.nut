@@ -1,15 +1,16 @@
 global function VoteMapInit
 
-array<string> playerMapVoteNames = [] // list of players who have voted, is used to see how many have voted 
+array<string> playerMapVoteNames = [] // list of players who have voted, is used to see how many have voted
 bool voteMapEnabled = true
 float mapTimeFrac = 0.5 // when the vote is displayed. 0.5 would be halftime
+int howManyMapsToPropose = 5
 
 struct MapVotesData{
     string mapName
     int votes
 }
 
-bool mapsHaveBeenProposed = false // dont fuck with this 
+bool mapsHaveBeenProposed = false // dont fuck with this
 array<string> maps = []
 array<MapVotesData> voteData = []
 array<string> proposedMaps = []
@@ -56,7 +57,7 @@ void function Main(){
 bool function CommandVote(entity player, array<string> args){
     if(!IsLobby()){
         printl("USER TRIED VOTING")
-        
+
         // check if voting is enabled
         if(!voteMapEnabled){
             SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
@@ -94,9 +95,9 @@ bool function CommandVote(entity player, array<string> args){
             return true
         }
 
-        // check if player has already voted 
+        // check if player has already voted
         if(!PlayerHasVoted(player, playerMapVoteNames)){
-            // add player to list of players who have voted 
+            // add player to list of players who have voted
             playerMapVoteNames.append(player.GetPlayerName())
 
             // send message to everyone
@@ -106,14 +107,21 @@ bool function CommandVote(entity player, array<string> args){
                 else
                     SendHudMessageBuilder(GetPlayerArray()[i], playerMapVoteNames.len() + ONE_MAP_VOTE, 255, 200, 200)
 			}
-        } 
+        }
         else {
             // Doesnt let the player vote twice, name is saved so even on reconnect they cannot vote twice
             // Future update might check if the player is actually online but right now i am too tired
             SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
         }
     }
-    SetNextMap(args[0].tointeger())
+
+    // check if num is valid
+    int num = args[0].tointeger()
+    if(num == 0 || num > proposedMaps.len()-1){
+        SendHudMessageBuilder(player, MAP_NUMBER_NOT_FOUND, 255, 200, 200)
+        return
+    }
+    SetNextMap(num)
     return true
 }
 
@@ -124,7 +132,7 @@ void function Postmatch(){
 }
 
 void function ChangeMapBeforeServer(){
-    wait GAME_POSTMATCH_LENGTH - 1 // change 1 sec before server does 
+    wait GAME_POSTMATCH_LENGTH - 1 // change 1 sec before server does
     if(nextMap != "")
         GameRules_ChangeMap(nextMap, GameRules_GetGameMode())
     else
@@ -136,12 +144,42 @@ void function ChangeMapBeforeServer(){
  */
 
 void function ProposeMaps(){
-    //TODO
+    string currMap = GetMapName()
+    for(int i = 0; i < howManyMapsToPropose; i++){
+        while(true){
+            string temp = maps[rndint(howManyMapsToPropose - 1)]
+            if(proposedMaps.find(temp) == -1){
+                proposedMaps.append(temp)
+                break
+            }
+        }
+    }
+
+    // create message
+    string message = ""
+    for (int i = 1; i <= proposedMaps.len(); i++) {
+        message += i + ": " + proposedMaps[i-1] + "\n" // TODO make table and assign mapnames to their real name
+    }
+
+    // meesage all players
+    foreach (entity player in GetPlayerArray()){
+        SendHudMessageBuilder(player, message, 255, 200, 200) // TODO different position
+    }
+    mapsHaveBeenProposed = true
 }
 
-void function SetNextMap(int num, bool force = false){
+void function SetNextMap(int num, bool force = false){ // TODO
+    MapVotesData temp
+    temp.mapName = proposedMaps[num-1]
+
+    // is already in array
+    if(voteData.find(x => x.mapName = temp.mapName) != -1){
+        //TODO
+    }
+
     if(force){
         // set to unbeatable value
+
         return
     }
 
