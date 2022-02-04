@@ -75,11 +75,11 @@ bool function CommandVote(entity player, array<string> args){
             return false
         }
 
-        // admin gave map check
+        /* admin gave map check
         if(args.len() == 1 && args[0] == "force"){
             SendHudMessageBuilder(player, MAP_NOT_GIVEN, 255, 200, 200)
             return false
-        }
+        }*/
 
         if(args.len() == 2 && args[0] == "force"){
             // Check if user is admin
@@ -99,19 +99,12 @@ bool function CommandVote(entity player, array<string> args){
         if(!PlayerHasVoted(player, playerMapVoteNames)){
             // add player to list of players who have voted
             playerMapVoteNames.append(player.GetPlayerName())
-
-            // send message to everyone
-            for(int i = 0; i < GetPlayerArray().len(); i++){
-                if(playerMapVoteNames.len() > 1) // semantics
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerMapVoteNames.len() + MULTIPLE_MAP_VOTES, 255, 200, 200)
-                else
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerMapVoteNames.len() + ONE_MAP_VOTE, 255, 200, 200)
-			}
         }
         else {
             // Doesnt let the player vote twice, name is saved so even on reconnect they cannot vote twice
             // Future update might check if the player is actually online but right now i am too tired
             SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
+            return false
         }
     }
 
@@ -119,7 +112,7 @@ bool function CommandVote(entity player, array<string> args){
     int num = args[0].tointeger()
     if(num == 0 || num > proposedMaps.len()-1){
         SendHudMessageBuilder(player, MAP_NUMBER_NOT_FOUND, 255, 200, 200)
-        return
+        return false
     }
     SetNextMap(num)
     return true
@@ -163,7 +156,7 @@ void function ProposeMaps(){
 
     // meesage all players
     foreach (entity player in GetPlayerArray()){
-        SendHudMessageBuilder(player, message, 255, 200, 200) // TODO different position
+        SendHudMessage( player, message, -0.92, 0.5, 255, 255, 255, 255, 0.15, 30, 1 )
     }
     mapsHaveBeenProposed = true
 }
@@ -194,8 +187,8 @@ void function SetNextMap(int num, bool force = false){
     nextMap = voteData[0].mapName
 }
 
-int FindMvdInVoteData(string mapName){ // returns -1 if not found
-    index = -1
+int function FindMvdInVoteData(string mapName){ // returns -1 if not found
+    int index = -1
     foreach(MapVotesData mvd in voteData){
         if(mvd.mapName == mapName)
             return index

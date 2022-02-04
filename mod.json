@@ -123,7 +123,7 @@
 			"Name": "pv_maps",
 			//"DefaultValue": "mp_lf_stacks"
 			// below should be all maps, i wouldnt delete it :)
-			"DefaultValue": "mp_angel_city, mp_beacon, mp_black_water_canal, mp_box, mp_coliseum, mp_coliseum_column, mp_colony02, mp_complex3, mp_crashsite3, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_grave, mp_homestead, mp_lf_alleys, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_thaw"
+			"DefaultValue": "mp_angel_city, mp_beacon, mp_black_water_canal, mp_coliseum, mp_coliseum_column, mp_colony02, mp_complex3, mp_crashsite3, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_grave, mp_homestead, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_thaw"
 		}
 	],
 

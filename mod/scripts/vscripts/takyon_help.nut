@@ -17,6 +17,7 @@ string balance =    "[ !balance     -> vote to balance teams by kd       ]"
 string rules =      "[ !rules       -> get the server's rules            ]"
 string message =    "[ !msg         -> !msg player message               ]"
 string announce =   "[ !announce    -> !announce message                 ]"
+string vote =   "[ !vote        -> !vote number                      ]"
 
 // dont forget to add new strings in cmdArr in InitCommands()
 void function InitCommands(){
@@ -87,6 +88,9 @@ bool function CommandHelp(entity player, array<string> args){
                     break;
                 case "announce":
                     SendHudMessageBuilder(player, announce, 200, 200, 255)
+                    break;
+                case "vote":
+                    SendHudMessageBuilder(player, vote, 200, 200, 255)
                     break;
                 default:
                     string fullCmd = ""
