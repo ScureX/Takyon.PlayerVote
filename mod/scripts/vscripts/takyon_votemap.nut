@@ -25,7 +25,7 @@ void function VoteMapInit(){
     AddCallback_GameStateEnter(eGameState.Postmatch, Postmatch) // change map before the server changes it lololol
 
     // ConVar
-    voteMapEnabled = GetConVarBool( "pv_vote_map_enabled" ) // TODO
+    voteMapEnabled = GetConVarBool( "pv_vote_map_enabled" )
     string cvar = GetConVarString( "pv_maps" )
     mapTimeFrac = GetConVarFloat( "pv_map_time_frac" )
 
@@ -168,22 +168,40 @@ void function ProposeMaps(){
     mapsHaveBeenProposed = true
 }
 
-void function SetNextMap(int num, bool force = false){ // TODO
+void function SetNextMap(int num, bool force = false){
+    int index = FindMvdInVoteData(proposedMaps[num-1])
     MapVotesData temp
-    temp.mapName = proposedMaps[num-1]
 
     // is already in array
-    if(voteData.find(x => x.mapName = temp.mapName) != -1){
-        //TODO
+    if(index != -1){
+        // increase votes
+        temp = voteData[index]
+        temp.votes = temp.votes + 1
+    }
+    else{ // add to array
+        temp.votes = 1
+        temp.mapName = proposedMaps[num-1]
+        voteData.append(temp)
     }
 
     if(force){
-        // set to unbeatable value
-
+        // set to unbeatable value // TODO bad fix but uhhh idc
+        temp.votes = 1000
         return
     }
 
-    nextMap = "mp_thaw"
+    voteData.sort(MapVotesSort)
+    nextMap = voteData[0].mapName
+}
+
+int FindMvdInVoteData(string mapName){ // returns -1 if not found
+    index = -1
+    foreach(MapVotesData mvd in voteData){
+        if(mvd.mapName == mapName)
+            return index
+        index++
+    }
+    return index
 }
 
 int function MapVotesSort(MapVotesData data1, MapVotesData data2)
