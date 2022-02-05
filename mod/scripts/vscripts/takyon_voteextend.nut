@@ -12,6 +12,7 @@ void function VoteExtendInit(){
     AddClientCommandCallback("!extend", CommandExtend)
     AddClientCommandCallback("!EXTEND", CommandExtend)
     AddClientCommandCallback("!Extend", CommandExtend)
+    AddClientCommandCallback("!elongate", CommandExtend) // for sye <3
 
     // ConVars
     extendVoteEnabled = GetConVarBool( "pv_extend_vote_enabled" )

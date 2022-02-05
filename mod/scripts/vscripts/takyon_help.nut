@@ -7,17 +7,17 @@ bool useGeneratedHelp = true // will auto-generate text for the help command. se
 array<string> spawnedPlayers = []
 array<string> cmdArr = []
 
-string commands =   "[ !skip, !extend, !kick, !rules, !switch, !balance\n]"
-string skip =       "[ !skip        -> to skip the map                   ]"
-string extend =     "[ !extend      -> to play this map longer           ]"
-string kick =       "[ !kick        -> to kick a player                  ]"
-string switchcmd =  "[ !switch      -> to switch teams                   ]"
-string ping =       "[ !ping (name) -> get your or a player's ping       ]"
-string balance =    "[ !balance     -> vote to balance teams by kd       ]"
-string rules =      "[ !rules       -> get the server's rules            ]"
-string message =    "[ !msg         -> !msg player message               ]"
-string announce =   "[ !announce    -> !announce message                 ]"
-string vote =   "[ !vote        -> !vote number                      ]"
+string commands =   "[ !skip, !extend, !kick, !rules, !switch, !balance, !ping, !vote ]"
+string skip =       "[ !skip        -> to skip the map                  ]"
+string extend =     "[ !extend      -> to play this map longer          ]"
+string kick =       "[ !kick        -> to kick a player                 ]"
+string switchcmd =  "[ !switch      -> to switch teams                  ]"
+string ping =       "[ !ping (name) -> get your or a player's ping      ]"
+string balance =    "[ !balance     -> vote to balance teams by kd      ]"
+string rules =      "[ !rules       -> get the server's rules           ]"
+string message =    "[ !msg         -> !msg player message              ]"
+string announce =   "[ !announce    -> !announce message                ]"
+string vote =       "[ !vote        -> !vote number                     ]"
 
 // dont forget to add new strings in cmdArr in InitCommands()
 void function InitCommands(){
@@ -28,6 +28,10 @@ void function InitCommands(){
     cmdArr.append(switchcmd)
     cmdArr.append(ping)
     cmdArr.append(balance)
+    cmdArr.append(rules)
+    cmdArr.append(message)
+    cmdArr.append(announce)
+    cmdArr.append(vote)
 }
 
 void function HelpInit(){
@@ -93,14 +97,12 @@ bool function CommandHelp(entity player, array<string> args){
                     SendHudMessageBuilder(player, vote, 200, 200, 255)
                     break;
                 default:
-                    string fullCmd = ""
-                    foreach (string cmd in cmdArr) {
-                        fullCmd += cmd + "\n"
-                    }
-                    SendHudMessageBuilder(player, fullCmd, 200, 200, 255)
+                    SendHudMessageBuilder(player, commands, 200, 200, 255)
                     break;
+                return true
             }
         }
+        SendHudMessageBuilder(player, commands, 200, 200, 255)
     }
     return true
 }

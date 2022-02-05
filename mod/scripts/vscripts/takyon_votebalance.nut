@@ -107,7 +107,13 @@ array<PlayerKDData> function GetPlayersSortedBySkill(array<entity> arr){
         // get kd for player // TYSM Dinorush
         PlayerKDData temp
         temp.player = player
-        temp.kd =  1.0 * player.GetPlayerGameStat(PGS_KILLS) / player.GetPlayerGameStat(PGS_DEATHS)
+        int deaths =  player.GetPlayerGameStat(PGS_DEATHS)
+        if(deaths == 0){
+            temp.kd = 9999.0
+        }
+        else{
+            temp.kd =  1.0 * player.GetPlayerGameStat(PGS_KILLS) / player.GetPlayerGameStat(PGS_DEATHS)
+        }
         pkdArr.append(temp)
     }
     pkdArr.sort(PlayerKDDataSort)
