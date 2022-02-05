@@ -141,7 +141,7 @@ void function ProposeMaps(){
     for(int i = 0; i < howManyMapsToPropose; i++){
         while(true){
             string temp = maps[rndint(howManyMapsToPropose - 1)]
-            if(proposedMaps.find(temp) == -1){
+            if(proposedMaps.find(temp) == -1 && temp != currMap){
                 proposedMaps.append(temp)
                 break
             }
