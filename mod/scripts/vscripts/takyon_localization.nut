@@ -30,7 +30,7 @@ global const string NO_VOTE_GOING = "There is no vote going on. Use !kick"
 global const string HOW_TO_MESSAGE = "\n!msg playerName message"
 global const string NO_MESSAGE_FOUND = "No message found"
 global const string PLAYER_IS_NULL = "There was an error. The player might've left"
-global const string MESSAGE_SENT_TO_PLAYER = "Message sent"
+global const string MESSAGE_SENT_TO_PLAYER = "Message sent to " // remember the space at the end
 
 // help
 global const string SPAWN_MESSAGE = "Open your console and type !help"
@@ -65,5 +65,6 @@ global const string ADMIN_BALANCED = "An Admin has balanced the teams by K/D"
 global const string MAPS_NOT_PROPOSED = "Maps have not been proposed yet"
 global const string MAP_VOTE_USAGE = "!vote number"
 global const string ADMIN_VOTED_MAP = "Admin set the next map to "
-global const string MAP_NOT_GIVEN = "no map given"
+global const string MAP_NOT_GIVEN = "No map given"
 global const string MAP_NUMBER_NOT_FOUND = "Map number not found"
+global const string MAP_YOU_VOTED = "You have voted for " // remember the space at the end

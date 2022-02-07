@@ -114,6 +114,7 @@ bool function CommandVote(entity player, array<string> args){
         SendHudMessageBuilder(player, MAP_NUMBER_NOT_FOUND, 255, 200, 200)
         return false
     }
+    SendHudMessageBuilder(player, MAP_YOU_VOTED + proposedMaps[num-1], 200, 200, 200)
     SetNextMap(num)
     return true
 }
