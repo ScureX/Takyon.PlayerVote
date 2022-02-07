@@ -65,6 +65,17 @@ Lets an admin announce something. The message is displayed for everyone.
 Lets a player switch teams based on some rules to keep the match balanced.  
 Lets an admin switch the team of a player.
 
+## !balance
+### Usage: [!balance]  [!balance force]
+Lets players vote on balancing the teams based on K/D.  
+This will distribute good players evenly to make a fair match.
+
+## !vote
+### Usage: [!vote]  [!vote number]  [!vote number force]
+Lets players vote which map will be played next.  
+Also lets the server hoster make a custom map playlist with every available map regardless of gamemode.  
+
+
 ---
 
 # Settings
