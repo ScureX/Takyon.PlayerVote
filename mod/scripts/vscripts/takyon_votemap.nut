@@ -16,6 +16,31 @@ array<MapVotesData> voteData = []
 array<string> proposedMaps = []
 string nextMap = ""
 
+table<string, string> mapNameTable = {
+    mp_angel_city = "Angel City",
+    mp_black_water_canal = "Black Water Canal",
+    mp_coliseum = "Coliseum",
+    mp_coliseum_column = "Pillars",
+    mp_colony02 = "Colony",
+    mp_complex3 = "Complex",
+    mp_crashsite3 = "Crashsite",
+    mp_drydock = "Drydock",
+    mp_eden = "Eden",
+    mp_forwardbase_kodai = "Forwardbase Kodai",
+    mp_grave = "Boomtown",
+    mp_homestead = "Homestead",
+    mp_lf_deck = "Deck",
+    mp_lf_meadow = "Meadow",
+    mp_lf_stacks = "Stacks",
+    mp_lf_township = "Township",
+    mp_lf_traffic = "Traffic",
+    mp_lf_uma = "UMA",
+    mp_relic02 = "Relic",
+    mp_rise = "Rise",
+    mp_thaw = "Exoplanet",
+    mp_wargames = "Wargames"
+}
+
 void function VoteMapInit(){
     // add commands here. i added some varieants for accidents, however not for brain damage. do whatever :P
     AddClientCommandCallback("!vote", CommandVote) //!vote force 3 will force the map if your name is in adminNames
@@ -28,10 +53,11 @@ void function VoteMapInit(){
     voteMapEnabled = GetConVarBool( "pv_vote_map_enabled" )
     string cvar = GetConVarString( "pv_maps" )
     mapTimeFrac = GetConVarFloat( "pv_map_time_frac" )
+    howManyMapsToPropose = GetConVarInt( "pv_map_map_propose_amount" )
 
-    maps = split( cvar, "," )
-    foreach ( string map in maps )
-        StringReplace( map, " ", "" )
+    array<string> dirtyMaps = split( cvar, "," )
+    foreach ( string map in dirtyMaps )
+        maps.append(strip(map))
 
     // loop to get time when map vote should be displayed
     thread Main()
@@ -48,7 +74,7 @@ void function Main(){
             // check if halftime or whatever
             float endTime = expect float(GetServerVar("gameEndTime"))
             if(Time() / endTime >= mapTimeFrac && !mapsHaveBeenProposed){
-                ProposeMaps()
+                FillProposedMaps()
             }
         }
     }
@@ -70,18 +96,25 @@ bool function CommandVote(entity player, array<string> args){
             return false
         }
 
+        // only !vote -> show maps again
+        if(args.len() == 0){
+            ShowProposedMaps(player)
+            return true
+        }
+
+        // map num not a num
         if(args.len() < 1 || !IsInt(args[0])){
             SendHudMessageBuilder(player, MAP_VOTE_USAGE, 255, 200, 200)
             return false
         }
 
-        /* admin gave map check
-        if(args.len() == 1 && args[0] == "force"){
-            SendHudMessageBuilder(player, MAP_NOT_GIVEN, 255, 200, 200)
+        // check if num is valid
+        if(!IsMapNumValid(args[0])){
+            SendHudMessageBuilder(player, MAP_NUMBER_NOT_FOUND, 255, 200, 200)
             return false
-        }*/
+        }
 
-        if(args.len() == 2 && args[0] == "force"){
+        if(args.len() == 2 && args[1] == "force"){
             // Check if user is admin
             if(!IsPlayerAdmin(player)){
                 SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
@@ -102,24 +135,19 @@ bool function CommandVote(entity player, array<string> args){
         }
         else {
             // Doesnt let the player vote twice, name is saved so even on reconnect they cannot vote twice
-            // Future update might check if the player is actually online but right now i am too tired
             SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
             return false
         }
     }
 
-    // check if num is valid
-    int num = args[0].tointeger()
-    if(num == 0 || num > proposedMaps.len()-1){
-        SendHudMessageBuilder(player, MAP_NUMBER_NOT_FOUND, 255, 200, 200)
-        return false
-    }
-    SendHudMessageBuilder(player, MAP_YOU_VOTED + proposedMaps[num-1], 200, 200, 200)
-    SetNextMap(num)
+    SendHudMessageBuilder(player, MAP_YOU_VOTED + TryGetNormalizedMapName(proposedMaps[args[0].tointeger()-1]), 200, 200, 200)
+    SetNextMap(args[0].tointeger())
     return true
 }
 
-// post match logic
+/*
+ *  POST MATCH LOGIC
+ */
 
 void function Postmatch(){
     thread ChangeMapBeforeServer()
@@ -137,11 +165,45 @@ void function ChangeMapBeforeServer(){
  *  HELPER FUNCTIONS
  */
 
-void function ProposeMaps(){
+string function TryGetNormalizedMapName(string mapName){
+    try{
+        return mapNameTable[mapName]
+    }
+    catch(e){
+        // name not normalized, should be added to list lol (make a pr with the mapname if i missed sumn :P)
+        printl(e)
+        return mapName
+    }
+}
+
+bool function IsMapNumValid(string x){
+    int num = x.tointeger()
+    if(num == 0 || num > proposedMaps.len()-1){
+        return false
+    }
+    return true
+}
+
+void function ShowProposedMaps(entity player){
+    // create message
+    string message = MAP_VOTE_USAGE + "\n"
+    for (int i = 1; i <= proposedMaps.len(); i++) {
+        string map = TryGetNormalizedMapName(proposedMaps[i-1])
+        message += i + ": " + map + "\n" // TODO make table and assign mapnames to their real name
+    }
+
+    // message player
+    foreach (entity player in GetPlayerArray()){
+        SendHudMessage( player, message, -0.925, 0.4, 255, 255, 255, 255, 0.15, 30, 1 )
+    }
+}
+
+void function FillProposedMaps(){
     string currMap = GetMapName()
     for(int i = 0; i < howManyMapsToPropose; i++){
         while(true){
-            string temp = maps[rndint(howManyMapsToPropose - 1)]
+            // get a random map from maps
+            string temp = maps[rndint(maps.len() - 1)]
             if(proposedMaps.find(temp) == -1 && temp != currMap){
                 proposedMaps.append(temp)
                 break
@@ -149,16 +211,11 @@ void function ProposeMaps(){
         }
     }
 
-    // create message
-    string message = ""
-    for (int i = 1; i <= proposedMaps.len(); i++) {
-        message += i + ": " + proposedMaps[i-1] + "\n" // TODO make table and assign mapnames to their real name
+    // message all players
+    foreach(entity player in GetPlayerArray()){
+        ShowProposedMaps(player)
     }
-
-    // meesage all players
-    foreach (entity player in GetPlayerArray()){
-        SendHudMessage( player, message, -0.92, 0.5, 255, 255, 255, 255, 0.15, 30, 1 )
-    }
+    
     mapsHaveBeenProposed = true
 }
 

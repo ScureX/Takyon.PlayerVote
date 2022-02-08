@@ -40,6 +40,10 @@
 			"DefaultValue": "5" // minimum required players online to kick a person. this should be kept high cause if there are only 3, 2 people are enough to kick
 		},
 		{
+			"Name": "pv_kick_save_players",
+			"DefaultValue": "1" //  save kicked players to stop them from rejoining the same round, 0 = disabled, 1 = enabled
+		},
+		{
 			"Name": "pv_extend_vote_enabled",
 			"DefaultValue": "1" // are users/admins able to extend maptime, 0 = disabled, 1 = enabled
 		},
@@ -120,10 +124,14 @@
 			"DefaultValue": "0.5" // when the vote is displayed. 0.5 would be halftime
 		},
 		{
+			"Name": "pv_map_map_propose_amount",
+			"DefaultValue": "10" // how many maps to propose
+		},
+		{
 			"Name": "pv_maps",
-			//"DefaultValue": "mp_lf_stacks"
+			//"DefaultValue": "mp_angel_city,mp_colony02,mp_complex3"
 			// below should be all maps, i wouldnt delete it :)
-			"DefaultValue": "mp_angel_city, mp_black_water_canal, mp_coliseum, mp_coliseum_column, mp_colony02, mp_complex3, mp_crashsite3, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_grave, mp_homestead, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_thaw"
+			"DefaultValue": "mp_angel_city, mp_black_water_canal, mp_coliseum, mp_coliseum_column, mp_colony02, mp_complex3, mp_crashsite3, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_grave, mp_homestead, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_rise, mp_thaw, mp_wargames"
 		}
 	],
 

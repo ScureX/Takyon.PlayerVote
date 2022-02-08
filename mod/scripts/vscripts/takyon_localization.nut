@@ -63,7 +63,7 @@ global const string ADMIN_BALANCED = "An Admin has balanced the teams by K/D"
 
 // map vote
 global const string MAPS_NOT_PROPOSED = "Maps have not been proposed yet"
-global const string MAP_VOTE_USAGE = "!vote number"
+global const string MAP_VOTE_USAGE = "!vote number -> in console"
 global const string ADMIN_VOTED_MAP = "Admin set the next map to "
 global const string MAP_NOT_GIVEN = "No map given"
 global const string MAP_NUMBER_NOT_FOUND = "Map number not found"
