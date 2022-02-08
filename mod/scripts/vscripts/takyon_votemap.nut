@@ -10,12 +10,14 @@ struct MapVotesData{
     int votes
 }
 
-bool mapsHaveBeenProposed = false // dont fuck with this
+global bool mapsHaveBeenProposed = false // dont fuck with this
 array<string> maps = []
 array<MapVotesData> voteData = []
 array<string> proposedMaps = []
 string nextMap = ""
+array<string> spawnedPlayers= []
 
+// do not remove maps from here, just add the ones you need!
 table<string, string> mapNameTable = {
     mp_angel_city = "Angel City",
     mp_black_water_canal = "Black Water Canal",
@@ -48,6 +50,8 @@ void function VoteMapInit(){
     AddClientCommandCallback("!Vote", CommandVote)
 
     AddCallback_GameStateEnter(eGameState.Postmatch, Postmatch) // change map before the server changes it lololol
+    AddCallback_OnPlayerRespawned(OnPlayerSpawned) // to send vote message to players who join after vote has started 
+    AddCallback_OnClientDisconnected(OnPlayerDisconnected)
 
     // ConVar
     voteMapEnabled = GetConVarBool( "pv_vote_map_enabled" )
@@ -145,6 +149,24 @@ bool function CommandVote(entity player, array<string> args){
     return true
 }
 
+void function OnPlayerSpawned(entity player){ // show the player that just joined the map vote
+    printl("len: " + spawnedPlayers.len())
+    if(spawnedPlayers.find(player.GetPlayerName()) == -1 && mapsHaveBeenProposed){
+        printl("HERE")
+        ShowProposedMaps(player)
+        spawnedPlayers.append(player.GetPlayerName())
+    }
+}
+
+void function OnPlayerDisconnected(entity player){
+    // remove player from list so on reconnect they get the message again
+    while(spawnedPlayers.find(player.GetPlayerName()) != -1){
+        try{
+            spawnedPlayers.remove(spawnedPlayers.find(player.GetPlayerName()))
+        } catch(exception){} // idc abt error handling
+    }
+}
+
 /*
  *  POST MATCH LOGIC
  */
@@ -193,12 +215,11 @@ void function ShowProposedMaps(entity player){
     }
 
     // message player
-    foreach (entity player in GetPlayerArray()){
-        SendHudMessage( player, message, -0.925, 0.4, 255, 255, 255, 255, 0.15, 30, 1 )
-    }
+    SendHudMessage( player, message, -0.925, 0.4, 255, 255, 255, 255, 0.15, 30, 1 )
 }
 
 void function FillProposedMaps(){
+    printl("making proposed maps")
     string currMap = GetMapName()
     for(int i = 0; i < howManyMapsToPropose; i++){
         while(true){

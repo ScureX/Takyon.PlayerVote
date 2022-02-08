@@ -125,7 +125,7 @@ void function OnPlayerSpawned(entity player){
         }
     }
 
-    if(spawnedPlayers.find(player.GetPlayerName()) == -1 || spawnAmount <= displayHintOnSpawnAmount){
+    if(!mapsHaveBeenProposed && (spawnedPlayers.find(player.GetPlayerName()) == -1 || spawnAmount <= displayHintOnSpawnAmount)){ // prioritizing the vote instead of showing help
         SendHudMessageBuilder(player, SPAWN_MESSAGE, 200, 200, 255) // Message that gets displayed on respawn
         spawnedPlayers.append(player.GetPlayerName())
     }
