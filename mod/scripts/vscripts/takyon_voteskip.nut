@@ -76,7 +76,16 @@ bool function CommandSkip(entity player, array<string> args){
 void function CheckIfEnoughSkipVotes(bool force = false){
     // check if enough have voted
     if(playerSkipVoteNames.len() >= (1.0 * GetPlayerArray().len() * skipVotePercentage) || force){
-        SetServerVar("gameEndTime", 1.0) // end this game 
-        playerSkipVoteNames.clear()
+        if(mapsHaveBeenProposed)
+            SetGameEndTime(1.0) // TODO maybe check for how long the mapvote has been going? 
+        else{
+            SetGameEndTime(30)
+            FillProposedMaps()
+        }
     }
+}
+
+void function SetGameEndTime(float seconds){
+    SetServerVar("gameEndTime", seconds) // end this game 
+    playerSkipVoteNames.clear()
 }

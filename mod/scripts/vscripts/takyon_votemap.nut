@@ -1,4 +1,5 @@
 global function VoteMapInit
+global function FillProposedMaps 
 
 array<string> playerMapVoteNames = [] // list of players who have voted, is used to see how many have voted
 bool voteMapEnabled = true
@@ -211,7 +212,7 @@ void function ShowProposedMaps(entity player){
     string message = MAP_VOTE_USAGE + "\n"
     for (int i = 1; i <= proposedMaps.len(); i++) {
         string map = TryGetNormalizedMapName(proposedMaps[i-1])
-        message += i + ": " + map + "\n" // TODO make table and assign mapnames to their real name
+        message += i + ": " + map + "\n" 
     }
 
     // message player
@@ -219,7 +220,6 @@ void function ShowProposedMaps(entity player){
 }
 
 void function FillProposedMaps(){
-    printl("making proposed maps")
     string currMap = GetMapName()
     for(int i = 0; i < howManyMapsToPropose; i++){
         while(true){

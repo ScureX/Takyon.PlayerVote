@@ -125,7 +125,7 @@
 		},
 		{
 			"Name": "pv_map_map_propose_amount",
-			"DefaultValue": "10" // how many maps to propose
+			"DefaultValue": "6" // how many maps to propose
 		},
 		{
 			"Name": "pv_maps",
