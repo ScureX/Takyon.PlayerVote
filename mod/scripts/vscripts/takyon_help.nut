@@ -118,7 +118,7 @@ bool function CommandHelp(entity player, array<string> args){
 
 void function OnPlayerSpawned(entity player){
     // this prevents the message from being displayed every time someone spawns, which would be annoying. so we dont do that :)
-    int spawnAmount = 0
+    welcomeEnabled ? spawnAmount = 1 : spawnAmount = 0
     foreach (name in spawnedPlayers)  {
         if (name == player.GetPlayerName())  {
             spawnAmount++
