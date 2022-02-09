@@ -17,6 +17,7 @@ array<MapVotesData> voteData = []
 array<string> proposedMaps = []
 string nextMap = ""
 array<string> spawnedPlayers= []
+global float mapsProposalTimeLeft = 0
 
 // do not remove maps from here, just add the ones you need!
 table<string, string> mapNameTable = {
@@ -151,9 +152,7 @@ bool function CommandVote(entity player, array<string> args){
 }
 
 void function OnPlayerSpawned(entity player){ // show the player that just joined the map vote
-    printl("len: " + spawnedPlayers.len())
     if(spawnedPlayers.find(player.GetPlayerName()) == -1 && mapsHaveBeenProposed){
-        printl("HERE")
         ShowProposedMaps(player)
         spawnedPlayers.append(player.GetPlayerName())
     }
@@ -201,7 +200,7 @@ string function TryGetNormalizedMapName(string mapName){
 
 bool function IsMapNumValid(string x){
     int num = x.tointeger()
-    if(num == 0 || num > proposedMaps.len()-1){
+    if(num == 0 || num > proposedMaps.len()){
         return false
     }
     return true
@@ -220,6 +219,7 @@ void function ShowProposedMaps(entity player){
 }
 
 void function FillProposedMaps(){
+    printl("Proposing maps")
     string currMap = GetMapName()
     for(int i = 0; i < howManyMapsToPropose; i++){
         while(true){
@@ -237,6 +237,7 @@ void function FillProposedMaps(){
         ShowProposedMaps(player)
     }
     
+    mapsProposalTimeLeft = Time()
     mapsHaveBeenProposed = true
 }
 

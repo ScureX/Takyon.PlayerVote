@@ -108,27 +108,29 @@ bool function CommandHelp(entity player, array<string> args){
 }
 
 /*
- *  HELP COMMAND DESCRIPTION LOGIC
- */
-
-
-/*
  *  HELP HINT MESSAGE LOGIC
  */
 
 void function OnPlayerSpawned(entity player){
     // this prevents the message from being displayed every time someone spawns, which would be annoying. so we dont do that :)
-    welcomeEnabled ? spawnAmount = 1 : spawnAmount = 0
+    int spawnAmount = 0
     foreach (name in spawnedPlayers)  {
         if (name == player.GetPlayerName())  {
             spawnAmount++
         }
     }
 
-    if(!mapsHaveBeenProposed && (spawnedPlayers.find(player.GetPlayerName()) == -1 || spawnAmount <= displayHintOnSpawnAmount)){ // prioritizing the vote instead of showing help
-        SendHudMessageBuilder(player, SPAWN_MESSAGE, 200, 200, 255) // Message that gets displayed on respawn
-        spawnedPlayers.append(player.GetPlayerName())
+    bool shouldWelcome = welcomeEnabled && spawnAmount == 0
+    bool shouldDisplayHelp = spawnAmount <= displayHintOnSpawnAmount
+    bool enoughTimeAfterMapProposal = Time() - mapsProposalTimeLeft > 10
+
+    if(shouldWelcome && !mapsHaveBeenProposed){
+        ShowWelcomeMessage(player)
     }
+    else if(shouldDisplayHelp && (!mapsHaveBeenProposed || (enoughTimeAfterMapProposal && spawnAmount > 0))){
+        SendHudMessageBuilder(player, HELP_MESSAGE, 200, 200, 255) // Message that gets displayed on respawn
+    }
+    spawnedPlayers.append(player.GetPlayerName()) 
 }
 
 void function OnPlayerDisconnected(entity player){

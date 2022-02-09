@@ -1,7 +1,8 @@
 global function WelcomeInit
+global function ShowWelcomeMessage
 
 global bool welcomeEnabled = true
-array<string> spawnedPlayers = []
+global array<string> welcomeSpawnedPlayers = []
 
 // ADD YOUR FUCKING SERVER NAME IN mod.json I BEG YOU
 string serverName = ""
@@ -30,17 +31,17 @@ void function WelcomeInit(){
  */
 
 void function OnPlayerSpawned(entity player){
-    if(!mapsHaveBeenProposed && welcomeEnabled && spawnedPlayers.find(player.GetPlayerName()) == -1){ // prioritizing the vote instead of showing help
-        SendHudMessageBuilder(player, WelcomeMsgBuilder(welcomeMsg, player), 255, 255, 255) // Message that gets displayed on respawn
-        spawnedPlayers.append(player.GetPlayerName())
+    if(!mapsHaveBeenProposed && welcomeEnabled && welcomeSpawnedPlayers.find(player.GetPlayerName()) == -1){ // prioritizing the vote instead of showing help
+        //ShowWelcomeMessage(player)
+        welcomeSpawnedPlayers.append(player.GetPlayerName())
     }
 }
 
 void function OnPlayerDisconnected(entity player){
     // remove player from list so on reconnect they get the message again
-    while(spawnedPlayers.find(player.GetPlayerName()) != -1){
+    while(welcomeSpawnedPlayers.find(player.GetPlayerName()) != -1){
         try{
-            spawnedPlayers.remove(spawnedPlayers.find(player.GetPlayerName()))
+            welcomeSpawnedPlayers.remove(welcomeSpawnedPlayers.find(player.GetPlayerName()))
         } catch(exception){} // idc abt error handling
     }
 }
@@ -48,6 +49,10 @@ void function OnPlayerDisconnected(entity player){
 /*
  *  HELPER FUNCTIONS
  */
+
+void function ShowWelcomeMessage(entity player){
+    SendHudMessageBuilder(player, WelcomeMsgBuilder(welcomeMsg, player), 255, 255, 255) // Message that gets displayed on respawn
+}
 
 string function WelcomeMsgBuilder(string msg, entity player){
     string playerName = "%playername%"
