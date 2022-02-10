@@ -88,4 +88,4 @@ void function CheckIfEnoughSkipVotes(bool force = false){
 void function SetGameEndTime(float seconds){
     SetServerVar("gameEndTime", seconds) // end this game 
     playerSkipVoteNames.clear()
-}
+} 
