@@ -77,9 +77,9 @@ void function CheckIfEnoughSkipVotes(bool force = false){
     // check if enough have voted
     if(playerSkipVoteNames.len() >= (1.0 * GetPlayerArray().len() * skipVotePercentage) || force){
         if(mapsHaveBeenProposed)
-            SetGameEndTime(1.0) // TODO maybe check for how long the mapvote has been going? 
+            SetGameEndTime(Time() + 1.0) // TODO maybe check for how long the mapvote has been going? 
         else{
-            SetGameEndTime(30)
+            SetGameEndTime(Time() + 30)
             FillProposedMaps()
         }
     }
