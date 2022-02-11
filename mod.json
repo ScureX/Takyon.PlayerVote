@@ -129,7 +129,7 @@
 		},
 		{
 			"Name": "pv_map_map_propose_amount",
-			"DefaultValue": "6" // how many maps to propose
+			"DefaultValue": "6" // how many maps to propose. KEEP THIS LOWER THAN THE AMOUNT OF MAPS YOU HAVE IN pv_maps!!! 5 maps in pv_maps -> set this to 4 maximum
 		},
 		{
 			"Name": "pv_maps",
