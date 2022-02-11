@@ -21,15 +21,25 @@ void function RulesInit(){
      */
 
     // string rule99 = "this is your rule"
-    string rule1 = "[1] Takyon is poggers"
-    string rule2 = "[2] Someone didnt fill out their rules"
-    string rule3 = "[3] chicken nugget"
+    string rule1 = "[1] No camping"
+    string rule2 = "[2] No cheating/exploiting"
+    string rule3 = "[3] No toxicity/discrimination"
+    string rule4 = "[4] No mic/chat spam"
+    string rule5 = "[5] No advertising"
+    string rule6 = "[6] No threatening real harm"
+    string rule7 = "[7] No evading punishments"
+    string rule8 = "[8] Be respectful to others"
 
     // add rules to the rule builder
     // dont forget the "\n" to add a new line, also dont put a + after the last rule
     rules = rule1 + "\n" +
             rule2 + "\n" + 
-            rule3 + "\n"
+            rule3 + "\n" +
+            rule4 + "\n" + 
+            rule5 + "\n" +
+            rule6 + "\n" + 
+            rule7 + "\n" +
+            rule8
 
     /*
      *  end of rules
