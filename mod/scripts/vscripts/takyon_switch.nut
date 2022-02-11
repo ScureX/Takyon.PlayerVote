@@ -12,8 +12,6 @@ void function SwitchInit(){
     AddClientCommandCallback("!switch", CommandSwitch)
     AddClientCommandCallback("!SWITCH", CommandSwitch)
     AddClientCommandCallback("!Switch", CommandSwitch)
-    AddClientCommandCallback("!un", Un)
-
 
     // ConVars
     switchEnabled = GetConVarBool( "pv_switch_enabled" )
@@ -25,12 +23,7 @@ void function SwitchInit(){
 /*
  *  COMMAND LOGIC
  */
-
-bool function Un(entity player, array<string> args){
-    SetTeam(player, TEAM_UNASSIGNED)
-    return true
-}
-
+ 
 bool function CommandSwitch(entity player, array<string> args){
     if(!IsLobby()){
         printl("USER USED SWITCH")
