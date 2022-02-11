@@ -90,6 +90,9 @@ This will distribute good players evenly to make a fair match.
 Lets players vote which map will be played next.  
 Also lets the server hoster make a custom map playlist with every available map regardless of gamemode.  
 
+## !ping
+### Usage: [!ping]  [!ping playerName]
+Gets the players average ping. [An issue regarding this being inaccurate is currently being investigated]
 
 ---
 
