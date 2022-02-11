@@ -112,10 +112,6 @@
 			"DefaultValue": "1" // 1: users can use !balance | 0: users cant use !balance
 		},
 		{
-			"Name": "pv_vote_map_enabled",
-			"DefaultValue": "1" // 1: users can use !vote | 0: users cant use !vote
-		},
-		{
 			"Name": "pv_balance_percentage",
 			"DefaultValue": "0.5" // how many people are needed to pass the balance vote in percent
 		},
