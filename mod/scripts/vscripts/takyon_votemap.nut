@@ -220,6 +220,11 @@ void function ShowProposedMaps(entity player){
 
 void function FillProposedMaps(){
     printl("Proposing maps")
+    if(howManyMapsToPropose >= maps.len()){
+        printl("\n\n[PLAYERVOTE][ERROR] pv_map_map_propose_amount is not lower than pv_maps! Set it to a lower number than the amount of maps in your map pool!\n\n")
+        howManyMapsToPropose = maps.len()-1
+    }
+
     string currMap = GetMapName()
     for(int i = 0; i < howManyMapsToPropose; i++){
         while(true){
