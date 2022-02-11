@@ -1,8 +1,23 @@
 # PlayerVote
 
-Enables players to vote on different things like skipping a map or kicking a player, to add a true community feeling to your server! Also includes admin functionalities to enforce some rules.
+Enables players to vote on different things like skipping a map or kicking a player, to add a true community feeling to your server! Also includes admin functionalities to enforce some rules.  
+> **BIG THANKS to: Elmo, Alt4, Coopyy, Spoon, Dullahan, Tsk22, wolf109909, Pandora and all the other people that helped me through this nightmare of a project! <3**
 
-BIG THANKS to: Coopyy, Spoon, Dullahan, Tsk22, wolf109909, Pandora and all the other people that helped me through this nightmare of a project! <3
+**Consider supporting this project on [ko-fi](https://ko-fi.com/takyon_scure)**
+
+---
+
+# Contributing
+The main branch is only updated with minor changes between releases! The newest features are always in a seperate branch and will be merged with main on release. Versioned branches might have bugs or other issues till release. Once released they should be fully functional and will be merged with main.
+
+## How to contribute
+[Here](https://github.com/ScureX/Takyon.PlayerVote/projects/1) you can see planned features/bugs and their current status. 
+
+> ### Contribute Code
+> The main branch will always work so it's safe to implement stuff on top of it, it will be merged with a versioned branch and then released. You could also build features on versioned branches, however this might result in more merge conflicts.
+
+> ### Contribute Ideas
+> You can open a [Discussion](https://github.com/ScureX/Takyon.PlayerVote/discussions/categories/ideas) and share your thoughts on certain features, suggest improvements or new features. You can also DM me on Discord: ```Takyon Scure#6969```
 
 ---
 
