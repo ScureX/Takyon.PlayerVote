@@ -79,7 +79,7 @@ void function Main(){
             wait 10
             // check if halftime or whatever
             float endTime = expect float(GetServerVar("gameEndTime"))
-            if(Time() / endTime >= mapTimeFrac && !mapsHaveBeenProposed){
+            if(Time() / endTime >= mapTimeFrac && Time() > 5.0 && !mapsHaveBeenProposed){
                 FillProposedMaps()
             }
         }
