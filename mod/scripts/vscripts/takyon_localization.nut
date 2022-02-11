@@ -33,7 +33,7 @@ global const string PLAYER_IS_NULL = "There was an error. The player might've le
 global const string MESSAGE_SENT_TO_PLAYER = "Message sent to " // remember the space at the end
 
 // help
-global const string HELP_MESSAGE = "Open your console and type !help"
+global const string HELP_MESSAGE = "Welcome to Karma Kraber9k! Open your console and type !help"
 
 // vote extend
 global const string ADMIN_EXTENDED = "Admin extended map time"
