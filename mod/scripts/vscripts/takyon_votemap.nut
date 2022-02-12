@@ -51,6 +51,7 @@ void function VoteMapInit(){
     AddClientCommandCallback("!VOTE", CommandVote)
     AddClientCommandCallback("!Vote", CommandVote)
 
+    AddCallback_GameStateEnter( eGameState.Playing, MainInit )
     AddCallback_GameStateEnter(eGameState.Postmatch, Postmatch) // change map before the server changes it lololol
     AddCallback_OnPlayerRespawned(OnPlayerSpawned) // to send vote message to players who join after vote has started 
     AddCallback_OnClientDisconnected(OnPlayerDisconnected)
@@ -66,20 +67,30 @@ void function VoteMapInit(){
         maps.append(strip(map))
 
     // loop to get time when map vote should be displayed
-    thread Main()
+    //thread Main()
 }
 
 /*
  *  COMMAND LOGIC
  */
 
+void function MainInit(){
+    printl("init main thread")
+    thread Main()
+}
+
 void function Main(){
+    wait 2
     if(!IsLobby()){
         while(voteMapEnabled && !mapsHaveBeenProposed){
             wait 10
             // check if halftime or whatever
             float endTime = expect float(GetServerVar("gameEndTime"))
-            if(Time() / endTime >= mapTimeFrac && !mapsHaveBeenProposed){
+            if(Time() / endTime >= mapTimeFrac && Time() > 5.0 && !mapsHaveBeenProposed){
+                // DEBUG CHANGE TODO REMOVE
+                printl("\n\nmap")
+                printl("Time: " + Time())
+                printl("endTIme: " + endTime + "\n\n")
                 FillProposedMaps()
             }
         }
@@ -220,6 +231,11 @@ void function ShowProposedMaps(entity player){
 
 void function FillProposedMaps(){
     printl("Proposing maps")
+    if(howManyMapsToPropose >= maps.len()){
+        printl("\n\n[PLAYERVOTE][ERROR] pv_map_map_propose_amount is not lower than pv_maps! Set it to a lower number than the amount of maps in your map pool!\n\n")
+        howManyMapsToPropose = maps.len()-1
+    }
+
     string currMap = GetMapName()
     for(int i = 0; i < howManyMapsToPropose; i++){
         while(true){
