@@ -65,9 +65,6 @@ void function VoteMapInit(){
     array<string> dirtyMaps = split( cvar, "," )
     foreach ( string map in dirtyMaps )
         maps.append(strip(map))
-
-    // loop to get time when map vote should be displayed
-    //thread Main()
 }
 
 /*
@@ -75,7 +72,7 @@ void function VoteMapInit(){
  */
 
 void function MainInit(){
-    printl("init main thread")
+    printl("initializing main thread")
     thread Main()
 }
 
@@ -87,10 +84,6 @@ void function Main(){
             // check if halftime or whatever
             float endTime = expect float(GetServerVar("gameEndTime"))
             if(Time() / endTime >= mapTimeFrac && Time() > 5.0 && !mapsHaveBeenProposed){
-                // DEBUG CHANGE TODO REMOVE
-                printl("\n\nmap")
-                printl("Time: " + Time())
-                printl("endTIme: " + endTime + "\n\n")
                 FillProposedMaps()
             }
         }
