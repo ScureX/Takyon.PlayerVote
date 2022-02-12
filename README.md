@@ -23,7 +23,9 @@ The main branch is only updated with minor changes between releases! The newest 
 
 # Commands
 ## !help
-Shows the player who requested it a hint, telling them to type !skip in their console if they want to skip this map
+### Usage: [!help]  [!help command]
+Shows the player who requested it all available commands.  
+If they added a command after the usage of said command will be displayed.
 
 ## !skip | !rtv
 ### Usage: [!skip]  [!skip force] | [!rtv]  [!rtv force]
