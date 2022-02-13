@@ -20,7 +20,7 @@ void function BalanceInit(){
     balanceVotePercentage = GetConVarFloat( "pv_balance_percentage" )
 
     if(GetConVarBool("pv_balance_at_map_end")) {  // add callback if convar set for shuffle at end of map
-      AddCallback_GameStateEnter(eGameState.Postmatch, CheckIfEnoughBalanceVotes(true))
+      AddCallback_GameStateEnter(eGameState.Postmatch, BalanceMapEnd)
     }
 }
 
@@ -91,6 +91,13 @@ void function CheckIfEnoughBalanceVotes(bool force = false){
         }
         playerBalanceVoteNames.clear()
     }
+}
+
+/* Helper function to force a team balance
+    Intended for use upon eGameState.Postmatch
+*/
+void function BalanceMapEnd() {
+  CheckIfEnoughBalanceVotes(true)
 }
 
 void function Balance(array<entity> _players){
