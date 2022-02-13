@@ -141,7 +141,7 @@ void function OnPlayerSpawned(entity player){
     else if(shouldDisplayHelp && (!mapsHaveBeenProposed || (enoughTimeAfterMapProposal && spawnAmount > 0))){
         SendHudMessageBuilder(player, HELP_MESSAGE, 200, 200, 255) // Message that gets displayed on respawn
     }
-    spawnedPlayers.append(player.GetPlayerName()) 
+    spawnedPlayers.append(player.GetPlayerName())
 }
 
 void function OnPlayerDisconnected(entity player){

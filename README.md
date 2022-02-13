@@ -11,7 +11,7 @@ Enables players to vote on different things like skipping a map or kicking a pla
 The main branch is only updated with minor changes between releases! The newest features are always in a seperate branch and will be merged with main on release. Versioned branches might have bugs or other issues till release. Once released they should be fully functional and will be merged with main.
 
 ## How to contribute
-[Here](https://github.com/ScureX/Takyon.PlayerVote/projects/1) you can see planned features/bugs and their current status. 
+[Here](https://github.com/ScureX/Takyon.PlayerVote/projects/1) you can see planned features/bugs and their current status.
 
 > ### Contribute Code
 > The main branch will always work so it's safe to implement stuff on top of it, it will be merged with a versioned branch and then released. You could also build features on versioned branches, however this might result in more merge conflicts.
@@ -75,7 +75,7 @@ Not the full name has to be given, just enough to identify a player.
 
 ## !announce
 ### Usage: [!announce message]
-Lets an admin announce something. The message is displayed for everyone. 
+Lets an admin announce something. The message is displayed for everyone.
 
 ## !switch
 ### Usage: [!switch]  [!switch force player]
@@ -130,6 +130,7 @@ This mod can be configured using the following [ConVars](https://r2northstar.git
 | `pv_ping_average_time`            | For how many seconds the ping should be measured to get an average. Set to 0.0 for current ping.                                           | `2.0`                                                  | float              |
 | `pv_balance_enabled`              | Allows users to start a vote to balance the teams by k/d                                                                                   | `1`                                                    | 0-1                |
 | `pv_balance_percentage`           | How many people are neede to pass the vote in percent                                                                                      | `0.5`                                                  | float              |
+| `pv_balance_at_map_end`           | Shuffle teams by skill at end of map                                                                                                       | `0`                                                    | 0-1                |
 | `pv_vote_map_enabled`             | allows users to !vote for the next played map                                                                                              | `1`                                                    | 0-1                |
 | `pv_map_time_frac`                | When during the match the map vote is displayed. 0.5 would be halftime, 0.8 after 80% of the match is over                                 | `0.5`                                                  | float              |
 | `pv_map_map_propose_amount`       | how many maps to propose. KEEP THIS LOWER THAN THE AMOUNT OF MAPS YOU HAVE IN pv_maps!!! 5 maps in pv_maps -> set this to 4 maximum        | `6`                                                    | int                |

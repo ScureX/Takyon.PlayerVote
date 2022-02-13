@@ -112,6 +112,10 @@
 			"DefaultValue": "1" // 1: users can use !balance | 0: users cant use !balance
 		},
 		{
+			"Name": "pv_balance_at_map_end",
+			"DefaultValue": "0" // 1: shuffle teams by skill at end of map | 0: do not change teams at end of map
+		},
+		{
 			"Name": "pv_balance_percentage",
 			"DefaultValue": "0.5" // how many people are needed to pass the balance vote in percent
 		},
