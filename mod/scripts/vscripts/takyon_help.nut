@@ -21,7 +21,6 @@ string vote =       "[ !vote        -> !vote number                     ]"
 
 // dont forget to add new strings in cmdArr in InitCommands()
 void function InitCommands(){
-    // only show if the convar for the command is enabled
     cmdArr.append(commands)
     cmdArr.append(skip)
     cmdArr.append(extend)
