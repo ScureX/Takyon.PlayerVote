@@ -2,8 +2,7 @@ global function HelpInit
 
 bool helpEnabled = true
 int displayHintOnSpawnAmount = 0
-//bool useGeneratedHelp = true // will auto-generate text for the help command. set false if you want to input your own help text
-// above variable not referenced elsewhere
+bool useGeneratedHelp = true // will auto-generate text for the help command. set false if you want to input your own help text
 
 array<string> spawnedPlayers = []
 array<string> cmdArr = []
@@ -24,16 +23,16 @@ string vote =       "[ !vote        -> !vote number                     ]"
 void function InitCommands(){
     // only show if the convar for the command is enabled
     cmdArr.append(commands)
-    if(GetConVarBool("pv_skip_enabled")) cmdArr.append(skip);
-    if(GetConVarBool("pv_extend_vote_enabled")) cmdArr.append(extend);
-    if(GetConVarBool("pv_kick_enabled")) cmdArr.append(kick);
-    if(GetConVarBool("pv_switch_enabled")) cmdArr.append(switchcmd);
-    if(GetConVarBool("pv_ping_enabled")) cmdArr.append(ping);
-    if(GetConVarBool("pv_balance_at_map_end")) cmdArr.append(balance);
-    if(GetConVarBool("pv_rules_enabled")) cmdArr.append(rules);
-    if(GetConVarBool("pv_message")) cmdArr.append(message);
-    if(GetConVarBool("pv_announce")) cmdArr.append(announce);
-    if(GetConVarBool("pv_vote_map_enabled")) cmdArr.append(vote);
+    cmdArr.append(skip)
+    cmdArr.append(extend)
+    cmdArr.append(kick)
+    cmdArr.append(switchcmd)
+    cmdArr.append(ping)
+    cmdArr.append(balance)
+    cmdArr.append(rules)
+    cmdArr.append(message)
+    cmdArr.append(announce)
+    cmdArr.append(vote)
 }
 
 void function HelpInit(){
