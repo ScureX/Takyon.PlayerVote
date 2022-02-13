@@ -20,7 +20,7 @@ void function BalanceInit(){
     balanceVotePercentage = GetConVarFloat( "pv_balance_percentage" )
 
     if(GetConVarBool("pv_balance_at_map_end")) {  // add callback if convar set for shuffle at end of map
-      AddCallback_GameStateEnter(eGameState.Postmatch, Balance)
+      AddCallback_GameStateEnter(eGameState.Postmatch, CheckIfEnoughBalanceVotes(true))
     }
 }
 
