@@ -1,5 +1,6 @@
 global function HelpInit
 
+string version = "v3.0.1"
 bool helpEnabled = true
 int displayHintOnSpawnAmount = 0
 bool useGeneratedHelp = true // will auto-generate text for the help command. set false if you want to input your own help text
@@ -42,6 +43,9 @@ void function HelpInit(){
     AddClientCommandCallback("!help", CommandHelp)
     AddClientCommandCallback("!HELP", CommandHelp)
     AddClientCommandCallback("!Help", CommandHelp)
+
+    // More or less only relevant for me to see what verison servers are on without contacting the owner
+    AddClientCommandCallback("!version", CommandVersion)
 
     // callbacks
     AddCallback_OnPlayerRespawned(OnPlayerSpawned)
@@ -106,6 +110,13 @@ bool function CommandHelp(entity player, array<string> args){
     }
     return true
 }
+bool function CommandVersion(entity player, array<string> args){
+    if(!IsLobby()){
+        SendHudMessageBuilder(player, version, 200, 200, 255)
+        return true
+    }
+    return false
+}
 
 /*
  *  HELP HINT MESSAGE LOGIC
@@ -130,7 +141,7 @@ void function OnPlayerSpawned(entity player){
     else if(shouldDisplayHelp && (!mapsHaveBeenProposed || (enoughTimeAfterMapProposal && spawnAmount > 0))){
         SendHudMessageBuilder(player, HELP_MESSAGE, 200, 200, 255) // Message that gets displayed on respawn
     }
-    spawnedPlayers.append(player.GetPlayerName()) 
+    spawnedPlayers.append(player.GetPlayerName())
 }
 
 void function OnPlayerDisconnected(entity player){
