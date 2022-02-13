@@ -21,9 +21,9 @@ void function UpdateAdminList()
 {
     string cvar = GetConVarString( "pv_admin_uids" )
 
-    adminUIDs = split( cvar, "," )
-    foreach ( string uid in adminUIDs )
-        StringReplace( uid, " ", "" )
+    array<string> dirtyUIDs = split( cvar, "," )
+    foreach ( string uid in dirtyUIDs )
+        adminUIDs.append(strip(uid))
 }
 
 bool function CanFindPlayerFromSubstring(string substring){

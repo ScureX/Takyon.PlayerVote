@@ -1,9 +1,9 @@
 {
 	"Name": "Takyon.PlayerVote",
-	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no] [!extend, !extend force] [!rules, !sendrules], [!announce], [!msg name message]",
+	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no] [!extend, !extend force] [!vote] [!rules, !sendrules], [!announce], [!msg name message] [!switch] [!balance, !balance force] [!ping]",
 	"LoadPriority": 0,
 	"RequiredOnClient": false,
-  	"Version": "3.0.0",
+  	"Version": "3.0.1",
 
 	"ConVars": [
 		{
@@ -110,6 +110,10 @@
 		{
 			"Name": "pv_balance_enabled",
 			"DefaultValue": "1" // 1: users can use !balance | 0: users cant use !balance
+		},
+		{
+			"Name": "pv_balance_at_map_end",
+			"DefaultValue": "0" // 1: shuffle teams by skill at end of map | 0: do not change teams at end of map
 		},
 		{
 			"Name": "pv_balance_percentage",

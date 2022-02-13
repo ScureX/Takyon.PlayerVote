@@ -1,9 +1,7 @@
 {
-    "name": "Takyon.PlayerVote",
-    "version_number": "3.0.0",
+    "name": "PlayerVote",
+    "version_number": "3.0.1",
     "website_url": "https://github.com/ScureX/Takyon.PlayerVote",
     "description": "Enables players to vote on different things like skipping a map or kicking a player, to add a true community feeling to your server! Also includes admin functionalities to enforce some rules.",
-    "dependencies": [
-        "Takyon-PlayerVote-3.0.0"
-    ]
+    "dependencies": []
 }

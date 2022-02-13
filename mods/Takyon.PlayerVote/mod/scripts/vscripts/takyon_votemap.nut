@@ -176,6 +176,8 @@ void function OnPlayerDisconnected(entity player){
  */
 
 void function Postmatch(){
+    if(!mapsHaveBeenProposed)
+        FillProposedMaps()
     thread ChangeMapBeforeServer()
 }
 
