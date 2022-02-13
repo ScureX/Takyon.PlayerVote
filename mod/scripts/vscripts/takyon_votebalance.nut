@@ -93,9 +93,8 @@ void function CheckIfEnoughBalanceVotes(bool force = false){
     }
 }
 
-/* Helper function to force a team balance
-    Intended for use upon eGameState.Postmatch
-*/
+// Helper function to force a team balance
+// Intended for use upon eGameState.Postmatch
 void function BalanceMapEnd() {
   CheckIfEnoughBalanceVotes(true)
 }
