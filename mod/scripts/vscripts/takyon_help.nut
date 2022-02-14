@@ -44,12 +44,12 @@ bool function CommandHelp(entity player, array<string> args){
         if(args.len() > 0){
             for(int i = 0; i < commandArr.len(); i++){
                 if(commandArr[i].names.contains(args[0])){
-                    SendHudMessageBuilder(player, commandArr[i].usage, 200, 200, 255)
+                    SendHudMessageBuilder(player, commandArr[i].usage, 255, 255, 255)
                     return true
                 }
             }
         }
-        SendHudMessageBuilder(player, commands, 200, 200, 255)
+        SendHudMessageBuilder(player, commands, 255, 255, 255)
     }
     return true
 }
