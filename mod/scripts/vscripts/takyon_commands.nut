@@ -11,7 +11,7 @@ global array<Command> commandArr
 
 void function CommandsInit(){
     commandArr.append(new_CommandStruct(["skip", "rtv"], false, "", CommandSkip))
-    commandArr.append(new_CommandStruct(["extend", "elongate"], false, "", CommandExtend))
+    commandArr.append(new_CommandStruct(["extend", "elongate", "ext"], false, "", CommandExtend)) // elongate is for Sye <3
     commandArr.append(new_CommandStruct(["kick"], false, "", CommandKick))
     commandArr.append(new_CommandStruct(["yes"], true, "", CommandYes))
     commandArr.append(new_CommandStruct(["no"], true, "", CommandNo))

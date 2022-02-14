@@ -1,7 +1,7 @@
 global function HelpInit
 global function CommandHelp
 
-string version = "v3.0.1"
+string version = "v3.1.0"
 bool helpEnabled = true
 int displayHintOnSpawnAmount = 0
 bool useGeneratedHelp = true // will auto-generate text for the help command. set false if you want to input your own help text
@@ -69,6 +69,8 @@ bool function CommandHelp(entity player, array<string> args){
             return false
         }
 
+        printl("len: " + args[0])
+
         if(args.len() > 0){
             switch (args[0]) {
                 case "skip":
@@ -107,7 +109,6 @@ bool function CommandHelp(entity player, array<string> args){
                 return true
             }
         }
-        SendHudMessageBuilder(player, commands, 200, 200, 255)
     }
     return true
 }
