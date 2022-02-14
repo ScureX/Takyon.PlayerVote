@@ -149,7 +149,7 @@ This mod can be configured using the following [ConVars](https://r2northstar.git
 | `pv_vote_map_enabled`             | allows users to !vote for the next played map                                                                                              | `1`                                                    | 0-1                |
 | `pv_map_time_frac`                | When during the match the map vote is displayed. 0.5 would be halftime, 0.8 after 80% of the match is over                                 | `0.5`                                                  | float              |
 | `pv_map_map_propose_amount`       | how many maps to propose. KEEP THIS LOWER THAN THE AMOUNT OF MAPS YOU HAVE IN pv_maps!!! 5 maps in pv_maps -> set this to 4 maximum        | `6`                                                    | int                |
-| `pv_maps`                         | This is your map-pool. One of these maps will be chosen as the next map, allowing you to make a custom map rotation regardless of gamemode | `all maps ("mp_angel_city, mp_black_water_canal,...")` | string             |
+| `pv_maps`                         | This is your map-pool. One of these maps will be chosen as the next map, allowing you to make a custom map rotation regardless of gamemode | `all maps "mp_angel_city, mp_black_water_canal,..."` | string             |
 | `pv_welcome_enabled`              | Will send a welcome message when a player first joins the match                                                                            | `1`                                                    | 0-1                |
 
 # Adding rules
