@@ -1,4 +1,5 @@
 global function PingInit
+global function CommandPing
 
 bool pingEnabled = true
 float pingAverageTime = 3.0 // for how many seconds the ping should be measured to get an average. set 0.0 for current ping

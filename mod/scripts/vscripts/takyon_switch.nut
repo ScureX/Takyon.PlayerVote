@@ -1,4 +1,5 @@
 global function SwitchInit
+global function CommandSwitch
 
 bool switchEnabled = true // true: users can use !switch | false: users cant use !switch
 bool adminSwitchPlayerEnabled = true // true: admins can switch users | false: admins cant switch users

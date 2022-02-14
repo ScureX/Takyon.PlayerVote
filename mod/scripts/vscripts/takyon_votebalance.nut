@@ -1,4 +1,5 @@
 global function BalanceInit
+global function CommandBalance
 
 bool balanceEnabled = true
 float balanceVotePercentage = 0.5 // percentage of how many people on the server need to have voted

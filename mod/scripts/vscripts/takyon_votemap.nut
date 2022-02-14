@@ -1,5 +1,6 @@
 global function VoteMapInit
 global function FillProposedMaps 
+global function CommandVote
 
 array<string> playerMapVoteNames = [] // list of players who have voted, is used to see how many have voted
 bool voteMapEnabled = true
@@ -31,6 +32,7 @@ table<string, string> mapNameTable = {
     mp_drydock = "Drydock",
     mp_eden = "Eden",
     mp_forwardbase_kodai = "Forwardbase Kodai",
+    mp_glitch = "Glitch",
     mp_grave = "Boomtown",
     mp_homestead = "Homestead",
     mp_lf_deck = "Deck",

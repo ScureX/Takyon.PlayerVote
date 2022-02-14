@@ -1,9 +1,24 @@
 # PlayerVote
 
 Enables players to vote on different things like skipping a map or kicking a player, to add a true community feeling to your server! Also includes admin functionalities to enforce some rules.  
-> **BIG THANKS to: Elmo, Alt4, xiaO, Coopyy, Spoon, Dullahan, Tsk22, wolf109909, Pandora and all the other people that helped me through this nightmare of a project! <3**
 
-**Consider supporting this project on [ko-fi](https://ko-fi.com/takyon_scure)**
+### **Consider supporting this project on [ko-fi](https://ko-fi.com/takyon_scure)**
+
+> ### **Supporters <3**  
+> 🟥  Scythe Zilla  
+> 🟨  Coopyy  
+> 🟨  Faky  
+
+> **BIG THANKS to: Elmo, Alt4, xiaO, DinoRush, Coopyy, Spoon, Dullahan, Tsk22, wolf109909, Pandora and all the other people that helped me through this nightmare of a project! <3**
+
+---
+
+# Before Installing
+## Mod Conflicts
+There may be conflicts with other server mods which write messages to players as there can only be one message displayed! Namely Unholy Trinity, Karma's Admin Abuse and RCON. Basically every mod that sends a HUD-message. If there are conflicts either make one mod stop or disable it. If you need help hmu on Discord.
+
+## sv_cheats
+It is recommended to have ```sv_cheats``` set to ```0``` at all times, however if you plan to use my mod this is a must as players will be able to kick others and access admin commands!
 
 ---
 

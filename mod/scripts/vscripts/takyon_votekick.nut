@@ -1,4 +1,7 @@
 global function VoteKickInit
+global function CommandKick
+global function CommandYes
+global function CommandNo
 
 bool playerVoteKickEnabled = true // change this to false if you dont want users/admins to be able to vote kick
 float playerVotePercentage = 0.9 // percentage of how many people on the server need to have voted
