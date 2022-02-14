@@ -31,6 +31,7 @@ table<string, string> mapNameTable = {
     mp_drydock = "Drydock",
     mp_eden = "Eden",
     mp_forwardbase_kodai = "Forwardbase Kodai",
+    mp_glitch = "Glitch",
     mp_grave = "Boomtown",
     mp_homestead = "Homestead",
     mp_lf_deck = "Deck",
