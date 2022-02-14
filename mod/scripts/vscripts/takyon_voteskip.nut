@@ -77,15 +77,15 @@ void function CheckIfEnoughSkipVotes(bool force = false){
     // check if enough have voted
     if(playerSkipVoteNames.len() >= (1.0 * GetPlayerArray().len() * skipVotePercentage) || force){
         if(mapsHaveBeenProposed){
-            OGSetGameEndTime(Time() + 1.0)}
+            PVSetGameEndTime(Time() + 1.0)}
         else{
-            OGSetGameEndTime(Time() + 30.0) 
+            PVSetGameEndTime(Time() + 30.0) 
             FillProposedMaps()
         }
     }
 }
 
-void function OGSetGameEndTime(float seconds){
+void function PVSetGameEndTime(float seconds){
     SetServerVar("gameEndTime", seconds) // end this game 
     playerSkipVoteNames.clear()
 } 
