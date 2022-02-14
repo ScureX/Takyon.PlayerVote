@@ -1,4 +1,5 @@
 global function MessageInit
+global function CommandMsg
 
 bool messageEnabled = true // true: users can use !rules | false: users cant use !rules
 

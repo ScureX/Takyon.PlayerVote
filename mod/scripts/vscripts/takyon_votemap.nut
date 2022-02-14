@@ -1,5 +1,6 @@
 global function VoteMapInit
 global function FillProposedMaps 
+global function CommandVote
 
 array<string> playerMapVoteNames = [] // list of players who have voted, is used to see how many have voted
 bool voteMapEnabled = true

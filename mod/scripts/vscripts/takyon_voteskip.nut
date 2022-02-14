@@ -1,4 +1,6 @@
 global function VoteSkipInit
+global function CommandSkip
+global function CommandSkipCall
 
 array<string> playerSkipVoteNames = [] // list of players who have voted, is used to see how many have voted 
 float skipVotePercentage = 0.8 // percentage of how many people on the server need to have voted
@@ -21,6 +23,10 @@ void function VoteSkipInit(){
 /*
  *  COMMAND LOGIC
  */
+
+bool function CommandSkipCall(entity player = null, array<string> args = []){
+    return true
+}
 
 bool function CommandSkip(entity player, array<string> args){
     if(!IsLobby()){

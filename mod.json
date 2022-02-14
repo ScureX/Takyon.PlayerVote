@@ -3,7 +3,7 @@
 	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no] [!extend, !extend force] [!vote] [!rules, !sendrules], [!announce], [!msg name message] [!switch] [!balance, !balance force] [!ping]",
 	"LoadPriority": 0,
 	"RequiredOnClient": false,
-  	"Version": "3.0.1-hot",
+  	"Version": "3.1.0",
 
 	"ConVars": [
 		{
@@ -147,6 +147,13 @@
 		{
 			"Path": "takyon_localization.nut",
 			"RunOn": "SERVER && MP"
+		},
+		{
+			"Path": "takyon_commands.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "CommandsInit"
+			}
 		},
 		{
 			"Path": "takyon_playervote.nut",

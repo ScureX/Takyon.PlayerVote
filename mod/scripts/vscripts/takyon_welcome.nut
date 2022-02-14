@@ -7,7 +7,7 @@ global array<string> welcomeSpawnedPlayers = []
 // ADD YOUR FUCKING SERVER NAME IN mod.json I BEG YOU
 string serverName = ""
 
-// change this lol // TODO maybe make convar
+// TODO maybe make convar
 string welcomeMsg = ""
 
 void function WelcomeInit(){

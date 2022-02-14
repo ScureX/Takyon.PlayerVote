@@ -1,4 +1,5 @@
 global function HelpInit
+global function CommandHelp
 
 string version = "v3.0.1"
 bool helpEnabled = true
