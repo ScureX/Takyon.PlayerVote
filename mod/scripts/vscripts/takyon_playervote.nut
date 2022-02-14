@@ -6,6 +6,7 @@ global function PlayerHasVoted
 global function IsPlayerAdmin
 global function GetPlayerFromName
 global function rndint
+global function GetCommandIndex
 
 global array<string> adminUIDs = []
 
@@ -113,4 +114,12 @@ int function rndint(int max) {
     // Generate a pseudo-random integer between 0 and max
     float roll = 1.0 * max * rand() / RAND_MAX;
     return roll.tointeger();
+}
+
+int function GetCommandIndex(string name){
+    for(int i = 0; i < commandArr.len(); i++){
+        if(commandArr[i].names.contains(name))
+            return i
+    }
+    return -1
 }
