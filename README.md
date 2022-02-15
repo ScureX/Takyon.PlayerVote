@@ -14,6 +14,11 @@ Enables players to vote on different things like skipping a map or kicking a pla
 ---
 
 # Before Installing
+## Version 3.1.0 and higher
+To enable commands being sent to chat you need to add ```-enablechathooks``` to your startup args!  
+Server: ```\Titanfall2\ns_startup_args_dedi.txt```  
+Client(Private Match): ```\Titanfall2\ns_startup_args.txt```  
+
 ## Mod Conflicts
 There may be conflicts with other server mods which write messages to players as there can only be one message displayed! Namely Unholy Trinity, Karma's Admin Abuse and RCON. Basically every mod that sends a HUD-message. If there are conflicts either make one mod stop or disable it. If you need help hmu on Discord.
 
