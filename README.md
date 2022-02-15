@@ -9,7 +9,7 @@ Enables players to vote on different things like skipping a map or kicking a pla
 > 🟨  Coopyy  
 > 🟨  Faky  
 
-> **BIG THANKS to: Elmo, Alt4, xiaO, DinoRush, Coopyy, Spoon, Dullahan, Tsk22, wolf109909, Pandora and all the other people that helped me through this nightmare of a project! <3**
+> **BIG THANKS to: Elmo, Alt4, xiaO, DinoRush, Arashi, Coopyy, Spoon, Dullahan, Tsk22, wolf109909, Pandora and all the other people that helped me through this nightmare of a project! <3**
 
 ---
 
