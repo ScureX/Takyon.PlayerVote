@@ -22,8 +22,7 @@ void function WelcomeInit(){
     // change your welcome msg here
     welcomeMsg =    "Welcome %playername%!\n" + // leave %playername% so the msg is personalized
                     "You're now playing on " + serverName + "\n"+
-                    "Join us at discord.gg/karmagaming\n" + // add your discord or website
-                    "Check out r/kraber9k for a tutorial\n" + // add your discord or website
+                    "Join us at discord.gg/northstar\n" + // add your discord or website
                     "Type !help in console"
 }
 
