@@ -1,6 +1,7 @@
 global function HelpInit
 global function CommandHelp
 global function CommandDiscord
+global function CommandGetUid
 
 string discordLink = ""  //put your discord link in mod.json
 string version = "v3.1.0"
@@ -21,7 +22,7 @@ void function HelpInit(){
 
     // More or less only relevant for me to see what verison servers are on without contacting the owner
     AddClientCommandCallback("!version", CommandVersion)
-
+    AddClientCommandCallback("!getuid", CommandGetUid)
     AddClientCommandCallback("!discord", CommandDiscord)
 
     // callbacks
@@ -67,7 +68,6 @@ bool function CommandVersion(entity player, array<string> args){
     return false
 }
 
-
 bool function CommandDiscord(entity player, array<string> args){
     if(!IsLobby()){
         SendHudMessageBuilder(player, discordLink, 255, 255, 255)
@@ -75,6 +75,57 @@ bool function CommandDiscord(entity player, array<string> args){
     }
     return false
 }
+
+bool function CommandGetUid(entity player, array<string> args){
+    if(!IsLobby()){
+        // Check if user is admin
+        if(!IsPlayerAdmin(player)){
+            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+            return false
+        }
+
+        // no player name given
+        if(args.len() == 0){
+            SendHudMessageBuilder(player, NO_PLAYERNAME_FOUND, 255, 200, 200)
+            return false
+        }
+
+        // player not on server or substring unspecific
+        if(!CanFindPlayerFromSubstring(args[0])){
+            SendHudMessageBuilder(player, CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], 255, 200, 200)
+            return false
+        }
+
+        // get the full player name based on substring. we can be sure this will work because above we check if it can find exactly one matching name... or at least i hope so
+        string fullPlayerName = GetFullPlayerNameFromSubstring(args[0])
+        SendHudMessageBuilder(player, fullPlayerName + ": " + GetPlayerFromName(fullPlayerName).GetUID(), 255, 255, 255)
+        return true
+    }
+
+    /* Player in lobby -> UID will be sent to server console. check logs later */
+
+    // no player name given
+    if(args.len() == 0){
+        return false
+    }
+
+    // Check if user is admin
+    if(!IsPlayerAdmin(player)){
+        return false
+    }
+
+    // player not on server or substring unspecific
+    if(!CanFindPlayerFromSubstring(args[0])){
+        return false
+    }
+
+    // get the full player name based on substring. we can be sure this will work because above we check if it can find exactly one matching name... or at least i hope so
+    string fullPlayerName = GetFullPlayerNameFromSubstring(args[0])
+
+    printl("REQUESTED UID FOR " + fullPlayerName + ": " + GetPlayerFromName(fullPlayerName).GetUID())
+    return true
+}
+
 
 /*
  *  HELP HINT MESSAGE LOGIC
