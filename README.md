@@ -27,6 +27,26 @@ It is recommended to have ```sv_cheats``` set to ```0``` at all times, however i
 
 ---
 
+# Setup
+## Installing
+### Github
+- Download the .zip on Github (under latest release)
+- Extract the .zip to ```\Titanfall2\R2Northstar\mods\```
+
+### Thunderstore
+- Download the latest version
+- In the downloaded folder you'll find a ```mods``` folder and in that my mod. Drag my mod out of ```/mods/``` and into ```\Titanfall2\R2Northstar\mods\```
+
+## Configuration
+- Add a welcome message in ```takyon_welcome.nut``` or disable it in ```mod.json```
+- Add rules in ```takyon_rules.nut``` or disable them in ```mod.json```
+- Add your server name and discord in ```mod.json```
+- Set a custom map pool in ```mod.json``` under ```pv_maps``` 
+
+**Note: everything in ```mod.json``` can instead be set in ```\Titanfall2\R2Northstar\mods\Northstar.CustomServers\mod\cfg\autoexec_ns_server.cfg``` to allow for different configurations on different servers** 
+
+---
+
 # Contributing
 The main branch is only updated with minor changes between releases! The newest features are always in a seperate branch and will be merged with main on release. Versioned branches might have bugs or other issues till release. Once released they should be fully functional and will be merged with main.
 
