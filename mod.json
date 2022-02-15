@@ -137,9 +137,9 @@
 		},
 		{
 			"Name": "pv_maps",
-			//"DefaultValue": "mp_angel_city, mp_black_water_canal, mp_colony02, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_glitch, mp_grave, mp_homestead, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_rise, mp_thaw, mp_wargames"
+			"DefaultValue": "mp_angel_city, mp_black_water_canal, mp_colony02, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_glitch, mp_grave, mp_homestead, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_rise, mp_thaw, mp_wargames"
 			// below should be all maps, i wouldnt delete it :)
-			"DefaultValue": "mp_angel_city, mp_black_water_canal, mp_coliseum, mp_coliseum_column, mp_colony02, mp_complex3, mp_crashsite3, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_glitch, mp_grave, mp_homestead, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_rise, mp_thaw, mp_wargames"
+			//"DefaultValue": "mp_angel_city, mp_black_water_canal, mp_coliseum, mp_coliseum_column, mp_colony02, mp_complex3, mp_crashsite3, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_glitch, mp_grave, mp_homestead, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_rise, mp_thaw, mp_wargames"
 		},
 		{
 			"Name": "pv_welcome_enabled",
