@@ -24,7 +24,7 @@ void function WelcomeInit(){
                     "You're now playing on " + serverName + "\n"+
                     "Join us at discord.gg/karmagaming\n" + // add your discord or website
                     "Check out r/kraber9k for a tutorial\n" + // add your discord or website
-                    "Type !help in console"
+                    "Type !help in chat"
 }
 
 /*

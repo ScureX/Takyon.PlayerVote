@@ -1,6 +1,8 @@
 global function HelpInit
 global function CommandHelp
+global function CommandDiscord
 
+string discordLink = ""  //put your discord link in mod.json
 string version = "v3.1.0"
 bool helpEnabled = true
 int displayHintOnSpawnAmount = 0
@@ -20,6 +22,8 @@ void function HelpInit(){
     // More or less only relevant for me to see what verison servers are on without contacting the owner
     AddClientCommandCallback("!version", CommandVersion)
 
+    AddClientCommandCallback("!discord", CommandDiscord)
+
     // callbacks
     AddCallback_OnPlayerRespawned(OnPlayerSpawned)
     AddCallback_OnClientDisconnected(OnPlayerDisconnected)
@@ -27,6 +31,7 @@ void function HelpInit(){
     // ConVar
     helpEnabled = GetConVarBool( "pv_help_enabled" )
     displayHintOnSpawnAmount = GetConVarInt( "pv_display_hint_on_spawn_amount" )
+    discordLink = GetConVarString( "pv_discord" )
 }
 
 /*
@@ -57,6 +62,15 @@ bool function CommandHelp(entity player, array<string> args){
 bool function CommandVersion(entity player, array<string> args){
     if(!IsLobby()){
         SendHudMessageBuilder(player, version, 255, 255, 255)
+        return true
+    }
+    return false
+}
+
+
+bool function CommandDiscord(entity player, array<string> args){
+    if(!IsLobby()){
+        SendHudMessageBuilder(player, discordLink, 255, 255, 255)
         return true
     }
     return false

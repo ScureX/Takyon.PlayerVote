@@ -17,6 +17,7 @@ void function CommandsInit(){
     commandArr.append(new_CommandStruct(["no"],                         true, "!no -> vote to not kick a player", CommandNo))
     commandArr.append(new_CommandStruct(["switch"],                     false, "!switch -> to switch teams", CommandSwitch))
     commandArr.append(new_CommandStruct(["help"],                       false, "", CommandHelp))
+    commandArr.append(new_CommandStruct(["discord"],                    false, "!discord -> to display the link to the discord server", CommandDiscord))
     commandArr.append(new_CommandStruct(["ping"],                       true, "!ping (name) -> get your or a player's ping", CommandPing))
     commandArr.append(new_CommandStruct(["balance"],                    false, "!balance -> vote to balance teams by kd", CommandBalance))
     commandArr.append(new_CommandStruct(["rules"],                      false, "!rules -> get the server's rules", CommandRules))
