@@ -2,6 +2,8 @@ global function HelpInit
 global function CommandHelp
 global function CommandDiscord
 global function CommandGetUid
+global function OnPlayerSpawnedHelp
+global function OnPlayerDisconnectedHelp
 
 string discordLink = ""  //put your discord link in mod.json
 string version = "v3.1.0"
@@ -24,10 +26,6 @@ void function HelpInit(){
     AddClientCommandCallback("!version", CommandVersion)
     AddClientCommandCallback("!getuid", CommandGetUid)
     AddClientCommandCallback("!discord", CommandDiscord)
-
-    // callbacks
-    AddCallback_OnPlayerRespawned(OnPlayerSpawned)
-    AddCallback_OnClientDisconnected(OnPlayerDisconnected)
 
     // ConVar
     helpEnabled = GetConVarBool( "pv_help_enabled" )
@@ -131,7 +129,7 @@ bool function CommandGetUid(entity player, array<string> args){
  *  HELP HINT MESSAGE LOGIC
  */
 
-void function OnPlayerSpawned(entity player){
+void function OnPlayerSpawnedHelp(entity player){
     // this prevents the message from being displayed every time someone spawns, which would be annoying. so we dont do that :)
     int spawnAmount = 0
     foreach (name in spawnedPlayers)  {
@@ -153,7 +151,7 @@ void function OnPlayerSpawned(entity player){
     spawnedPlayers.append(player.GetPlayerName())
 }
 
-void function OnPlayerDisconnected(entity player){
+void function OnPlayerDisconnectedHelp(entity player){
     // remove player from list so on reconnect they get the message again
     while(spawnedPlayers.find(player.GetPlayerName()) != -1){
         try{
