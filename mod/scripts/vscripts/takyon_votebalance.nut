@@ -1,6 +1,9 @@
 global function BalanceInit
+global function CommandBalance
+global function BalanceMapEnd
 
 bool balanceEnabled = true
+bool balanceAtMapEnd = false
 float balanceVotePercentage = 0.5 // percentage of how many people on the server need to have voted
 array<string> playerBalanceVoteNames = [] // list of players who have voted, is used to see how many have voted
 
@@ -18,10 +21,7 @@ void function BalanceInit(){
     // ConVar
     balanceEnabled = GetConVarBool( "pv_balance_enabled" )
     balanceVotePercentage = GetConVarFloat( "pv_balance_percentage" )
-
-    if(GetConVarBool("pv_balance_at_map_end")) {  // add callback if convar set for shuffle at end of map
-      AddCallback_GameStateEnter(eGameState.Postmatch, BalanceMapEnd)
-    }
+    balanceAtMapEnd = GetConVarBool("pv_balance_at_map_end") // add callback if convar set for shuffle at end of map
 }
 
 /*
@@ -96,7 +96,8 @@ void function CheckIfEnoughBalanceVotes(bool force = false){
 // Helper function to force a team balance
 // Intended for use upon eGameState.Postmatch
 void function BalanceMapEnd() {
-  CheckIfEnoughBalanceVotes(true)
+    if(balanceAtMapEnd)
+        CheckIfEnoughBalanceVotes(true)
 }
 
 void function Balance(array<entity> _players){

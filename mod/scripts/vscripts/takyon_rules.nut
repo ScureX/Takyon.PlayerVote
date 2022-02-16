@@ -1,4 +1,6 @@
 global function RulesInit
+global function CommandSendRules
+global function CommandRules
 
 bool rulesEnabled = true // true: users can use !rules | false: users cant use !rules
 bool adminSendRulesEnabled = true // true: admins can send users the rules | false: admins cant do that

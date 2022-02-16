@@ -1,4 +1,6 @@
 global function VoteSkipInit
+global function CommandSkip
+global function CommandSkipCall
 
 array<string> playerSkipVoteNames = [] // list of players who have voted, is used to see how many have voted 
 float skipVotePercentage = 0.8 // percentage of how many people on the server need to have voted
@@ -21,6 +23,10 @@ void function VoteSkipInit(){
 /*
  *  COMMAND LOGIC
  */
+
+bool function CommandSkipCall(entity player = null, array<string> args = []){
+    return true
+}
 
 bool function CommandSkip(entity player, array<string> args){
     if(!IsLobby()){
@@ -77,15 +83,15 @@ void function CheckIfEnoughSkipVotes(bool force = false){
     // check if enough have voted
     if(playerSkipVoteNames.len() >= (1.0 * GetPlayerArray().len() * skipVotePercentage) || force){
         if(mapsHaveBeenProposed){
-            SetGameEndTime(Time() + 1.0)}
+            PVSetGameEndTime(Time() + 1.0)}
         else{
-            SetGameEndTime(Time() + 30.0) 
+            PVSetGameEndTime(Time() + 30.0) 
             FillProposedMaps()
         }
     }
 }
 
-void function SetGameEndTime(float seconds){
+void function PVSetGameEndTime(float seconds){
     SetServerVar("gameEndTime", seconds) // end this game 
     playerSkipVoteNames.clear()
 } 

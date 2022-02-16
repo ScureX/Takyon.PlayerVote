@@ -3,7 +3,7 @@
 	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no] [!extend, !extend force] [!vote] [!rules, !sendrules], [!announce], [!msg name message] [!switch] [!balance, !balance force] [!ping]",
 	"LoadPriority": 0,
 	"RequiredOnClient": false,
-  	"Version": "3.0.1",
+  	"Version": "3.1.0",
 
 	"ConVars": [
 		{
@@ -14,6 +14,10 @@
 		{
 			"Name": "pv_servername",
 			"DefaultValue": "YOUR SERVER" // change this to your servername
+		},
+		{
+			"Name": "pv_discord",
+			"DefaultValue": "YOUR DISCORD" // change this to your discord server. leave empty to disable !discord 
 		},
 		{
 			"Name": "pv_display_hint_on_spawn_amount",
@@ -135,7 +139,7 @@
 			"Name": "pv_maps",
 			//"DefaultValue": "mp_angel_city,mp_colony02,mp_complex3"
 			// below should be all maps, i wouldnt delete it :)
-			"DefaultValue": "mp_angel_city, mp_black_water_canal, mp_coliseum, mp_coliseum_column, mp_colony02, mp_complex3, mp_crashsite3, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_grave, mp_homestead, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_rise, mp_thaw, mp_wargames"
+			"DefaultValue": "mp_angel_city, mp_black_water_canal, mp_coliseum, mp_coliseum_column, mp_colony02, mp_complex3, mp_crashsite3, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_glitch, mp_grave, mp_homestead, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_rise, mp_thaw, mp_wargames"
 		},
 		{
 			"Name": "pv_welcome_enabled",
@@ -147,6 +151,13 @@
 		{
 			"Path": "takyon_localization.nut",
 			"RunOn": "SERVER && MP"
+		},
+		{
+			"Path": "takyon_commands.nut",
+			"RunOn": "SERVER && MP",
+			"ServerCallback": {
+				"After": "CommandsInit"
+			}
 		},
 		{
 			"Path": "takyon_playervote.nut",

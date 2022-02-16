@@ -1,9 +1,50 @@
 # PlayerVote
 
 Enables players to vote on different things like skipping a map or kicking a player, to add a true community feeling to your server! Also includes admin functionalities to enforce some rules.  
-> **BIG THANKS to: Elmo, Alt4, xiaO, Coopyy, Spoon, Dullahan, Tsk22, wolf109909, Pandora and all the other people that helped me through this nightmare of a project! <3**
 
-**Consider supporting this project on [ko-fi](https://ko-fi.com/takyon_scure)**
+### **Consider supporting this project on [ko-fi](https://ko-fi.com/takyon_scure)**
+
+> ### **Supporters <3**  
+> 🟥  Scythe Zilla  
+> 🟨  Coopyy  
+> 🟨  Faky  
+
+> **BIG THANKS to: Elmo, Alt4, xiaO, DinoRush, Arashi, Coopyy, Spoon, Dullahan, Tsk22, wolf109909, Pandora and all the other people that helped me through this nightmare of a project! <3**
+
+---
+
+# Before Installing
+## Version 3.1.0 and higher
+To enable commands being sent to chat you need to add ```-enablechathooks``` to your startup args!  
+Server: ```\Titanfall2\ns_startup_args_dedi.txt```  
+Client(Private Match): ```\Titanfall2\ns_startup_args.txt```  
+
+## Mod Conflicts
+For **Flipside** set pv_maps to "mp_glitch", disable mapvote and skip!
+There may be conflicts with other server mods which write messages to players as there can only be one message displayed! Namely **Unholy Trinity**, **Karma's Admin Abuse** and **RCON**. Basically every mod that sends a HUD-message. If there are conflicts either make one mod stop or disable it. If you need help hmu on Discord.
+
+## sv_cheats
+It is recommended to have ```sv_cheats``` set to ```0``` at all times, however if you plan to use my mod this is a must as players will be able to kick others and access admin commands!
+
+---
+
+# Setup
+## Installing
+### Github
+- Download the .zip on Github (under latest release)
+- Extract the .zip to ```\Titanfall2\R2Northstar\mods\```
+
+### Thunderstore
+- Download the latest version
+- In the downloaded folder you'll find a ```mods``` folder and in that my mod. Drag my mod out of ```/mods/``` and into ```\Titanfall2\R2Northstar\mods\```
+
+## Configuration
+- Add a welcome message in ```takyon_welcome.nut``` or disable it in ```mod.json```
+- Add rules in ```takyon_rules.nut``` or disable them in ```mod.json```
+- Add your server name and discord in ```mod.json```
+- Set a custom map pool in ```mod.json``` under ```pv_maps``` 
+
+**Note: everything in ```mod.json``` can instead be set in ```\Titanfall2\R2Northstar\mods\Northstar.CustomServers\mod\cfg\autoexec_ns_server.cfg``` to allow for different configurations on different servers** 
 
 ---
 
@@ -134,7 +175,7 @@ This mod can be configured using the following [ConVars](https://r2northstar.git
 | `pv_vote_map_enabled`             | allows users to !vote for the next played map                                                                                              | `1`                                                    | 0-1                |
 | `pv_map_time_frac`                | When during the match the map vote is displayed. 0.5 would be halftime, 0.8 after 80% of the match is over                                 | `0.5`                                                  | float              |
 | `pv_map_map_propose_amount`       | how many maps to propose. KEEP THIS LOWER THAN THE AMOUNT OF MAPS YOU HAVE IN pv_maps!!! 5 maps in pv_maps -> set this to 4 maximum        | `6`                                                    | int                |
-| `pv_maps`                         | This is your map-pool. One of these maps will be chosen as the next map, allowing you to make a custom map rotation regardless of gamemode | `all maps ("mp_angel_city, mp_black_water_canal,...")` | string             |
+| `pv_maps`                         | This is your map-pool. One of these maps will be chosen as the next map, allowing you to make a custom map rotation regardless of gamemode | `all maps "mp_angel_city, mp_black_water_canal,..."` | string             |
 | `pv_welcome_enabled`              | Will send a welcome message when a player first joins the match                                                                            | `1`                                                    | 0-1                |
 
 # Adding rules

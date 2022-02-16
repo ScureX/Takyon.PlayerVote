@@ -1,4 +1,5 @@
 global function VoteExtendInit
+global function CommandExtend
 
 bool extendVoteEnabled = true
 float extendVotePercentage = 0.9 // percentage of how many people on the server need to have voted

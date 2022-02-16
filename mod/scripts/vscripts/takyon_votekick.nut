@@ -1,4 +1,8 @@
 global function VoteKickInit
+global function CommandKick
+global function CommandYes
+global function CommandNo
+global function OnPlayerConnectedKick
 
 bool playerVoteKickEnabled = true // change this to false if you dont want users/admins to be able to vote kick
 float playerVotePercentage = 0.9 // percentage of how many people on the server need to have voted
@@ -15,8 +19,6 @@ void function VoteKickInit(){
     AddClientCommandCallback("!kick", CommandKick) // !kick playername force will kick a player if youre admin | normal kick: !kick playername
     AddClientCommandCallback("!yes", CommandYes)
     AddClientCommandCallback("!no", CommandNo)
-
-    AddCallback_OnClientConnected(OnPlayerConnected)
 
     // ConVars
     playerVoteKickEnabled = GetConVarBool( "pv_kick_enabled" )
@@ -70,6 +72,7 @@ bool function CommandKick(entity player, array<string> args){
             
             ServerCommand("kick " + fullPlayerName) 
             playerKickVoteYesNames.clear()
+            kickedPlayers.append(fullPlayerName)
             SendHudMessageBuilder(player, KICKED_PLAYER + fullPlayerName, 255, 200, 200)
             return true
         }
@@ -161,7 +164,7 @@ void function CheckIfEnoughKickVotes(){
     }
 }
 
-void function OnPlayerConnected(entity player){
+void function OnPlayerConnectedKick(entity player){
     // check if connected player got kicked this game 
     if(saveKickedPlayers)
         if(kickedPlayers.find(player.GetPlayerName()) != -1) // if player is in kickedPlayers

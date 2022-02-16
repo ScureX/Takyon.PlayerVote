@@ -1,5 +1,10 @@
 global function VoteMapInit
 global function FillProposedMaps 
+global function CommandVote
+global function OnPlayerSpawnedMap
+global function OnPlayerDisconnectedMap
+global function PlayingMap
+global function PostmatchMap
 
 array<string> playerMapVoteNames = [] // list of players who have voted, is used to see how many have voted
 bool voteMapEnabled = true
@@ -31,6 +36,7 @@ table<string, string> mapNameTable = {
     mp_drydock = "Drydock",
     mp_eden = "Eden",
     mp_forwardbase_kodai = "Forwardbase Kodai",
+    mp_glitch = "Glitch",
     mp_grave = "Boomtown",
     mp_homestead = "Homestead",
     mp_lf_deck = "Deck",
@@ -51,11 +57,6 @@ void function VoteMapInit(){
     AddClientCommandCallback("!VOTE", CommandVote)
     AddClientCommandCallback("!Vote", CommandVote)
 
-    AddCallback_GameStateEnter( eGameState.Playing, MainInit )
-    AddCallback_GameStateEnter(eGameState.Postmatch, Postmatch) // change map before the server changes it lololol
-    AddCallback_OnPlayerRespawned(OnPlayerSpawned) // to send vote message to players who join after vote has started 
-    AddCallback_OnClientDisconnected(OnPlayerDisconnected)
-
     // ConVar
     voteMapEnabled = GetConVarBool( "pv_vote_map_enabled" )
     string cvar = GetConVarString( "pv_maps" )
@@ -71,12 +72,7 @@ void function VoteMapInit(){
  *  COMMAND LOGIC
  */
 
-void function MainInit(){
-    printl("initializing main thread")
-    thread Main()
-}
-
-void function Main(){
+void function PlayingMap(){
     wait 2
     if(!IsLobby()){
         while(voteMapEnabled && !mapsHaveBeenProposed){
@@ -155,14 +151,14 @@ bool function CommandVote(entity player, array<string> args){
     return true
 }
 
-void function OnPlayerSpawned(entity player){ // show the player that just joined the map vote
+void function OnPlayerSpawnedMap(entity player){ // show the player that just joined the map vote
     if(spawnedPlayers.find(player.GetPlayerName()) == -1 && mapsHaveBeenProposed){
         ShowProposedMaps(player)
         spawnedPlayers.append(player.GetPlayerName())
     }
 }
 
-void function OnPlayerDisconnected(entity player){
+void function OnPlayerDisconnectedMap(entity player){
     // remove player from list so on reconnect they get the message again
     while(spawnedPlayers.find(player.GetPlayerName()) != -1){
         try{
@@ -175,7 +171,7 @@ void function OnPlayerDisconnected(entity player){
  *  POST MATCH LOGIC
  */
 
-void function Postmatch(){
+void function PostmatchMap(){ // change map before the server changes it lololol
     if(!mapsHaveBeenProposed)
         FillProposedMaps()
     thread ChangeMapBeforeServer()

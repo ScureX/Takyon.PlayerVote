@@ -1,4 +1,5 @@
 global function AnnounceInit
+global function CommandAnnounce
 
 bool announceEnabled = false // true: users can use !rules | false: users cant use !rules //CHANGE
 
