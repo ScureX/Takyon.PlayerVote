@@ -3,7 +3,7 @@ global function FillProposedMaps
 global function CommandVote
 global function OnPlayerSpawnedMap
 global function OnPlayerDisconnectedMap
-global function MainMap
+global function PlayingMap
 global function PostmatchMap
 
 array<string> playerMapVoteNames = [] // list of players who have voted, is used to see how many have voted
@@ -72,12 +72,7 @@ void function VoteMapInit(){
  *  COMMAND LOGIC
  */
 
-void function MainInit(){
-    printl("initializing main thread")
-    thread Main()
-}
-
-void function MainMap(){
+void function PlayingMap(){
     wait 2
     if(!IsLobby()){
         while(voteMapEnabled && !mapsHaveBeenProposed){

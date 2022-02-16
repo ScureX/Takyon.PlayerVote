@@ -59,7 +59,7 @@ bool function CommandKick(entity player, array<string> args){
         // players cannot kick themselves 
         if(fullPlayerName == player.GetPlayerName()){
             SendHudMessageBuilder(player, CANT_KICK_YOURSELF, 255, 200, 200)
-            return false
+            //return false
         }
 
         // admin kick
@@ -72,6 +72,7 @@ bool function CommandKick(entity player, array<string> args){
             
             ServerCommand("kick " + fullPlayerName) 
             playerKickVoteYesNames.clear()
+            kickedPlayers.append(fullPlayerName)
             SendHudMessageBuilder(player, KICKED_PLAYER + fullPlayerName, 255, 200, 200)
             return true
         }

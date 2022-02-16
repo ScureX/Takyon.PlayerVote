@@ -58,7 +58,7 @@ ClServer_MessageStruct function ChatCallback(ClServer_MessageStruct message) {
  */
 
 void function OnPlayerSpawned(entity player){
-    printl(" [PV] Triggered OnPlayerSpawned")
+    printl("[PV] Triggered OnPlayerSpawned")
     OnPlayerSpawnedHelp(player)
     OnPlayerConnectedKick(player)
     OnPlayerSpawnedWelcome(player)
@@ -66,19 +66,19 @@ void function OnPlayerSpawned(entity player){
 }
 
 void function OnPlayerDisconnected(entity player){
-    printl(" [PV] Triggered OnPlayerDisconnected")
+    printl("[PV] Triggered OnPlayerDisconnected")
     OnPlayerDisconnectedHelp(player)
     OnPlayerDisconnectedWelcome(player)
     OnPlayerDisconnectedMap(player)
 }
 
 void function Playing(){
-    printl(" [PV] Triggered Playing")
+    printl("[PV] Triggered Playing")
     thread PlayingMap()
 }
 
 void function Postmatch(){
-    printl(" [PV] Triggered Postmatch")
+    printl("[PV] Triggered Postmatch")
     PostmatchMap()
     BalanceMapEnd()
 }

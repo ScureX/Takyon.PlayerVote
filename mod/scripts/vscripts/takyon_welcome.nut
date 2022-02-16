@@ -1,5 +1,7 @@
 global function WelcomeInit
 global function ShowWelcomeMessage
+global function OnPlayerSpawnedWelcome
+global function OnPlayerDisconnectedWelcome
 
 global bool welcomeEnabled = true
 global array<string> welcomeSpawnedPlayers = []
