@@ -14,6 +14,12 @@ void function PlayerVoteInit(){
     // chat callback
     AddCallback_OnReceivedSayTextMessage(ChatCallback)
 
+    AddCallback_GameStateEnter(eGameState.Playing, Playing)
+    AddCallback_GameStateEnter(eGameState.Postmatch, Postmatch)
+
+    AddCallback_OnPlayerRespawned(OnPlayerSpawned)
+    AddCallback_OnClientDisconnected(OnPlayerDisconnected)
+
     UpdateAdminList()
 }
 
@@ -45,6 +51,36 @@ ClServer_MessageStruct function ChatCallback(ClServer_MessageStruct message) {
         }
     }
     return message
+}
+
+/*
+ *  HELPER FUNCTIONS
+ */
+
+void function OnPlayerSpawned(entity player){
+    printl("[PV] Triggered OnPlayerSpawned")
+    OnPlayerSpawnedHelp(player)
+    OnPlayerConnectedKick(player)
+    OnPlayerSpawnedWelcome(player)
+    OnPlayerSpawnedMap(player)
+}
+
+void function OnPlayerDisconnected(entity player){
+    printl("[PV] Triggered OnPlayerDisconnected")
+    OnPlayerDisconnectedHelp(player)
+    OnPlayerDisconnectedWelcome(player)
+    OnPlayerDisconnectedMap(player)
+}
+
+void function Playing(){
+    printl("[PV] Triggered Playing")
+    thread PlayingMap()
+}
+
+void function Postmatch(){
+    printl("[PV] Triggered Postmatch")
+    PostmatchMap()
+    BalanceMapEnd()
 }
 
 /*

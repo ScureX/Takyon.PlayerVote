@@ -1,5 +1,7 @@
 global function WelcomeInit
 global function ShowWelcomeMessage
+global function OnPlayerSpawnedWelcome
+global function OnPlayerDisconnectedWelcome
 
 global bool welcomeEnabled = true
 global array<string> welcomeSpawnedPlayers = []
@@ -11,10 +13,6 @@ string serverName = ""
 string welcomeMsg = ""
 
 void function WelcomeInit(){
-    // callbacks
-    AddCallback_OnPlayerRespawned(OnPlayerSpawned)
-    AddCallback_OnClientDisconnected(OnPlayerDisconnected)
-
     // ConVar
     welcomeEnabled = GetConVarBool( "pv_welcome_enabled" )
     serverName = GetConVarString( "pv_servername" )
@@ -31,14 +29,14 @@ void function WelcomeInit(){
  *  WELCOME MESSAGE LOGIC
  */
 
-void function OnPlayerSpawned(entity player){
+void function OnPlayerSpawnedWelcome(entity player){
     if(!mapsHaveBeenProposed && welcomeEnabled && welcomeSpawnedPlayers.find(player.GetPlayerName()) == -1){ // prioritizing the vote instead of showing help
         //ShowWelcomeMessage(player)
         welcomeSpawnedPlayers.append(player.GetPlayerName())
     }
 }
 
-void function OnPlayerDisconnected(entity player){
+void function OnPlayerDisconnectedWelcome(entity player){
     // remove player from list so on reconnect they get the message again
     while(welcomeSpawnedPlayers.find(player.GetPlayerName()) != -1){
         try{

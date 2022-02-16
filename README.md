@@ -20,7 +20,8 @@ Server: ```\Titanfall2\ns_startup_args_dedi.txt```
 Client(Private Match): ```\Titanfall2\ns_startup_args.txt```  
 
 ## Mod Conflicts
-There may be conflicts with other server mods which write messages to players as there can only be one message displayed! Namely Unholy Trinity, Karma's Admin Abuse and RCON. Basically every mod that sends a HUD-message. If there are conflicts either make one mod stop or disable it. If you need help hmu on Discord.
+For **Flipside** set pv_maps to "mp_glitch", disable mapvote and skip!
+There may be conflicts with other server mods which write messages to players as there can only be one message displayed! Namely **Unholy Trinity**, **Karma's Admin Abuse** and **RCON**. Basically every mod that sends a HUD-message. If there are conflicts either make one mod stop or disable it. If you need help hmu on Discord.
 
 ## sv_cheats
 It is recommended to have ```sv_cheats``` set to ```0``` at all times, however if you plan to use my mod this is a must as players will be able to kick others and access admin commands!
