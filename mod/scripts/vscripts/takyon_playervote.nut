@@ -30,13 +30,21 @@ void function PlayerVoteInit(){
 // x3Karma if you steal this istg i will break your legs
 ClServer_MessageStruct function ChatCallback(ClServer_MessageStruct message) {
     string msg = message.message.tolower()
-    // find first char -> gotta be ! to recognize command 
+    // find first char -> gotta be ! to recognize command
     if (format("%c", msg[0]) == "!") {
         printl("Chat Command Found")
         // command
         msg = msg.slice(1) // remove !
         array<string> msgArr = split(msg, " ") // split at space, [0] = command
-        string cmd = msgArr[0] // save command
+        string cmd
+
+        try{
+            cmd = msgArr[0] // save command
+        }
+        catch(e){
+            return message
+        }
+
         msgArr.remove(0) // remove command from args
 
         entity player = message.player
