@@ -10,7 +10,7 @@ global array<string> welcomeSpawnedPlayers = []
 string serverName = ""
 
 //Add your discord server link or website in mod.json
-string discordLink = ""
+string discordLink = "discord.gg/northstar"
 
 // TODO maybe make convar
 string welcomeMsg = ""
@@ -19,8 +19,10 @@ void function WelcomeInit(){
     // ConVar
     welcomeEnabled = GetConVarBool( "pv_welcome_enabled" )
     serverName = GetConVarString( "pv_servername" )
-    discordLink = GetConVarString("pv_discord")
 
+    if(GetConVarString( "pv_discord" ) != ""){
+        discordLink = GetConVarString("pv_discord")
+    }
     // change your welcome msg here
     welcomeMsg =    "Welcome %playername%!\n" + // leave %playername% so the msg is personalized
                     "You're now playing on " + serverName + "\n"+
