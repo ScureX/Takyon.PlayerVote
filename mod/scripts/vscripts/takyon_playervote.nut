@@ -36,7 +36,15 @@ ClServer_MessageStruct function ChatCallback(ClServer_MessageStruct message) {
         // command
         msg = msg.slice(1) // remove !
         array<string> msgArr = split(msg, " ") // split at space, [0] = command
-        string cmd = msgArr[0] // save command
+        string cmd
+        
+        try{
+            cmd = msgArr[0] // save command
+        }
+        catch(e){
+            return message
+        }
+        
         msgArr.remove(0) // remove command from args
 
         entity player = message.player
