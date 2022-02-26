@@ -30,7 +30,7 @@ void function PlayerVoteInit(){
 // x3Karma if you steal this istg i will break your legs
 ClServer_MessageStruct function ChatCallback(ClServer_MessageStruct message) {
     string msg = message.message.tolower()
-    // find first char -> gotta be ! to recognize command 
+    // find first char -> gotta be ! to recognize command
     if (format("%c", msg[0]) == "!") {
         printl("Chat Command Found")
         // command
