@@ -44,7 +44,7 @@ ClServer_MessageStruct function ChatCallback(ClServer_MessageStruct message) {
         catch(e){
             return message
         }
-
+        
         msgArr.remove(0) // remove command from args
 
         entity player = message.player
