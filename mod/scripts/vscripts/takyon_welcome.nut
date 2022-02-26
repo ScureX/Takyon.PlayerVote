@@ -20,7 +20,7 @@ void function WelcomeInit(){
     welcomeEnabled = GetConVarBool( "pv_welcome_enabled" )
     serverName = GetConVarString( "pv_servername" )
 
-    if(GetConVarString( "pv_discord" ) != ""){
+    if(GetConVarString( "pv_discord" ) != "" && GetConVarString( "pv_discord" ) != "YOUR DISCORD"){
         discordLink = GetConVarString("pv_discord")
     }
     // change your welcome msg here
