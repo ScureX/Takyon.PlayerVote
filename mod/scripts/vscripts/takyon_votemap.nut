@@ -202,7 +202,7 @@ string function TryGetNormalizedMapName(string mapName){
 
 bool function IsMapNumValid(string x){
     int num = x.tointeger()
-    if(num == 0 || num > proposedMaps.len()){
+    if(num <= 0 || num > proposedMaps.len()){
         return false
     }
     return true

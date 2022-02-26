@@ -6,7 +6,7 @@ global function OnPlayerSpawnedHelp
 global function OnPlayerDisconnectedHelp
 
 string discordLink = ""  //put your discord link in mod.json
-string version = "v3.1.0"
+string version = "v3.1.1"
 bool helpEnabled = true
 int displayHintOnSpawnAmount = 0
 bool useGeneratedHelp = true // will auto-generate text for the help command. set false if you want to input your own help text
