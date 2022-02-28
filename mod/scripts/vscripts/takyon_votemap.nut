@@ -1,5 +1,5 @@
 global function VoteMapInit
-global function FillProposedMaps 
+global function FillProposedMaps
 global function CommandVote
 global function OnPlayerSpawnedMap
 global function OnPlayerDisconnectedMap
@@ -130,7 +130,7 @@ bool function CommandVote(entity player, array<string> args){
             for(int i = 0; i < GetPlayerArray().len(); i++){
                 SendHudMessageBuilder(GetPlayerArray()[i], ADMIN_VOTED_MAP, 255, 200, 200)
             }
-            SetNextMap(args[1].tointeger(), true)
+            SetNextMap(args[0].tointeger(), true)
             return true
         }
 
@@ -212,8 +212,10 @@ void function ShowProposedMaps(entity player){
     // create message
     string message = MAP_VOTE_USAGE + "\n"
     for (int i = 1; i <= proposedMaps.len(); i++) {
-        string map = TryGetNormalizedMapName(proposedMaps[i-1])
-        message += i + ": " + map + "\n" 
+        string mapName = proposedMaps[i-1]
+        string map = TryGetNormalizedMapName(mapName)
+        string voteCount = GetMapVoteCount(mapName).tostring()
+        message += i + ": " + map + " (" + voteCount + ")\n"
     }
 
     // message player
@@ -243,7 +245,7 @@ void function FillProposedMaps(){
     foreach(entity player in GetPlayerArray()){
         ShowProposedMaps(player)
     }
-    
+
     mapsProposalTimeLeft = Time()
     mapsHaveBeenProposed = true
 }
@@ -277,11 +279,24 @@ void function SetNextMap(int num, bool force = false){
 int function FindMvdInVoteData(string mapName){ // returns -1 if not found
     int index = -1
     foreach(MapVotesData mvd in voteData){
+        index++
         if(mvd.mapName == mapName)
             return index
-        index++
     }
-    return index
+    return -1
+}
+
+
+int function GetMapVoteCount(string mapName){
+    int index = FindMvdInVoteData(mapName)
+    if(index == -1)
+        return 0;
+    else {
+        MapVotesData temp = voteData[index]
+
+        return temp.votes
+    }
+    return -1;
 }
 
 int function MapVotesSort(MapVotesData data1, MapVotesData data2)
