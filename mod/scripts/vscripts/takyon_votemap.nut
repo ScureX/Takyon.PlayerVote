@@ -289,14 +289,13 @@ int function FindMvdInVoteData(string mapName){ // returns -1 if not found
 
 int function GetMapVoteCount(string mapName){
     int index = FindMvdInVoteData(mapName)
-    if(index == -1)
-        return 0;
-    else {
+    if(index != -1) {
         MapVotesData temp = voteData[index]
 
         return temp.votes
     }
-    return -1;
+
+    return 0
 }
 
 int function MapVotesSort(MapVotesData data1, MapVotesData data2)
