@@ -130,7 +130,7 @@ bool function CommandVote(entity player, array<string> args){
             for(int i = 0; i < GetPlayerArray().len(); i++){
                 SendHudMessageBuilder(GetPlayerArray()[i], ADMIN_VOTED_MAP, 255, 200, 200)
             }
-            SetNextMap(args[1].tointeger(), true)
+            SetNextMap(args[0].tointeger(), true)
             return true
         }
 
