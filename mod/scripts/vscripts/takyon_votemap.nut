@@ -1,5 +1,5 @@
 global function VoteMapInit
-global function FillProposedMaps 
+global function FillProposedMaps
 global function CommandVote
 global function OnPlayerSpawnedMap
 global function OnPlayerDisconnectedMap
@@ -213,7 +213,7 @@ void function ShowProposedMaps(entity player){
     string message = MAP_VOTE_USAGE + "\n"
     for (int i = 1; i <= proposedMaps.len(); i++) {
         string map = TryGetNormalizedMapName(proposedMaps[i-1])
-        message += i + ": " + map + "\n" 
+        message += i + ": " + map + "\n"
     }
 
     // message player
@@ -243,7 +243,7 @@ void function FillProposedMaps(){
     foreach(entity player in GetPlayerArray()){
         ShowProposedMaps(player)
     }
-    
+
     mapsProposalTimeLeft = Time()
     mapsHaveBeenProposed = true
 }
@@ -277,11 +277,10 @@ void function SetNextMap(int num, bool force = false){
 int function FindMvdInVoteData(string mapName){ // returns -1 if not found
     int index = -1
     foreach(MapVotesData mvd in voteData){
-        if(mvd.mapName == mapName)
-            return index
         index++
+        if(mvd.mapName == mapName) return index
     }
-    return index
+    return -1
 }
 
 int function MapVotesSort(MapVotesData data1, MapVotesData data2)
