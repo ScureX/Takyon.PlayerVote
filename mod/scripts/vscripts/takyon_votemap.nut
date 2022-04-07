@@ -277,11 +277,10 @@ void function SetNextMap(int num, bool force = false){
 int function FindMvdInVoteData(string mapName){ // returns -1 if not found
     int index = -1
     foreach(MapVotesData mvd in voteData){
-        if(mvd.mapName == mapName)
-            return index
         index++
+        if(mvd.mapName == mapName) return index
     }
-    return index
+    return -1
 }
 
 int function MapVotesSort(MapVotesData data1, MapVotesData data2)
