@@ -1,6 +1,7 @@
 global function BalanceInit
 global function CommandBalance
 global function BalanceMapEnd
+global function Balance
 
 bool balanceEnabled = true
 bool balanceAtMapEnd = false
@@ -29,7 +30,7 @@ void function BalanceInit(){
  */
 
 bool function CommandBalance(entity player, array<string> args){
-    if(!IsLobby()){
+    if(!IsLobby() && !IsFFAGame()){
         printl("USER USED BALANCE")
         if(!balanceEnabled){
             SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
