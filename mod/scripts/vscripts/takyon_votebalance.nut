@@ -1,7 +1,6 @@
 global function BalanceInit
 global function CommandBalance
 global function BalanceMapEnd
-global function Balance
 
 bool balanceEnabled = true
 bool balanceAtMapEnd = false
