@@ -17,7 +17,7 @@
 		},
 		{
 			"Name": "pv_discord",
-			"DefaultValue": "https://discord.gg/NkAkBzmdQm\nhttps://discord.gg/karmagaming" // change this to your discord server. leave empty to disable !discord 
+			"DefaultValue": "karma-gaming.net/go/discord" // change this to your discord server. leave empty to disable !discord 
 		},
 		{
 			"Name": "pv_display_hint_on_spawn_amount",
