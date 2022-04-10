@@ -25,7 +25,7 @@ bool function CommandPing(entity player, array<string> args){
     if(!IsLobby()){
         printl("USER USED PING")
         if(!pingEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
             return false
         }
 
@@ -36,7 +36,7 @@ bool function CommandPing(entity player, array<string> args){
         if(args.len() > 0){
             // player not on server or substring unspecific
             if(!CanFindPlayerFromSubstring(args[0])){
-                SendHudMessageBuilder(player, CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], 255, 200, 200)
+                Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], false)
                 return false
             }
 
@@ -80,7 +80,7 @@ void function ShowPing(entity player, entity target, string fullPlayerName) {
         return
     }
 
-    SendHudMessageBuilder(player, fullPlayerName + ": " + pingAvg + "ms", 200, 200, 255)
+    Chat_ServerPrivateMessage(player, fullPlayerName + ": " + pingAvg + "ms",false)
     return
 }
 

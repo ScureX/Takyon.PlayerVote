@@ -53,26 +53,26 @@ bool function CommandSendRules(entity player, array<string> args){
 
         // send rules disabled
         if(!adminSendRulesEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
             return false
         }
 
         // Check if user is admin
         if(!IsPlayerAdmin(player)){
-            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, false)
             return false
         }
 
         // check if theres something after !announce
         if(args.len() < 1){
-            SendHudMessageBuilder(player, NO_PLAYERNAME_FOUND + HOW_TO_SENDRULES, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + NO_PLAYERNAME_FOUND + HOW_TO_SENDRULES, false)
             return false
         }
 
         // check if player substring exists n stuff
         // player not on server or substring unspecific
         if(!CanFindPlayerFromSubstring(args[0])){
-            SendHudMessageBuilder(player, CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], false)
             return false
         }
 
@@ -86,7 +86,7 @@ bool function CommandSendRules(entity player, array<string> args){
 
         // last minute error handling if player cant be found
         if(target == null){
-            SendHudMessageBuilder(player, PLAYER_IS_NULL, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + PLAYER_IS_NULL, false)
             return false
         }
 
@@ -101,7 +101,7 @@ bool function CommandRules(entity player, array<string> args){
         if(rulesEnabled)
             SendHudMessageBuilder(player, rules, 200, 200, 255, showRulesTime)
         else
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 200, 200, 255)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
     }
     return true
 }

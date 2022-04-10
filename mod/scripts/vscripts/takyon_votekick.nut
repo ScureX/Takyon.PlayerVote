@@ -37,19 +37,19 @@ bool function CommandKick(entity player, array<string> args){
         
         // no player name given
         if(args.len() == 0){
-            SendHudMessageBuilder(player, NO_PLAYERNAME_FOUND, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + NO_PLAYERNAME_FOUND, false)
             return false
         }
 
         // vote kick disabled
         if(!playerVoteKickEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
             return false
         }
 
         // player not on server or substring unspecific
         if(!CanFindPlayerFromSubstring(args[0])){
-            SendHudMessageBuilder(player, CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" +CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], false)
             return false
         }
 
@@ -58,7 +58,7 @@ bool function CommandKick(entity player, array<string> args){
 
         // players cannot kick themselves 
         if(fullPlayerName == player.GetPlayerName()){
-            SendHudMessageBuilder(player, CANT_KICK_YOURSELF, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + CANT_KICK_YOURSELF, false)
             return false
         }
 
@@ -66,20 +66,20 @@ bool function CommandKick(entity player, array<string> args){
         if(args.len() >= 2 && args[1] == "force"){
             // Check if user is admin
             if(!IsPlayerAdmin(player)){
-                SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+                Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, false)
                 return false
             }
             
             ServerCommand("kick " + fullPlayerName) 
             playerKickVoteYesNames.clear()
             kickedPlayers.append(fullPlayerName)
-            SendHudMessageBuilder(player, KICKED_PLAYER + fullPlayerName, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;0;128;0m" + KICKED_PLAYER + fullPlayerName, false)
             return true
         }
 
         // Check if enough people are online to initiate a vote
         if(GetPlayerArray().len() < minimumOnlinePlayers){
-            SendHudMessageBuilder(player, NOT_ENOUGH_PLAYERS_ONLINE_FOR_KICK, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + NOT_ENOUGH_PLAYERS_ONLINE_FOR_KICK, false)
             return false
         }
 
@@ -97,7 +97,7 @@ bool function CommandKick(entity player, array<string> args){
             CheckIfEnoughKickVotes()
         }
         else{
-            SendHudMessageBuilder(player, ALREADY_VOTE_GOING + fullPlayerName + HOW_TO_KICK, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + ALREADY_VOTE_GOING + fullPlayerName + HOW_TO_KICK, false)
         }
     }
     return true
@@ -105,7 +105,7 @@ bool function CommandKick(entity player, array<string> args){
 
 bool function CommandYes(entity player, array<string> args){
     if(playerVotedForKick == ""){
-        SendHudMessageBuilder(player, NO_VOTE_GOING, 255, 200, 200)
+        Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + NO_VOTE_GOING, false)
         return false
     }
 
@@ -116,14 +116,14 @@ bool function CommandYes(entity player, array<string> args){
         CheckIfEnoughKickVotes()    
     }
     else{
-        SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
+        Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + ALREADY_VOTED, false)
     }
     return true
 }
 
 bool function CommandNo(entity player, array<string> args){
     if(playerVotedForKick == ""){
-        SendHudMessageBuilder(player, NO_VOTE_GOING, 255, 200, 200)
+        Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + NO_VOTE_GOING, false)
         return false
     }
 
@@ -134,7 +134,7 @@ bool function CommandNo(entity player, array<string> args){
         CheckIfEnoughKickVotes()    
     }
     else{
-        SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
+        Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + ALREADY_VOTED, false)
     }
     return true
 }
