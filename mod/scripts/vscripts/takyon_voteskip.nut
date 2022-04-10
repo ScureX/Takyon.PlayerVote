@@ -35,7 +35,7 @@ bool function CommandSkip(entity player, array<string> args){
         if(args.len() == 1 && args[0] == "force"){
             // Check if user is admin
             if(!IsPlayerAdmin(player)){
-                SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+                Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES,false)
                 return false
             }
 

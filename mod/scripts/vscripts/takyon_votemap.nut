@@ -92,13 +92,13 @@ bool function CommandVote(entity player, array<string> args){
 
         // check if voting is enabled
         if(!voteMapEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
             return false
         }
 
         // check if the maps have been proposed
         if(!mapsHaveBeenProposed){
-            SendHudMessageBuilder(player, MAPS_NOT_PROPOSED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MAPS_NOT_PROPOSED, false)
             return false
         }
 
@@ -110,20 +110,20 @@ bool function CommandVote(entity player, array<string> args){
 
         // map num not a num
         if(args.len() < 1 || !IsInt(args[0])){
-            SendHudMessageBuilder(player, MAP_VOTE_USAGE, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MAP_VOTE_USAGE, false)
             return false
         }
 
         // check if num is valid
         if(!IsMapNumValid(args[0])){
-            SendHudMessageBuilder(player, MAP_NUMBER_NOT_FOUND, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MAP_NUMBER_NOT_FOUND, false)
             return false
         }
 
         if(args.len() == 2 && args[1] == "force"){
             // Check if user is admin
             if(!IsPlayerAdmin(player)){
-                SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+                Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, false)
                 return false
             }
 
@@ -141,7 +141,7 @@ bool function CommandVote(entity player, array<string> args){
         }
         else {
             // Doesnt let the player vote twice, name is saved so even on reconnect they cannot vote twice
-            SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + ALREADY_VOTED, false)
             return false
         }
     }

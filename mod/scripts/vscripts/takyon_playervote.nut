@@ -137,7 +137,6 @@ void function SendHudMessageBuilder(entity player, string message, int r, int g,
     // Alpha doesnt work properly and is dependant on the RGB values for whatever fucking reason
     SendHudMessage( player, message, -1, 0.2, r, g, b, 255, 0.15, holdTime, 1 )
 }
-
 bool function IsPlayerAdmin(entity player){
     if(adminUIDs.find(player.GetUID()) == -1)
         return false
