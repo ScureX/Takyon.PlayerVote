@@ -29,13 +29,13 @@ bool function CommandAnnounce(entity player, array<string> args){
 
         // check if theres something after !announce
         if(args.len() < 1){
-            Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + NO_ANNOUNCEMENT_FOUND, 255, 200, 200)
+            Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + NO_ANNOUNCEMENT_FOUND, false)
             return false
         }
 
         // Check if user is admin
         if(!IsPlayerAdmin(player)){
-            Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, 255, 200, 200)
+            Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, false)
             return false
         }
 
