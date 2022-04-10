@@ -45,7 +45,7 @@ bool function CommandBalance(entity player, array<string> args){
             }
 
             for(int i = 0; i < GetPlayerArray().len(); i++){
-                SendHudMessageBuilder(GetPlayerArray()[i], "\x1b[38;2;220;0;0m" + ADMIN_BALANCED,  255, 200, 200)
+                SendHudMessageBuilder(GetPlayerArray()[i], ADMIN_BALANCED, 255, 200, 200)
                 CheckIfEnoughBalanceVotes(true)
             }
             return true
@@ -59,9 +59,9 @@ bool function CommandBalance(entity player, array<string> args){
             // send message to everyone
             for(int i = 0; i < GetPlayerArray().len(); i++){
                 if(playerBalanceVoteNames.len() > 1) // semantics
-                SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + "\x1b[38;2;220;0;0m" + MULTIPLE_BALANCD_VOTES, 255, 200, 200)
+                SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + MULTIPLE_BALANCD_VOTES, 255, 200, 200)
                 else
-                SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + "\x1b[38;2;220;0;0m" + ONE_BALANCE_VOTE,  255, 200, 200)
+                    SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + ONE_BALANCE_VOTE, 255, 200, 200)
 			}
         }
         else {
@@ -87,7 +87,7 @@ void function CheckIfEnoughBalanceVotes(bool force = false){
         Balance(_players)
         // message everyone
         for(int i = 0; i < GetPlayerArray().len(); i++){
-            Chat_ServerPrivateMessage(GetPlayerArray()[i], "\x1b[38;2;0;128;0m" + BALANCED, false)
+            SendHudMessageBuilder(GetPlayerArray()[i], BALANCED, 255, 200, 200)
         }
         playerBalanceVoteNames.clear()
     }

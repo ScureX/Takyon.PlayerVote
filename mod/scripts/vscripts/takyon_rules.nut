@@ -80,7 +80,7 @@ bool function CommandSendRules(entity player, array<string> args){
         string fullPlayerName = GetFullPlayerNameFromSubstring(args[0])
 
         // give admin feedback
-        Chat_ServerPrivateMessage(player, "\x1b[38;2;0;128;0m" + RULES_SENT_TO_PLAYER + fullPlayerName, false)
+        SendHudMessageBuilder(player, RULES_SENT_TO_PLAYER + fullPlayerName, 255, 200, 200)
 
         entity target = GetPlayerFromName(fullPlayerName)
 

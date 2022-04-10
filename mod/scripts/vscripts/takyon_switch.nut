@@ -72,8 +72,8 @@ bool function CommandSwitch(entity player, array<string> args){
             string fullPlayerName = GetFullPlayerNameFromSubstring(args[1])
 
             // give player and admin feedback
-            Chat_ServerPrivateMessage(player, "\x1b[38;2;0;128;0m" + fullPlayerName + SWITCH_ADMIN_SUCCESS, false)
-            SendHudMessageBuilder(GetPlayerFromName(fullPlayerName), "\x1b[38;2;0;128;0m" +  SWITCHED_BY_ADMIN, 255, 200, 200)
+            SendHudMessageBuilder(player, fullPlayerName + SWITCH_ADMIN_SUCCESS, 255, 200, 200)
+            SendHudMessageBuilder(GetPlayerFromName(fullPlayerName), SWITCHED_BY_ADMIN, 255, 200, 200)
             SwitchPlayer(GetPlayerFromName(fullPlayerName), true)
         }
     }
@@ -97,7 +97,7 @@ void function SwitchPlayer(entity player, bool force = false){
             return
         }
         SetTeam(player, TEAM_MILITIA)
-        Chat_ServerPrivateMessage(player, "\x1b[38;2;0;128;0m" + SWITCH_SUCCESS, false)
+        SendHudMessageBuilder(player, SWITCH_SUCCESS, 200, 200, 255)
         return
     }
 
@@ -110,7 +110,7 @@ void function SwitchPlayer(entity player, bool force = false){
             return
         }
         SetTeam(player, TEAM_IMC)
-        Chat_ServerPrivateMessage(player, "\x1b[38;2;0;128;0m" + SWITCH_SUCCESS, false)
+        SendHudMessageBuilder(player, SWITCH_SUCCESS, 200, 200, 255)
         return
     }
 

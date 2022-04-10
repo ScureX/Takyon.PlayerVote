@@ -53,7 +53,7 @@ bool function CommandHelp(entity player, array<string> args){
                 }
             }
         }
-        Chat_ServerPrivateMessage(player, commands, false)
+        SendHudMessageBuilder(player, commands, 255, 255, 255)
     }
     return true
 }

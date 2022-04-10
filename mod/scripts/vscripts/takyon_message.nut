@@ -70,8 +70,8 @@ bool function CommandMsg(entity player, array<string> args){
         }
 
         // send message 
-        Chat_ServerPrivateMessage(player, MESSAGE_SENT_TO_PLAYER + fullPlayerName, false)
-        Chat_ServerPrivateMessage(target, msg, false)
+        SendHudMessageBuilder(player, MESSAGE_SENT_TO_PLAYER + fullPlayerName, 255, 200, 200)
+        SendHudMessageBuilder(target, msg, 255, 200, 200)
     }
     return true
 }
