@@ -23,19 +23,19 @@ bool function CommandAnnounce(entity player, array<string> args){
 
         // check if !announce is enabled
         if(!announceEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + COMMAND_DISABLED,false)
             return false
         }
 
         // check if theres something after !announce
         if(args.len() < 1){
-            SendHudMessageBuilder(player, NO_ANNOUNCEMENT_FOUND, 255, 200, 200)
+            Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + NO_ANNOUNCEMENT_FOUND, 255, 200, 200)
             return false
         }
 
         // Check if user is admin
         if(!IsPlayerAdmin(player)){
-            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+            Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, 255, 200, 200)
             return false
         }
 

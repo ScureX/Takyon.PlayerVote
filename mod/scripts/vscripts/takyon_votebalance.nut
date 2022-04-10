@@ -32,7 +32,7 @@ bool function CommandBalance(entity player, array<string> args){
     if(!IsLobby()){
         printl("USER USED BALANCE")
         if(!balanceEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
             return false
         }
 
@@ -40,12 +40,12 @@ bool function CommandBalance(entity player, array<string> args){
         if(args.len() == 1 && args[0] == "force"){
             // Check if user is admin
             if(!IsPlayerAdmin(player)){
-                SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+                Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, false)
                 return false
             }
 
             for(int i = 0; i < GetPlayerArray().len(); i++){
-                SendHudMessageBuilder(GetPlayerArray()[i], ADMIN_BALANCED, 255, 200, 200)
+                SendHudMessageBuilder(GetPlayerArray()[i], "\x1b[38;2;220;0;0m" + ADMIN_BALANCED,  255, 200, 200)
                 CheckIfEnoughBalanceVotes(true)
             }
             return true
@@ -59,15 +59,15 @@ bool function CommandBalance(entity player, array<string> args){
             // send message to everyone
             for(int i = 0; i < GetPlayerArray().len(); i++){
                 if(playerBalanceVoteNames.len() > 1) // semantics
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + MULTIPLE_BALANCD_VOTES, 255, 200, 200)
+                SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + "\x1b[38;2;220;0;0m" + MULTIPLE_BALANCD_VOTES, 255, 200, 200)
                 else
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + ONE_BALANCE_VOTE, 255, 200, 200)
+                SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + "\x1b[38;2;220;0;0m" + ONE_BALANCE_VOTE,  255, 200, 200)
 			}
         }
         else {
             // Doesnt let the player vote twice, name is saved so even on reconnect they cannot vote twice
             // Future update might check if the player is actually online but right now i am too tired
-            SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + ALREADY_VOTED, false)
         }
     }
     CheckIfEnoughBalanceVotes()
@@ -87,7 +87,7 @@ void function CheckIfEnoughBalanceVotes(bool force = false){
         Balance(_players)
         // message everyone
         for(int i = 0; i < GetPlayerArray().len(); i++){
-            SendHudMessageBuilder(GetPlayerArray()[i], BALANCED, 255, 200, 200)
+            Chat_ServerPrivateMessage(GetPlayerArray()[i], "\x1b[38;2;0;128;0m" + BALANCED, false)
         }
         playerBalanceVoteNames.clear()
     }

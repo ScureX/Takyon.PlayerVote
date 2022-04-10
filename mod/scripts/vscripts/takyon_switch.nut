@@ -31,7 +31,7 @@ bool function CommandSwitch(entity player, array<string> args){
 
         // check if enabled
         if(!switchEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
             return false
         }
 
@@ -39,7 +39,7 @@ bool function CommandSwitch(entity player, array<string> args){
         if(args.len() < 1){
             // check if player has already switched too often
             if(FindAllSwitches(player) >= maxSwitches){
-                SendHudMessageBuilder(player, SWITCHED_TOO_OFTEN, 255, 200, 200)
+                Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + SWITCHED_TOO_OFTEN, false)
                 return false
             }
 
@@ -50,7 +50,7 @@ bool function CommandSwitch(entity player, array<string> args){
 
         // no player name given
         if(args.len() == 1){
-            SendHudMessageBuilder(player, NO_PLAYERNAME_FOUND, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + NO_PLAYERNAME_FOUND, false)
             return false
         }
 
@@ -58,13 +58,13 @@ bool function CommandSwitch(entity player, array<string> args){
         if(args.len() >= 2 && args[0] == "force"){
             // Check if user is admin
             if(!IsPlayerAdmin(player)){
-                SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+                Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, false)
                 return false
             }
 
             // player not on server or substring unspecific
             if(!CanFindPlayerFromSubstring(args[1])){
-                SendHudMessageBuilder(player, CANT_FIND_PLAYER_FROM_SUBSTRING + args[1], 255, 200, 200)
+                Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + CANT_FIND_PLAYER_FROM_SUBSTRING + args[1], false)
                 return false
             }
 
@@ -72,8 +72,8 @@ bool function CommandSwitch(entity player, array<string> args){
             string fullPlayerName = GetFullPlayerNameFromSubstring(args[1])
 
             // give player and admin feedback
-            SendHudMessageBuilder(player, fullPlayerName + SWITCH_ADMIN_SUCCESS, 255, 200, 200)
-            SendHudMessageBuilder(GetPlayerFromName(fullPlayerName), SWITCHED_BY_ADMIN, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;0;128;0m" + fullPlayerName + SWITCH_ADMIN_SUCCESS, false)
+            SendHudMessageBuilder(GetPlayerFromName(fullPlayerName), "\x1b[38;2;0;128;0m" +  SWITCHED_BY_ADMIN, 255, 200, 200)
             SwitchPlayer(GetPlayerFromName(fullPlayerName), true)
         }
     }
@@ -93,11 +93,11 @@ void function SwitchPlayer(entity player, bool force = false){
         printl("IMC: diff: " + (militiaPlayerAmount - imcPlayerAmount))
         // check if difference between team sizes is too big
         if(!CanPlayerSwitch(player, imcPlayerAmount, militiaPlayerAmount) && !force){
-            SendHudMessageBuilder(player, SWITCH_TOO_MANY_PLAYERS, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + SWITCH_TOO_MANY_PLAYERS, false)
             return
         }
         SetTeam(player, TEAM_MILITIA)
-        SendHudMessageBuilder(player, SWITCH_SUCCESS, 200, 200, 255)
+        Chat_ServerPrivateMessage(player, "\x1b[38;2;0;128;0m" + SWITCH_SUCCESS, false)
         return
     }
 
@@ -106,11 +106,11 @@ void function SwitchPlayer(entity player, bool force = false){
         printl("MILIT: diff: " + (imcPlayerAmount - militiaPlayerAmount))
         // check if difference between team sizes is too big
         if(!CanPlayerSwitch(player, imcPlayerAmount, militiaPlayerAmount) && !force){
-            SendHudMessageBuilder(player, SWITCH_TOO_MANY_PLAYERS, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + SWITCH_TOO_MANY_PLAYERS, false)
             return
         }
         SetTeam(player, TEAM_IMC)
-        SendHudMessageBuilder(player, SWITCH_SUCCESS, 200, 200, 255)
+        Chat_ServerPrivateMessage(player, "\x1b[38;2;0;128;0m" + SWITCH_SUCCESS, false)
         return
     }
 
@@ -119,7 +119,7 @@ void function SwitchPlayer(entity player, bool force = false){
         array<int> teams = [TEAM_MILITIA, TEAM_IMC]
 
         SetTeam(player, teams[rndint(1)])
-        SendHudMessageBuilder(player, SWITCH_FROM_UNASSIGNED, 200, 200, 255)
+        Chat_ServerPrivateMessage(player, "\x1b[38;2;0;128;0m" + SWITCH_FROM_UNASSIGNED, false)
         return
     }
 }
