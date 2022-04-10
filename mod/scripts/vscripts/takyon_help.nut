@@ -68,7 +68,7 @@ bool function CommandVersion(entity player, array<string> args){
 
 bool function CommandDiscord(entity player, array<string> args){
     if(!IsLobby()){
-        Chat_ServerPrivateMessage(player,"\x1b[38;2;88;101;242m" discordLink, false)
+        Chat_ServerPrivateMessage(player,"\x1b[38;2;88;101;242m" + discordLink, false)
         return true
     }
     return false
