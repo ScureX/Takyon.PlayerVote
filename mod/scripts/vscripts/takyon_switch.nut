@@ -24,9 +24,9 @@ void function SwitchInit(){
 /*
  *  COMMAND LOGIC
  */
- 
+
 bool function CommandSwitch(entity player, array<string> args){
-    if(!IsLobby()){
+    if(!IsLobby() && !IsFFAGame()){
         printl("USER USED SWITCH")
 
         // check if enabled
