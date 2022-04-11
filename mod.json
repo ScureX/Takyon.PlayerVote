@@ -3,7 +3,7 @@
 	"Description": "Write !help in the console to get a list of commands. [!skip, !skip force, !rtv] [!kick name, !kick name force, !yes, !no] [!extend, !extend force] [!vote] [!rules, !sendrules], [!announce], [!msg name message] [!switch] [!balance, !balance force] [!ping]",
 	"LoadPriority": 0,
 	"RequiredOnClient": false,
-  	"Version": "3.1.1",
+  	"Version": "3.1.2",
 
 	"ConVars": [
 		{
