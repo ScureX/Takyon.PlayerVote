@@ -68,3 +68,4 @@ global const string ADMIN_VOTED_MAP = "Admin set the next map to "
 global const string MAP_NOT_GIVEN = "No map given"
 global const string MAP_NUMBER_NOT_FOUND = "Map number not found"
 global const string MAP_YOU_VOTED = "You have voted for " // remember the space at the end
+global const string MAP_VOTE_USAGE_PROPOSED = "To vote type !vote number in chat. \x1b[38;2;0;220;220m(Ex. !vote 2)"
