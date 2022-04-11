@@ -65,7 +65,7 @@ void function VoteMapInit(){
 
     array<string> dirtyMaps = split( cvar, "," )
     foreach ( string map in dirtyMaps )
-        if (map != GetMapName()) maps.append(strip(map)) // Only add map if it is not the current map
+        if (map != GetMapName() || dirtyMaps.len() == 1) maps.append(strip(map)) // Only add map if it is not the current map
 }
 
 /*
