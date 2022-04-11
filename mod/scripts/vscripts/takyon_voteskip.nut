@@ -96,7 +96,7 @@ void function PVSetGameEndTime(float seconds){
       float roundEndTime = Time() - expect float(GetServerVar("roundEndTime"));
       if (roundEndTime > seconds) seconds = roundEndTime; // If there's less time in the round left than we request, don't increase
       SetRoundEndTime(seconds); // Set round end timer - for aesthetics only
-      PostmatchMap_Threaded(seconds);
+      thread PostmatchMap_Threaded(seconds);
     }
     else {
       SetGameEndTime(seconds);
