@@ -6,10 +6,10 @@ global function OnPlayerDisconnectedMap
 global function PlayingMap
 global function PostmatchMap
 
-array<string> playerMapVoteNames = [] // list of players who have voted, is used to see how many have voted
-bool voteMapEnabled = true
-float mapTimeFrac = 0.5 // when the vote is displayed. 0.5 would be halftime
-int howManyMapsToPropose = 5
+array<string> playerMapVoteNames // list of players who have voted, is used to see how many have voted
+bool voteMapEnabled
+float mapTimeFrac // when the vote is displayed. 0.5 would be halftime
+int howManyMapsToPropose
 
 struct MapVotesData{
     string mapName
@@ -17,11 +17,11 @@ struct MapVotesData{
 }
 
 global bool mapsHaveBeenProposed = false // dont fuck with this
-array<string> maps = []
-array<MapVotesData> voteData = []
-array<string> proposedMaps = []
-string nextMap = ""
-array<string> spawnedPlayers= []
+array<string> maps
+array<MapVotesData> voteData
+array<string> proposedMaps
+string nextMap
+array<string> spawnedPlayers
 global float mapsProposalTimeLeft = 0
 
 // do not remove maps from here, just add the ones you need!
