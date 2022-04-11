@@ -44,7 +44,7 @@ ClServer_MessageStruct function ChatCallback(ClServer_MessageStruct message) {
         catch(e){
             return message
         }
-
+        
         msgArr.remove(0) // remove command from args
 
         entity player = message.player
@@ -137,7 +137,6 @@ void function SendHudMessageBuilder(entity player, string message, int r, int g,
     // Alpha doesnt work properly and is dependant on the RGB values for whatever fucking reason
     SendHudMessage( player, message, -1, 0.2, r, g, b, 255, 0.15, holdTime, 1 )
 }
-
 bool function IsPlayerAdmin(entity player){
     if(adminUIDs.find(player.GetUID()) == -1)
         return false
@@ -155,7 +154,7 @@ entity function GetPlayerFromName(string name){
 }
 
 int function rndint(int max) {
-    // Generate a pseudo-random integer between 0 and max
+    // Generate a pseudo-random integer between 0 and max-1, inclusive
     float roll = 1.0 * max * rand() / RAND_MAX;
     return roll.tointeger();
 }

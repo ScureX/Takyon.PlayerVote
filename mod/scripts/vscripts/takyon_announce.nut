@@ -23,19 +23,19 @@ bool function CommandAnnounce(entity player, array<string> args){
 
         // check if !announce is enabled
         if(!announceEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + COMMAND_DISABLED,false)
             return false
         }
 
         // check if theres something after !announce
         if(args.len() < 1){
-            SendHudMessageBuilder(player, NO_ANNOUNCEMENT_FOUND, 255, 200, 200)
+            Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + NO_ANNOUNCEMENT_FOUND, false)
             return false
         }
 
         // Check if user is admin
         if(!IsPlayerAdmin(player)){
-            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+            Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, false)
             return false
         }
 
@@ -47,8 +47,9 @@ bool function CommandAnnounce(entity player, array<string> args){
 
         // send message 
         for(int j = 0; j < GetPlayerArray().len(); j++){
-            SendHudMessageBuilder(GetPlayerArray()[j], msg, 255, 200, 200)
+            SendHudMessageBuilder(GetPlayerArray()[j], msg, 255, 200, 200, 10)
         }
+        Chat_ServerBroadcast("\x1b[38;2;220;220;0m[PlayerVote]\n\x1b[38;2;220;50;50mANNOUNCEMENT:\n\n\x1b[38;2;220;80;80m" + msg + "\n\n")
     }
     return true
 }

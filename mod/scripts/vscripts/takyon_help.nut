@@ -6,7 +6,7 @@ global function OnPlayerSpawnedHelp
 global function OnPlayerDisconnectedHelp
 
 string discordLink = ""  //put your discord link in mod.json
-string version = "v3.1.1"
+string version = "v3.1.2"
 bool helpEnabled = true
 int displayHintOnSpawnAmount = 0
 bool useGeneratedHelp = true // will auto-generate text for the help command. set false if you want to input your own help text
@@ -41,7 +41,7 @@ bool function CommandHelp(entity player, array<string> args){
     if(!IsLobby()){
         printl("USER USED HELP")
         if(!helpEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
             return false
         }
 
@@ -60,7 +60,7 @@ bool function CommandHelp(entity player, array<string> args){
 
 bool function CommandVersion(entity player, array<string> args){
     if(!IsLobby()){
-        SendHudMessageBuilder(player, version, 255, 255, 255)
+        Chat_ServerPrivateMessage(player, "\x1b[38;2;0;128;0m" + version, false) 
         return true
     }
     return false
@@ -68,7 +68,7 @@ bool function CommandVersion(entity player, array<string> args){
 
 bool function CommandDiscord(entity player, array<string> args){
     if(!IsLobby()){
-        SendHudMessageBuilder(player, discordLink, 255, 255, 255)
+        Chat_ServerPrivateMessage(player,"\x1b[38;2;88;101;242m" + discordLink, false)
         return true
     }
     return false
@@ -78,19 +78,19 @@ bool function CommandGetUid(entity player, array<string> args){
     if(!IsLobby()){
         // Check if user is admin
         if(!IsPlayerAdmin(player)){
-            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, false)
             return false
         }
 
         // no player name given
         if(args.len() == 0){
-            SendHudMessageBuilder(player, NO_PLAYERNAME_FOUND, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + NO_PLAYERNAME_FOUND, false)
             return false
         }
 
         // player not on server or substring unspecific
         if(!CanFindPlayerFromSubstring(args[0])){
-            SendHudMessageBuilder(player, CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], false)
             return false
         }
 
