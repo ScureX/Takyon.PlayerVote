@@ -86,7 +86,7 @@ void function VoteMapInit(){
                    (!IsRoundBased() &&
                      (
                        Time() / endTime >= mapTimeFrac
-                       //|| float(GameRules_GetTeamScore(GameScore_GetWinningTeam())) / float(GetRoundScoreLimit_FromPlaylist()) >= mapTimeFrac
+                       || float(GameRules_GetTeamScore(GameScore_GetWinningTeam())) / float(GetScoreLimit_FromPlaylist()) >= mapTimeFrac
                      )
                    )
                    // Check for team score on round based modes
