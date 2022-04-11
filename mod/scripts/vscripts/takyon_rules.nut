@@ -23,15 +23,25 @@ void function RulesInit(){
      */
 
     // string rule99 = "this is your rule"
-    string rule1 = "[1] Takyon is poggers"
-    string rule2 = "[2] Someone didnt fill out their rules"
-    string rule3 = "[3] chicken nugget"
+    string rule1 = "[1] No camping"
+    string rule2 = "[2] No cheating/exploiting"
+    string rule3 = "[3] No toxicity/discrimination"
+    string rule4 = "[4] No mic/chat spam"
+    string rule5 = "[5] No advertising"
+    string rule6 = "[6] No threatening real harm"
+    string rule7 = "[7] No evading punishments"
+    string rule8 = "[8] Be respectful to others"
 
     // add rules to the rule builder
     // dont forget the "\n" to add a new line, also dont put a + after the last rule
     rules = rule1 + "\n" +
             rule2 + "\n" + 
-            rule3 + "\n"
+            rule3 + "\n" +
+            rule4 + "\n" + 
+            rule5 + "\n" +
+            rule6 + "\n" + 
+            rule7 + "\n" +
+            rule8
 
     /*
      *  end of rules
@@ -53,26 +63,26 @@ bool function CommandSendRules(entity player, array<string> args){
 
         // send rules disabled
         if(!adminSendRulesEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
             return false
         }
 
         // Check if user is admin
         if(!IsPlayerAdmin(player)){
-            SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, false)
             return false
         }
 
         // check if theres something after !announce
         if(args.len() < 1){
-            SendHudMessageBuilder(player, NO_PLAYERNAME_FOUND + HOW_TO_SENDRULES, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + NO_PLAYERNAME_FOUND + HOW_TO_SENDRULES, false)
             return false
         }
 
         // check if player substring exists n stuff
         // player not on server or substring unspecific
         if(!CanFindPlayerFromSubstring(args[0])){
-            SendHudMessageBuilder(player, CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + CANT_FIND_PLAYER_FROM_SUBSTRING + args[0], false)
             return false
         }
 
@@ -86,7 +96,7 @@ bool function CommandSendRules(entity player, array<string> args){
 
         // last minute error handling if player cant be found
         if(target == null){
-            SendHudMessageBuilder(player, PLAYER_IS_NULL, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + PLAYER_IS_NULL, false)
             return false
         }
 
@@ -101,7 +111,7 @@ bool function CommandRules(entity player, array<string> args){
         if(rulesEnabled)
             SendHudMessageBuilder(player, rules, 200, 200, 255, showRulesTime)
         else
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 200, 200, 255)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
     }
     return true
 }

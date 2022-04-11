@@ -29,10 +29,10 @@ void function BalanceInit(){
  */
 
 bool function CommandBalance(entity player, array<string> args){
-    if(!IsLobby()){
+    if(!IsLobby() && !IsFFAGame()){
         printl("USER USED BALANCE")
         if(!balanceEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
             return false
         }
 
@@ -40,7 +40,7 @@ bool function CommandBalance(entity player, array<string> args){
         if(args.len() == 1 && args[0] == "force"){
             // Check if user is admin
             if(!IsPlayerAdmin(player)){
-                SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+                Chat_ServerPrivateMessage(player,"\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, false)
                 return false
             }
 
@@ -59,7 +59,7 @@ bool function CommandBalance(entity player, array<string> args){
             // send message to everyone
             for(int i = 0; i < GetPlayerArray().len(); i++){
                 if(playerBalanceVoteNames.len() > 1) // semantics
-                    SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + MULTIPLE_BALANCD_VOTES, 255, 200, 200)
+                SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + MULTIPLE_BALANCD_VOTES, 255, 200, 200)
                 else
                     SendHudMessageBuilder(GetPlayerArray()[i], playerBalanceVoteNames.len() + ONE_BALANCE_VOTE, 255, 200, 200)
 			}
@@ -67,7 +67,7 @@ bool function CommandBalance(entity player, array<string> args){
         else {
             // Doesnt let the player vote twice, name is saved so even on reconnect they cannot vote twice
             // Future update might check if the player is actually online but right now i am too tired
-            SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + ALREADY_VOTED, false)
         }
     }
     CheckIfEnoughBalanceVotes()

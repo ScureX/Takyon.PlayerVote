@@ -31,7 +31,7 @@ bool function CommandExtend(entity player, array<string> args){
         printl("USER TRIED EXTENDING")
         
         if(!extendVoteEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
             return false
         }
 
@@ -39,7 +39,7 @@ bool function CommandExtend(entity player, array<string> args){
         if(args.len() == 1 && args[0] == "force"){
             // Check if user is admin
             if(!IsPlayerAdmin(player)){
-                SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+                Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, false)
                 return false
             }
 
@@ -52,7 +52,7 @@ bool function CommandExtend(entity player, array<string> args){
 
         // check if already extended and settings
         if(hasMapBeenExtended && !extendMapMultipleTimes ){
-            SendHudMessageBuilder(player, MAP_CANT_BE_EXTENDED_TWICE, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MAP_CANT_BE_EXTENDED_TWICE, false)
             return false
         }
 
@@ -72,7 +72,7 @@ bool function CommandExtend(entity player, array<string> args){
         else {
             // Doesnt let the player vote twice, name is saved so even on reconnect they cannot vote twice
             // Future update might check if the player is actually online but right now i am too tired
-            SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + ALREADY_VOTED, false)
         }
     }
     CheckIfEnoughExtendVotes()

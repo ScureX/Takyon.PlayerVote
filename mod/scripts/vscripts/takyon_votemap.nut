@@ -1,5 +1,5 @@
 global function VoteMapInit
-global function FillProposedMaps 
+global function FillProposedMaps
 global function CommandVote
 global function OnPlayerSpawnedMap
 global function OnPlayerDisconnectedMap
@@ -92,13 +92,13 @@ bool function CommandVote(entity player, array<string> args){
 
         // check if voting is enabled
         if(!voteMapEnabled){
-            SendHudMessageBuilder(player, COMMAND_DISABLED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + COMMAND_DISABLED, false)
             return false
         }
 
         // check if the maps have been proposed
         if(!mapsHaveBeenProposed){
-            SendHudMessageBuilder(player, MAPS_NOT_PROPOSED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MAPS_NOT_PROPOSED, false)
             return false
         }
 
@@ -110,27 +110,27 @@ bool function CommandVote(entity player, array<string> args){
 
         // map num not a num
         if(args.len() < 1 || !IsInt(args[0])){
-            SendHudMessageBuilder(player, MAP_VOTE_USAGE, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MAP_VOTE_USAGE, false)
             return false
         }
 
         // check if num is valid
         if(!IsMapNumValid(args[0])){
-            SendHudMessageBuilder(player, MAP_NUMBER_NOT_FOUND, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MAP_NUMBER_NOT_FOUND, false)
             return false
         }
 
         if(args.len() == 2 && args[1] == "force"){
             // Check if user is admin
             if(!IsPlayerAdmin(player)){
-                SendHudMessageBuilder(player, MISSING_PRIVILEGES, 255, 200, 200)
+                Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + MISSING_PRIVILEGES, false)
                 return false
             }
 
             for(int i = 0; i < GetPlayerArray().len(); i++){
                 SendHudMessageBuilder(GetPlayerArray()[i], ADMIN_VOTED_MAP, 255, 200, 200)
             }
-            SetNextMap(args[1].tointeger(), true)
+            SetNextMap(args[0].tointeger(), true)
             return true
         }
 
@@ -141,7 +141,7 @@ bool function CommandVote(entity player, array<string> args){
         }
         else {
             // Doesnt let the player vote twice, name is saved so even on reconnect they cannot vote twice
-            SendHudMessageBuilder(player, ALREADY_VOTED, 255, 200, 200)
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + ALREADY_VOTED, false)
             return false
         }
     }
@@ -182,7 +182,7 @@ void function ChangeMapBeforeServer(){
     if(nextMap != "")
         GameRules_ChangeMap(nextMap, GameRules_GetGameMode())
     else
-        GameRules_ChangeMap(maps[rndint(maps.len()-1)], GameRules_GetGameMode())
+        GameRules_ChangeMap(maps[rndint(maps.len())], GameRules_GetGameMode())
 }
 
 /*
@@ -213,11 +213,12 @@ void function ShowProposedMaps(entity player){
     string message = MAP_VOTE_USAGE + "\n"
     for (int i = 1; i <= proposedMaps.len(); i++) {
         string map = TryGetNormalizedMapName(proposedMaps[i-1])
-        message += i + ": " + map + "\n" 
+        message += i + ": " + map + "\n"
     }
 
     // message player
     SendHudMessage( player, message, -0.925, 0.4, 255, 255, 255, 255, 0.15, 30, 1 )
+    Chat_ServerBroadcast("\x1b[38;2;220;220;0m[PlayerVote] \x1b[0mTo vote type !vote number in chat. \x1b[38;2;0;220;220m(Ex. !vote 2)")
 }
 
 void function FillProposedMaps(){
@@ -231,7 +232,7 @@ void function FillProposedMaps(){
     for(int i = 0; i < howManyMapsToPropose; i++){
         while(true){
             // get a random map from maps
-            string temp = maps[rndint(maps.len() - 1)]
+            string temp = maps[rndint(maps.len())]
             if(proposedMaps.find(temp) == -1 && temp != currMap){
                 proposedMaps.append(temp)
                 break
@@ -243,7 +244,7 @@ void function FillProposedMaps(){
     foreach(entity player in GetPlayerArray()){
         ShowProposedMaps(player)
     }
-    
+
     mapsProposalTimeLeft = Time()
     mapsHaveBeenProposed = true
 }
@@ -277,11 +278,10 @@ void function SetNextMap(int num, bool force = false){
 int function FindMvdInVoteData(string mapName){ // returns -1 if not found
     int index = -1
     foreach(MapVotesData mvd in voteData){
-        if(mvd.mapName == mapName)
-            return index
         index++
+        if(mvd.mapName == mapName) return index
     }
-    return index
+    return -1
 }
 
 int function MapVotesSort(MapVotesData data1, MapVotesData data2)
