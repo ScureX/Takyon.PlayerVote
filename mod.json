@@ -8,16 +8,16 @@
 	"ConVars": [
 		{
 			"Name": "pv_admin_uids",
-			"DefaultValue": "1006880507304" // list of UIDs who should have admin privileges to execute commands like !skip force, comma separated. To get UID: Let admin join priv match with sv_cheats 1 and execute // script print(GetPlayerArray()[0].GetUID())
+			"DefaultValue": "1006880507304, 1009099551543, 1003204785491, 1006527769252, 1007705882025" // list of UIDs who should have admin privileges to execute commands like !skip force, comma separated. To get UID: Let admin join priv match with sv_cheats 1 and execute // script print(GetPlayerArray()[0].GetUID())
 			//"DefaultValue": "1006880507304, 1006880507304, 1006880507304"
 		},
 		{
 			"Name": "pv_servername",
-			"DefaultValue": "YOUR SERVER" // change this to your servername
+			"DefaultValue": "Karma Kraber9k" // change this to your servername
 		},
 		{
 			"Name": "pv_discord",
-			"DefaultValue": "YOUR DISCORD" // change this to your discord server. leave empty to disable !discord 
+			"DefaultValue": "karma-gaming.net/go/discord" // change this to your discord server. leave empty to disable !discord 
 		},
 		{
 			"Name": "pv_display_hint_on_spawn_amount",
@@ -33,7 +33,7 @@
 		},
 		{
 			"Name": "pv_skip_percentage",
-			"DefaultValue": "0.8" // percentage of players required to successfully skip the current map
+			"DefaultValue": "0.5" // percentage of players required to successfully skip the current map
 		},
 		{
 			"Name": "pv_kick_enabled",
@@ -41,7 +41,7 @@
 		},
 		{
 			"Name": "pv_kick_percentage",
-			"DefaultValue": "0.9" // percentage of players required to successfully kick
+			"DefaultValue": "0.8" // percentage of players required to successfully kick
 		},
 		{
 			"Name": "pv_kick_min_players",
@@ -57,15 +57,15 @@
 		},
 		{
 			"Name": "pv_extend_percentage",
-			"DefaultValue": "0.6" // percentage of players required to successfully extend the current map
+			"DefaultValue": "0.5" // percentage of players required to successfully extend the current map
 		},
 		{
 			"Name": "pv_extend_map_multiple_times",
-			"DefaultValue": "0" // 0: map can only be extended once; 1: map can be extended indefinetly
+			"DefaultValue": "1" // 0: map can only be extended once; 1: map can be extended indefinetly
 		},
 		{
 			"Name": "pv_extend_amount",
-			"DefaultValue": "3.5" // how much time should be added after successful !extend vote in minutes
+			"DefaultValue": "5.0" // how much time should be added after successful !extend vote in minutes
 		},
 		{
 			"Name": "pv_rules_enabled",
@@ -129,7 +129,7 @@
 		},
 		{
 			"Name": "pv_map_time_frac",
-			"DefaultValue": "0.5" // when the vote is displayed. 0.5 would be halftime
+			"DefaultValue": "0.8" // when the vote is displayed. 0.5 would be halftime
 		},
 		{
 			"Name": "pv_map_map_propose_amount",
@@ -137,9 +137,9 @@
 		},
 		{
 			"Name": "pv_maps",
-			//"DefaultValue": "mp_angel_city,mp_colony02"
+			"DefaultValue": "mp_angel_city, mp_black_water_canal, mp_colony02, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_glitch, mp_grave, mp_homestead, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_rise, mp_thaw, mp_wargames"
 			// below should be all maps, i wouldnt delete it :)
-			"DefaultValue": "mp_angel_city, mp_black_water_canal, mp_coliseum, mp_coliseum_column, mp_colony02, mp_complex3, mp_crashsite3, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_glitch, mp_grave, mp_homestead, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_rise, mp_thaw, mp_wargames"
+			//"DefaultValue": "mp_angel_city, mp_black_water_canal, mp_coliseum, mp_coliseum_column, mp_colony02, mp_complex3, mp_crashsite3, mp_drydock, mp_eden, mp_forwardbase_kodai, mp_glitch, mp_grave, mp_homestead, mp_lf_deck, mp_lf_meadow, mp_lf_stacks, mp_lf_township, mp_lf_traffic, mp_lf_uma, mp_relic02, mp_rise, mp_thaw, mp_wargames"
 		},
 		{
 			"Name": "pv_welcome_enabled",
