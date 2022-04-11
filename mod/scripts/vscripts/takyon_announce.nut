@@ -47,8 +47,9 @@ bool function CommandAnnounce(entity player, array<string> args){
 
         // send message 
         for(int j = 0; j < GetPlayerArray().len(); j++){
-            SendHudMessageBuilder(GetPlayerArray()[j], msg, 255, 200, 200)
+            SendHudMessageBuilder(GetPlayerArray()[j], msg, 255, 200, 200, 10)
         }
+        Chat_ServerBroadcast("\x1b[38;2;220;220;0m[PlayerVote]\n\x1b[38;2;220;50;50mANNOUNCEMENT:\n\n\x1b[38;2;220;80;80m" + msg + "\n\n")
     }
     return true
 }

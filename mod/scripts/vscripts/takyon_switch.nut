@@ -118,7 +118,7 @@ void function SwitchPlayer(entity player, bool force = false){
     if(player.GetTeam() == TEAM_UNASSIGNED){
         array<int> teams = [TEAM_MILITIA, TEAM_IMC]
 
-        SetTeam(player, teams[rndint(1)])
+        SetTeam(player, teams[rndint(2)])
         Chat_ServerPrivateMessage(player, "\x1b[38;2;0;128;0m" + SWITCH_FROM_UNASSIGNED, false)
         return
     }

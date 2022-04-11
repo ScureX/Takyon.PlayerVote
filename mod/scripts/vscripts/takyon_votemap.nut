@@ -182,7 +182,7 @@ void function ChangeMapBeforeServer(){
     if(nextMap != "")
         GameRules_ChangeMap(nextMap, GameRules_GetGameMode())
     else
-        GameRules_ChangeMap(maps[rndint(maps.len()-1)], GameRules_GetGameMode())
+        GameRules_ChangeMap(maps[rndint(maps.len())], GameRules_GetGameMode())
 }
 
 /*
@@ -218,6 +218,7 @@ void function ShowProposedMaps(entity player){
 
     // message player
     SendHudMessage( player, message, -0.925, 0.4, 255, 255, 255, 255, 0.15, 30, 1 )
+    Chat_ServerBroadcast("\x1b[38;2;220;220;0m[PlayerVote] \x1b[0mTo vote type !vote number in chat. \x1b[38;2;0;220;220m(Ex. !vote 2)")
 }
 
 void function FillProposedMaps(){
@@ -231,7 +232,7 @@ void function FillProposedMaps(){
     for(int i = 0; i < howManyMapsToPropose; i++){
         while(true){
             // get a random map from maps
-            string temp = maps[rndint(maps.len() - 1)]
+            string temp = maps[rndint(maps.len())]
             if(proposedMaps.find(temp) == -1 && temp != currMap){
                 proposedMaps.append(temp)
                 break

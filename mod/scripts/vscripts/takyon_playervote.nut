@@ -154,7 +154,7 @@ entity function GetPlayerFromName(string name){
 }
 
 int function rndint(int max) {
-    // Generate a pseudo-random integer between 0 and max
+    // Generate a pseudo-random integer between 0 and max-1, inclusive
     float roll = 1.0 * max * rand() / RAND_MAX;
     return roll.tointeger();
 }
