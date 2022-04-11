@@ -218,7 +218,6 @@ void function ShowProposedMaps(entity player){
 
     // message player
     SendHudMessage( player, message, -0.925, 0.4, 255, 255, 255, 255, 0.15, 30, 1 )
-    Chat_ServerBroadcast("\x1b[38;2;220;220;0m[PlayerVote] \x1b[0mTo vote type !vote number in chat. \x1b[38;2;0;220;220m(Ex. !vote 2)")
 }
 
 void function FillProposedMaps(){
@@ -244,7 +243,8 @@ void function FillProposedMaps(){
     foreach(entity player in GetPlayerArray()){
         ShowProposedMaps(player)
     }
-
+    
+    Chat_ServerBroadcast("\x1b[38;2;220;220;0m[PlayerVote] \x1b[0mTo vote type !vote number in chat. \x1b[38;2;0;220;220m(Ex. !vote 2)")
     mapsProposalTimeLeft = Time()
     mapsHaveBeenProposed = true
 }
