@@ -72,19 +72,33 @@ void function VoteMapInit(){
  *  COMMAND LOGIC
  */
 
-void function PlayingMap(){
-    wait 2
-    if(!IsLobby()){
-        while(voteMapEnabled && !mapsHaveBeenProposed){
-            wait 10
-            // check if halftime or whatever
-            float endTime = expect float(GetServerVar("gameEndTime"))
-            if(Time() / endTime >= mapTimeFrac && Time() > 5.0 && !mapsHaveBeenProposed){
-                FillProposedMaps()
-            }
-        }
-    }
-}
+ void function PlayingMap(){
+     wait 2
+     if(!IsLobby()){
+         while(voteMapEnabled && !mapsHaveBeenProposed){
+             wait 10
+
+             // check if halftime or whatever
+             float endTime = expect float(GetServerVar("gameEndTime"))
+             if (
+                 (
+                   // Check for time or score if it's not round based
+                   (!IsRoundBased() &&
+                     (
+                       Time() / endTime >= mapTimeFrac
+                       || float(GameRules_GetTeamScore(GameScore_GetWinningTeam())) / float(GetRoundScoreLimit_FromPlaylist()) >= mapTimeFrac
+                     )
+                   )
+                   // Check for team score on round based modes
+                   || (IsRoundBased() && float(GameRules_GetTeamScore2(GameScore_GetWinningTeam())) / float(GetRoundScoreLimit_FromPlaylist()) >= mapTimeFrac)
+                 )
+                 && Time() > 5.0
+                 && !mapsHaveBeenProposed) {
+                 FillProposedMaps()
+             }
+         }
+     }
+ }
 
 bool function CommandVote(entity player, array<string> args){
     if(!IsLobby()){
