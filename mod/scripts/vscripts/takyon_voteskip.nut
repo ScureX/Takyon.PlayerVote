@@ -105,6 +105,8 @@ void function PVSetGameEndTime(float seconds){
     playerSkipVoteNames.clear()
 }
 
+/* Helper function to change the map on round based game gamemodes
+*/
 void function PostmatchMap_Threaded(float seconds) {
   wait seconds + 2.0; // Wait a couple seconds for fade effect
   if (IsSuddenDeathGameMode()) PostmatchMap(); // Going to postmatch does not work on SD modes e.g. ctf - It will just go to half time then SD
