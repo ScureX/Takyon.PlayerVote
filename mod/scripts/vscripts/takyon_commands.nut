@@ -11,7 +11,7 @@ global array<Command> commandArr
 
 void function CommandsInit(){
     commandArr.append(new_CommandStruct(["skip", "rtv"],                false, "!skip -> to skip the map", CommandSkip))
-    commandArr.append(new_CommandStruct(["extend", "elongate", "ext"],  false, "!extend -> to play this map longer", CommandExtend)) // elongate is for Sye <3
+    commandArr.append(new_CommandStruct(["extend", "elongate", "embiggen", "makemaptimelonger", "ext"],  false, "!extend -> to play this map longer", CommandExtend)) // elongate is for Sye <3
     commandArr.append(new_CommandStruct(["kick"],                       false, "!kick -> to kick a player", CommandKick))
     commandArr.append(new_CommandStruct(["yes"],                        true, "!yes -> vote to kick a player", CommandYes))
     commandArr.append(new_CommandStruct(["no"],                         true, "!no -> vote to not kick a player", CommandNo))
@@ -20,7 +20,7 @@ void function CommandsInit(){
     commandArr.append(new_CommandStruct(["discord", "dc"],              false, "!discord -> to display the link to the discord server", CommandDiscord))
     commandArr.append(new_CommandStruct(["getuid", "gu"],               true, "!getuid name -> get the UID of a player", CommandGetUid))
     commandArr.append(new_CommandStruct(["ping"],                       true, "!ping (name) -> get your or a player's ping", CommandPing))
-    commandArr.append(new_CommandStruct(["balance", "bal"],             false, "!balance -> vote to balance teams by kd", CommandBalance))
+    commandArr.append(new_CommandStruct(["balance","thanos", "bal"],             false, "!balance -> vote to balance teams by kd", CommandBalance))
     commandArr.append(new_CommandStruct(["rules"],                      false, "!rules -> get the server's rules", CommandRules))
     commandArr.append(new_CommandStruct(["sendrules", "sr"],            true, "!sr -> send the rules to a player", CommandSendRules))
     commandArr.append(new_CommandStruct(["msg", "message"],             true, "!msg -> !msg player message", CommandMsg))
