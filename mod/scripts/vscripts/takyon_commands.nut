@@ -11,7 +11,7 @@ global array<Command> commandArr
 
 void function CommandsInit(){
     commandArr.append(new_CommandStruct(["skip", "rtv"],                false, "!skip -> to skip the map", CommandSkip))
-    commandArr.append(new_CommandStruct(["extend", "elongate", "ext"],  false, "!extend -> to play this map longer", CommandExtend)) // elongate is for Sye <3
+    commandArr.append(new_CommandStruct(["extend", "elongate", "embiggen", "makethemaptimelonger", "unfinish", "ext"],  false, "!extend -> to play this map longer", CommandExtend)) // elongate is for Sye <3
     commandArr.append(new_CommandStruct(["kick"],                       false, "!kick -> to kick a player", CommandKick))
     commandArr.append(new_CommandStruct(["yes"],                        true, "!yes -> vote to kick a player", CommandYes))
     commandArr.append(new_CommandStruct(["no"],                         true, "!no -> vote to not kick a player", CommandNo))
