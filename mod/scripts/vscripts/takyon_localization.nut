@@ -19,6 +19,7 @@ global const string NO_ANNOUNCEMENT_FOUND = "No message found\n!announce message
 
 // vote kick
 global const string CANT_KICK_YOURSELF = "You cannot kick yourself"
+global const string CANT_KICK_ADMIN = "You cannot kick an admin"
 global const string KICKED_PLAYER = "Kicked " // remember the space at the end
 global const string NOT_ENOUGH_PLAYERS_ONLINE_FOR_KICK = "Not enough players online to votekick"
 global const string PLAYER_WANTS_TO_KICK_PLAYER = " wants to kick " // remember to keep the space in the beginning and at the end
