@@ -100,6 +100,7 @@ bool function CommandKick(entity player, array<string> args){
             }
             else{
                 Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + ALREADY_VOTE_GOING + fullPlayerName + HOW_TO_KICK, false)
+                return false
             }
         }
         CheckIfEnoughKickVotes()
