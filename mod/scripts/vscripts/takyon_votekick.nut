@@ -62,6 +62,12 @@ bool function CommandKick(entity player, array<string> args){
             return false
         }
 
+        // player cannot kick admins
+        if (IsPlayerAdmin(GetPlayerFromName(fullPlayerName))) {
+            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + CANT_KICK_ADMIN, false)
+            return false
+        }
+
         // admin kick
         if(args.len() >= 2 && args[1] == "force"){
             // Check if user is admin
