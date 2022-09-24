@@ -89,7 +89,6 @@ bool function CommandKick(entity player, array<string> args){
             return false
         }
 
-        // starting the player vote
         if(playerKickVoteYesNames.len() == 0){ // no vote going yet
             // start vote by setting vars
             playerKickVoteYesNames.append(player.GetPlayerName())
@@ -100,11 +99,17 @@ bool function CommandKick(entity player, array<string> args){
             for(int i = 0; i < GetPlayerArray().len(); i++){
                 SendHudMessageBuilder(GetPlayerArray()[i], player.GetPlayerName() + PLAYER_WANTS_TO_KICK_PLAYER + fullPlayerName + HOW_TO_KICK, 255, 200, 200)
             }
-            CheckIfEnoughKickVotes()
         }
         else{
-            Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + ALREADY_VOTE_GOING + fullPlayerName + HOW_TO_KICK, false)
+            if(playerVotedForKick == fullPlayerName){
+                CommandYes(player, [])
+            }
+            else{
+                Chat_ServerPrivateMessage(player, "\x1b[38;2;220;0;0m" + ALREADY_VOTE_GOING + fullPlayerName + HOW_TO_KICK, false)
+                return false
+            }
         }
+        CheckIfEnoughKickVotes()
     }
     return true
 }
