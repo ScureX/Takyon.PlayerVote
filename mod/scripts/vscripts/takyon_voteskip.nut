@@ -2,7 +2,7 @@ global function VoteSkipInit
 global function CommandSkip
 global function CommandSkipCall
 
-array<string> playerSkipVoteNames = [] // list of players who have voted, is used to see how many have voted 
+array<string> playerSkipVoteNames = [] // list of players who have voted, is used to see how many have voted
 float skipVotePercentage = 0.8 // percentage of how many people on the server need to have voted
 bool skipEnabled = true
 
@@ -31,7 +31,7 @@ bool function CommandSkipCall(entity player = null, array<string> args = []){
 bool function CommandSkip(entity player, array<string> args){
     if(!IsLobby()){
         printl("USER TRIED SKIPPING")
-        
+
         if(args.len() == 1 && args[0] == "force"){
             // Check if user is admin
             if(!IsPlayerAdmin(player)){
@@ -54,7 +54,7 @@ bool function CommandSkip(entity player, array<string> args){
 
         // check if player has already voted //TODO fix this up
         if(!PlayerHasVoted(player, playerSkipVoteNames)){
-            // add player to list of players who have voted 
+            // add player to list of players who have voted
             playerSkipVoteNames.append(player.GetPlayerName())
 
             // send message to everyone
@@ -64,7 +64,7 @@ bool function CommandSkip(entity player, array<string> args){
                 else
                     SendHudMessageBuilder(GetPlayerArray()[i], playerSkipVoteNames.len() + ONE_SKIP_VOTE, 255, 200, 200)
 			}
-        } 
+        }
         else {
             // Doesnt let the player vote twice, name is saved so even on reconnect they cannot vote twice
             // Future update might check if the player is actually online but right now i am too tired
@@ -83,15 +83,32 @@ void function CheckIfEnoughSkipVotes(bool force = false){
     // check if enough have voted
     if(playerSkipVoteNames.len() >= (1.0 * GetPlayerArray().len() * skipVotePercentage) || force){
         if(mapsHaveBeenProposed){
-            PVSetGameEndTime(Time() + 1.0)}
+            PVSetGameEndTime(1.0)}
         else{
-            PVSetGameEndTime(Time() + 30.0) 
             FillProposedMaps()
+            PVSetGameEndTime(30.0)
         }
     }
 }
 
 void function PVSetGameEndTime(float seconds){
-    SetServerVar("gameEndTime", seconds) // end this game 
+    if (IsRoundBased() || IsSuddenDeathGameMode()) {
+      float roundEndTime = Time() - expect float(GetServerVar("roundEndTime"));
+      if (roundEndTime > seconds) seconds = roundEndTime; // If there's less time in the round left than we request, don't increase
+      SetRoundEndTime(seconds); // Set round end timer - for aesthetics only
+      thread PostmatchMap_Threaded(seconds);
+    }
+    else {
+      SetGameEndTime(seconds);
+    }
+
     playerSkipVoteNames.clear()
-} 
+}
+
+/* Helper function to change the map on round based game gamemodes
+*/
+void function PostmatchMap_Threaded(float seconds) {
+  wait seconds + 2.0; // Wait a couple seconds for fade effect
+  if (IsSuddenDeathGameMode()) PostmatchMap(); // Going to postmatch does not work on SD modes e.g. ctf - It will just go to half time then SD
+  else SetGameState( eGameState.Postmatch )
+}

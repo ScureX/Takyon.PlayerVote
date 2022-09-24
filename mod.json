@@ -8,16 +8,15 @@
 	"ConVars": [
 		{
 			"Name": "pv_admin_uids",
-			"DefaultValue": "1006880507304, 1009099551543, 1003204785491, 1006527769252, 1007705882025" // list of UIDs who should have admin privileges to execute commands like !skip force, comma separated. To get UID: Let admin join priv match with sv_cheats 1 and execute // script print(GetPlayerArray()[0].GetUID())
-			//"DefaultValue": "1006880507304, 1006880507304, 1006880507304"
+			"DefaultValue": "" // list of UIDs who should have admin privileges to execute commands like !skip force, comma separated. To get UID: Let admin join priv match with sv_cheats 1 and execute // script print(GetPlayerArray()[0].GetUID())
 		},
 		{
 			"Name": "pv_servername",
-			"DefaultValue": "Karma Kraber9k" // change this to your servername
+			"DefaultValue": "YOUR SERVER NAME" // change this to your servername
 		},
 		{
 			"Name": "pv_discord",
-			"DefaultValue": "karma-gaming.net/go/discord" // change this to your discord server. leave empty to disable !discord 
+			"DefaultValue": "YOUR SERVER DISCORD" // change this to your discord server. leave empty to disable !discord
 		},
 		{
 			"Name": "pv_display_hint_on_spawn_amount",
